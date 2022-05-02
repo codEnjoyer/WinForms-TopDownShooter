@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Runtime.Remoting.Channels;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 using GameProject.Domain;
 using GameProject.Entities;
-using System.Windows.Forms.VisualStyles;
+using GameProject.Physics;
+using Timer = System.Windows.Forms.Timer;
 
 namespace GameProject
 {
@@ -23,14 +20,17 @@ namespace GameProject
         {
             InitializeComponent();
 
-            game = new Game(new Player());
+            var x = Screen.PrimaryScreen.WorkingArea.Width / 2;
+            var y = Screen.PrimaryScreen.WorkingArea.Height / 2;
+            game = new Game(new Player(new Point(x - 50, y - 25)));
             timer = new Timer();
 
             timer.Interval = 15;
             timer.Tick += (sender, args) => Invalidate();
             timer.Start();
 
-            KeyDown += OnKeyPressed;
+            KeyDown += OnControlKeyPressed;
+            KeyDown += OnSystemKeyPressed;
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -42,18 +42,18 @@ namespace GameProject
         {
             if (fullscreen)
             {
-                this.WindowState = FormWindowState.Normal;
-                this.FormBorderStyle = FormBorderStyle.None;
-                this.Bounds = Screen.PrimaryScreen.Bounds;
+                WindowState = FormWindowState.Normal;
+                FormBorderStyle = FormBorderStyle.None;
+                Bounds = Screen.PrimaryScreen.Bounds;
             }
             else
             {
-                this.WindowState = FormWindowState.Maximized;
-                this.FormBorderStyle = FormBorderStyle.Sizable;
+                WindowState = FormWindowState.Maximized;
+                FormBorderStyle = FormBorderStyle.Sizable;
             }
         }
 
-        internal void OnKeyPressed(object sender, KeyEventArgs e)
+        internal void OnControlKeyPressed(object sender, KeyEventArgs e)
         {
             switch (e.KeyData)
             {
@@ -69,18 +69,35 @@ namespace GameProject
                 case Keys.D:
                     game.Player.Move(game.Player.Speed, 0);
                     break;
+            }
+        }
 
+        internal void OnSystemKeyPressed(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyData)
+            {
                 case Keys.Escape:
                     Application.Exit();
                     break;
             }
         }
-
         protected override void OnPaint(PaintEventArgs e)
         {
             var graphics = e.Graphics;
-            graphics.FillEllipse(Brushes.ForestGreen, new Rectangle(game.Player.Position, new Size(50, 50)));
+            var rect = new Rectangle(game.Player.Position, new Size(100, 50));
+            
+            graphics.FillRectangle(Brushes.Blue, rect);
+
+            RotateGraphics(graphics, 45);
+
+            graphics.FillRectangle(Brushes.ForestGreen, rect);
         }
 
+        private void RotateGraphics(Graphics graphics,  float angle)
+        {
+            graphics.TranslateTransform(ClientSize.Width / 2, ClientSize.Height / 2);
+            graphics.RotateTransform(angle);
+            graphics.TranslateTransform(-ClientSize.Width / 2, -ClientSize.Height / 2);
+        }
     }
 }

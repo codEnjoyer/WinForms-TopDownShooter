@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms.VisualStyles;
 using GameProject.Entities;
 
 namespace GameProject.Domain
@@ -14,7 +10,7 @@ namespace GameProject.Domain
 
         internal Game(Player player)
         {
-            Player = new Player();
+            Player = player;
         }
     }
 }

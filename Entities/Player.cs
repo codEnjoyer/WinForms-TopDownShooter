@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Drawing;
+using System.Numerics;
+using GameProject.Physics;
 
 namespace GameProject.Entities
 {
@@ -12,17 +10,17 @@ namespace GameProject.Entities
     {
         internal Point Position { get; private set; }
         internal int Speed{ get; private set; }
+        internal Vector Rotation { get; set; }
 
-        internal Player(Point position)//float speed)
+        internal Player()
         {
-            this.Position = position;
-            //this.Speed = speed;
+            Position = new Point(100, 100);
+            Speed = 10;
+            Rotation = new Vector(0, 1);
         }
-
-        internal Player()//float speed)
+        internal Player(Point position) : this()
         {
-            this.Position = new Point(100, 100);
-            this.Speed = 10;
+            Position = position;
         }
 
         internal void Move(int dx, int dy)
@@ -30,6 +28,9 @@ namespace GameProject.Entities
             Position = new Point(Position.X + dx, Position.Y + dy);
         }
 
-
+        internal void Accelerate(int speed)
+        {
+            Speed += speed;
+        }
     }
 }
