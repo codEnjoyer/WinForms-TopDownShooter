@@ -4,15 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace GameProject.Entities
 {
     internal class Player
     {
-        internal Vector Position { get; private set; }
-        //internal float Speed{ get; private set; }
+        internal Point Position { get; private set; }
+        internal int Speed{ get; private set; }
 
-        internal Player(Vector position)//float speed)
+        internal Player(Point position)//float speed)
         {
             this.Position = position;
             //this.Speed = speed;
@@ -20,13 +21,13 @@ namespace GameProject.Entities
 
         internal Player()//float speed)
         {
-            this.Position = new Vector(100, 100);
-            //this.Speed = speed;
+            this.Position = new Point(100, 100);
+            this.Speed = 10;
         }
 
-        internal void Move(float dx, float dy)
+        internal void Move(int dx, int dy)
         {
-            Position = new Vector(Position.X + dx, Position.Y + dy);
+            Position = new Point(Position.X + dx, Position.Y + dy);
         }
 
 

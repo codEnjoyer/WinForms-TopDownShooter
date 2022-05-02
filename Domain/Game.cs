@@ -10,11 +10,11 @@ namespace GameProject.Domain
 {
     internal class Game
     {
-        internal Player player{ get; }
+        internal Player Player{ get; }
 
         internal Game(Player player)
         {
-            this.player = new Player();
+            Player = new Player();
         }
     }
 }
