@@ -15,14 +15,15 @@ namespace GameProject
     {
         private Game game;
         private Timer timer;
-
+        private Size sizeOfPlayer;
         public MainForm()
         {
             InitializeComponent();
 
             var x = Screen.PrimaryScreen.WorkingArea.Width / 2;
             var y = Screen.PrimaryScreen.WorkingArea.Height / 2;
-            game = new Game(new Player(new Point(x - 50, y - 25)));
+            sizeOfPlayer = new Size(100, 50);
+            game = new Game(new Player(new Point(x - sizeOfPlayer.Width / 2, y - sizeOfPlayer.Height / 2)));
             timer = new Timer();
 
             timer.Interval = 15;
@@ -79,25 +80,17 @@ namespace GameProject
                 case Keys.Escape:
                     Application.Exit();
                     break;
+                //case Keys.R:
+                //    Invalidate();
+                //    break;
             }
         }
         protected override void OnPaint(PaintEventArgs e)
         {
             var graphics = e.Graphics;
-            var rect = new Rectangle(game.Player.Position, new Size(100, 50));
-            
-            graphics.FillRectangle(Brushes.Blue, rect);
+            var player = new Rectangle(game.Player.Position, sizeOfPlayer);
 
-            RotateGraphics(graphics, 45);
-
-            graphics.FillRectangle(Brushes.ForestGreen, rect);
-        }
-
-        private void RotateGraphics(Graphics graphics,  float angle)
-        {
-            graphics.TranslateTransform(ClientSize.Width / 2, ClientSize.Height / 2);
-            graphics.RotateTransform(angle);
-            graphics.TranslateTransform(-ClientSize.Width / 2, -ClientSize.Height / 2);
+            graphics.FillEllipse(Brushes.ForestGreen, player);
         }
     }
 }
