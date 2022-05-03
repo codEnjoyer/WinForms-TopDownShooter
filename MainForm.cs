@@ -16,6 +16,7 @@ namespace GameProject
         private Game game;
         private Timer timer;
         private Size sizeOfPlayer;
+        private Image imageOfPlayer = Image.FromFile(@"C:\Учёба\Прога\GameProject\Sprites\survivor-idle_knife_0.png");
         public MainForm()
         {
             InitializeComponent();
@@ -52,6 +53,11 @@ namespace GameProject
                 WindowState = FormWindowState.Maximized;
                 FormBorderStyle = FormBorderStyle.Sizable;
             }
+        }
+
+        internal void OnMouseMove(object sender, MouseEventArgs e)
+        {
+
         }
 
         internal void OnControlKeyPressed(object sender, KeyEventArgs e)
