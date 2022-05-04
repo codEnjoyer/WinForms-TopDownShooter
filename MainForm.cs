@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
@@ -15,16 +16,17 @@ namespace GameProject
     {
         private Game game;
         private Timer timer;
-        private Size sizeOfPlayer;
-        private Image imageOfPlayer = Image.FromFile(@"C:\Учёба\Прога\GameProject\Sprites\survivor-idle_knife_0.png");
+        private Size sizePlayer;
+        private Image imagePlayer;
         public MainForm()
         {
             InitializeComponent();
 
             var x = Screen.PrimaryScreen.WorkingArea.Width / 2;
             var y = Screen.PrimaryScreen.WorkingArea.Height / 2;
-            sizeOfPlayer = new Size(100, 50);
-            game = new Game(new Player(new Vector(x - sizeOfPlayer.Width / 2, y - sizeOfPlayer.Height / 2)));
+            sizePlayer = new Size(100, 50);
+            imagePlayer = Image.FromFile(@"C:\Учёба\Прога\GameProject\Sprites\survivor-idle_knife_0.png");
+            game = new Game(new Player(new Vector(x - sizePlayer.Width / 2, y - sizePlayer.Height / 2)));
             timer = new Timer();
 
             timer.Interval = 15;
@@ -55,11 +57,6 @@ namespace GameProject
             }
         }
 
-        internal void OnMouseMove(object sender, MouseEventArgs e)
-        {
-
-        }
-
         internal void OnControlKeyPressed(object sender, KeyEventArgs e)
         {
             switch (e.KeyData)
@@ -86,18 +83,16 @@ namespace GameProject
                 case Keys.Escape:
                     Application.Exit();
                     break;
-                //case Keys.R:
-                //    Invalidate();
-                //    break;
+                case Keys.R:
+                    Application.Restart();
+                    break;
             }
         }
         protected override void OnPaint(PaintEventArgs e)
         {
             var graphics = e.Graphics;
-            var playerPosition = game.Player.Position;
-            var player = new Rectangle(playerPosition.ToPoint(), sizeOfPlayer);
 
-            graphics.FillEllipse(Brushes.ForestGreen, player);
+            graphics.DrawImage(imagePlayer, game.Player.Location.ToPoint());
         }
     }
 }
