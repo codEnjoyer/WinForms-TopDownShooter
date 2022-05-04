@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -79,6 +80,11 @@ namespace GameProject.Physics
         public Vector Rotate(double angle)
         {
             return new Vector(X * Math.Cos(angle) - Y * Math.Sin(angle), X * Math.Sin(angle) + Y * Math.Cos(angle));
+        }
+
+        public Point ToPoint()
+        {
+            return new Point((int)(this.X + 0.5f), (int)(this.Y + 0.5f));
         }
     }
 }

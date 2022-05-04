@@ -24,7 +24,7 @@ namespace GameProject
             var x = Screen.PrimaryScreen.WorkingArea.Width / 2;
             var y = Screen.PrimaryScreen.WorkingArea.Height / 2;
             sizeOfPlayer = new Size(100, 50);
-            game = new Game(new Player(new Point(x - sizeOfPlayer.Width / 2, y - sizeOfPlayer.Height / 2)));
+            game = new Game(new Player(new Vector(x - sizeOfPlayer.Width / 2, y - sizeOfPlayer.Height / 2)));
             timer = new Timer();
 
             timer.Interval = 15;
@@ -94,7 +94,8 @@ namespace GameProject
         protected override void OnPaint(PaintEventArgs e)
         {
             var graphics = e.Graphics;
-            var player = new Rectangle(game.Player.Position, sizeOfPlayer);
+            var playerPosition = game.Player.Position;
+            var player = new Rectangle(playerPosition.ToPoint(), sizeOfPlayer);
 
             graphics.FillEllipse(Brushes.ForestGreen, player);
         }

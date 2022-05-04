@@ -8,24 +8,24 @@ namespace GameProject.Entities
 {
     internal class Player
     {
-        internal Point Position { get; private set; }
+        internal Vector Position { get; private set; }
         internal int Speed{ get; private set; }
         internal Vector Rotation { get; set; }
 
         internal Player()
         {
-            Position = new Point(100, 100);
+            Position = new Vector(100, 100);
             Speed = 10;
             Rotation = new Vector(0, 1);
         }
-        internal Player(Point position) : this()
+        internal Player(Vector position) : this()
         {
             Position = position;
         }
 
         internal void Move(int dx, int dy)
         {
-            Position = new Point(Position.X + dx, Position.Y + dy);
+            Position = new Vector(Position.X + dx, Position.Y + dy);
         }
 
         internal void Accelerate(int speed)
