@@ -10,9 +10,10 @@ namespace GameProject.Domain
 {
     internal class Game
     {
-        internal Player Player{ get; }
+        internal static Player Player { get; set; }
         internal GameStage Stage { get; private set; } = GameStage.NotStarted;
         internal event Action<GameStage> StageChanged;
+        internal static bool KeyPressed = false;
         internal Game(Player player)
         {
             Player = player;

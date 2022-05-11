@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GameProject.Entities;
 
 namespace GameProject.Physics
 {
@@ -15,10 +16,24 @@ namespace GameProject.Physics
             Y = y;
         }
 
+        public Vector(Point point)
+        {
+            X = point.X;
+            Y = point.Y;
+        }
+
         public readonly double X;
         public readonly double Y;
         public double Length => Math.Sqrt(X * X + Y * Y);
-        public double Angle => Math.Atan2(Y, X);
+        public float Angle => (float)Math.Atan2(Y, X) * 180 / (float)Math.PI;
+
+        public float AngleToPlayer(Player player)
+        {
+            var playerLocation = player.Location;
+            var x = X - (playerLocation.X + player.Size.Width) / 2f;
+            var y = Y - (playerLocation.Y + player.Size.Height) / 2f;
+            return new Vector(x, y).Angle;
+        }
         public static Vector Zero = new Vector(0, 0);
 
         public override string ToString()
@@ -84,7 +99,7 @@ namespace GameProject.Physics
 
         public Point ToPoint()
         {
-            return new Point((int)(this.X + 0.5f), (int)(this.Y + 0.5f));
+            return new Point((int)(X + 0.5f), (int)(Y + 0.5f));
         }
     }
 }
