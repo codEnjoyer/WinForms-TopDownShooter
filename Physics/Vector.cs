@@ -10,7 +10,8 @@ namespace GameProject.Physics
 {
     internal class Vector
     {
-		public Vector(double x, double y)
+        private const float ConvertToDegree = 180 / (float)Math.PI;
+        public Vector(double x, double y)
         {
             X = x;
             Y = y;
@@ -25,15 +26,11 @@ namespace GameProject.Physics
         public readonly double X;
         public readonly double Y;
         public double Length => Math.Sqrt(X * X + Y * Y);
-        public float Angle => (float)Math.Atan2(Y, X) * 180 / (float)Math.PI;
 
-        public float AngleToPlayer(Player player)
-        {
-            var playerLocation = player.Location;
-            var x = X - (playerLocation.X + player.Size.Width) / 2f;
-            var y = Y - (playerLocation.Y + player.Size.Height) / 2f;
-            return new Vector(x, y).Angle;
-        }
+        public float AngleInRadians => (float)Math.Atan2(Y, X);
+        public float AngleInDegrees => (float)Math.Atan2(Y, X) * ConvertToDegree;
+
+        
         public static Vector Zero = new Vector(0, 0);
 
         public override string ToString()
@@ -92,7 +89,7 @@ namespace GameProject.Physics
             return Length > 0 ? this * (1 / Length) : this;
         }
 
-        public Vector Rotate(double angle)
+        public Vector Rotate(float angle)
         {
             return new Vector(X * Math.Cos(angle) - Y * Math.Sin(angle), X * Math.Sin(angle) + Y * Math.Cos(angle));
         }

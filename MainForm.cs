@@ -53,35 +53,10 @@ namespace GameProject
         protected override void OnPaint(PaintEventArgs e)
         {
             var graphics = e.Graphics;
-            
-            graphics.DrawImage(Game.Player.Image, Game.Player.Location.ToPoint());
+            //graphics.DrawImage(Game.Player.Image, Game.Player.Location.ToPoint());
             View.UpdateTextures(graphics);
         }
 
-        //private void Rotate(Graphics graphics, float angle)
-        //{
-        //    var rotated = new Bitmap(playerSize.Width, playerSize.Height);
-        //    using (Graphics fromImage = Graphics.FromImage(rotated))
-        //    {
-        //        fromImage.TranslateTransform(playerSize.Width / 2f, playerSize.Height / 2f);
-        //        fromImage.RotateTransform(angle);
-        //        fromImage.TranslateTransform(-(playerSize.Width / 2f), -(playerSize.Height / 2f));
-        //        fromImage.DrawImage(playerImage, 0, 0, playerSize.Width, playerSize.Height);
-        //    }
-        //    graphics.DrawImage(rotated,
-        //        Game.Player.Location.ToPoint().X, Game.Player.Location.ToPoint().Y,
-        //        playerSize.Width, playerSize.Height);
-        //}
-
-        internal float GetAngleFromTargetToPlayer(Vector playerLocation, Vector targetLocation)
-        {
-            return targetLocation.AngleToPlayer(Game.Player);
-        }
-
-        internal void MouseControl(object sender, MouseEventArgs e)
-        {
-
-        }
         #region Fullscreen, FormLoad
         private void MainForm_Load(object sender, EventArgs e)
         {

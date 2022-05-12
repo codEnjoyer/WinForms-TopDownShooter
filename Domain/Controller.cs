@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using GameProject.Physics;
 
 namespace GameProject.Domain
 {
@@ -37,7 +39,17 @@ namespace GameProject.Domain
 
         internal static void ControlMouse(MouseEventArgs e)
         {
-            var cursorLocation = e.Location;
+            //direction of the mouse by looking at the position of the player in relation to the mouse pointer
+
+            var cursorLocation = new Vector(e.X - (Game.Player.PictureBox.Location.X + Game.Player.Size.Width),
+                e.Y - (Game.Player.PictureBox.Location.Y + Game.Player.Size.Height));
+            var angleToCursor = Game.Player.AngleToTarget(cursorLocation); //in degrees
+            Game.Player.RotationAngle = angleToCursor;
+            
+            Game.Player.PictureBox.Image?.Dispose();
+            var bitmap = new Bitmap(Game.Player.Image, Game.Player.PictureBox.Size);
+            
+            Game.Player.PictureBox.Image = View.RotateImageMatrix(bitmap, angleToCursor);
         }
     }
 }
