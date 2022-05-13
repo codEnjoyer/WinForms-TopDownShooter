@@ -16,13 +16,13 @@ namespace GameProject.Domain
             switch (pressed)
             {
                 case Keys.W:
-                    Game.Player.Up = isActive;
+                    Game.Player.Forward = isActive;
                     break;
                 case Keys.A:
                     Game.Player.Left = isActive;
                     break;
                 case Keys.S:
-                    Game.Player.Down = isActive;
+                    Game.Player.Back = isActive;
                     break;
                 case Keys.D:
                     Game.Player.Right = isActive;
@@ -39,17 +39,10 @@ namespace GameProject.Domain
 
         internal static void ControlMouse(MouseEventArgs e)
         {
-            //direction of the mouse by looking at the position of the player in relation to the mouse pointer
+            var cursorLocation = new Vector(e.Location.X, e.Location.Y);
+            var angleToCursor = Game.Player.AngleToTarget(cursorLocation); //in radians
 
-            var cursorLocation = new Vector(e.X - (Game.Player.PictureBox.Location.X + Game.Player.Size.Width),
-                e.Y - (Game.Player.PictureBox.Location.Y + Game.Player.Size.Height));
-            var angleToCursor = Game.Player.AngleToTarget(cursorLocation); //in degrees
-            Game.Player.RotationAngle = angleToCursor;
-            
-            Game.Player.PictureBox.Image?.Dispose();
-            var bitmap = new Bitmap(Game.Player.Image, Game.Player.PictureBox.Size);
-            
-            Game.Player.PictureBox.Image = View.RotateImageMatrix(bitmap, angleToCursor);
+            Game.Player.GetMouseRotation(angleToCursor);
         }
     }
 }

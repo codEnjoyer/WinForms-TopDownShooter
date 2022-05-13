@@ -14,20 +14,34 @@ namespace GameProject
     {
         internal static void UpdateTextures(Graphics graphics)
         {
-            Game.Player.Move();
-            Game.Player.GetMouseRotation();
+            UpdateMovement(graphics);
+            UpdateRotation(graphics);
         }
 
-        public static Bitmap RotateImageMatrix(Bitmap bitmap, float angle)
+        internal static void UpdateMovement(Graphics graphics)
         {
-            using (var g = Graphics.FromImage(bitmap))
-            using (var matrix = new Matrix())
+            Game.Player.Move();
+        }
+
+        internal static void UpdateRotation(Graphics graphics)
+        {
+            Game.Player.PictureBox.Image?.Dispose();
+            var bitmap = new Bitmap(Game.Player.Image, Game.Player.PictureBox.Size);
+
+            Game.Player.PictureBox.Image = RotateBitmap(bitmap, Game.Player.RotationAngle);
+            graphics.DrawImage(Game.Player.PictureBox.Image, Game.Player.Location.ToPoint());
+        }
+
+        internal static Bitmap RotateBitmap(Bitmap bitmap, float angle)
+        {
+            const float convertToDegree = 180 / (float)Math.PI;
+
+            using (var graphics = Graphics.FromImage(bitmap))
             {
-                //rotate at image mid point
-                matrix.RotateAt(angle, new PointF(bitmap.Width / 2, bitmap.Height / 2));
-                g.Transform = matrix;
-                //draw passed in image onto graphics object
-                g.DrawImage(bitmap, new PointF(0, 0));
+                graphics.TranslateTransform((float)bitmap.Width / 2, (float)bitmap.Height / 2);
+                graphics.RotateTransform(angle * convertToDegree);
+                graphics.TranslateTransform(-(float)bitmap.Width / 2, -(float)bitmap.Height / 2);
+                graphics.DrawImage(bitmap, new PointF(0, 0));
             }
             return bitmap;
         }

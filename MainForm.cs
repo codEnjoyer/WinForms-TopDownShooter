@@ -49,12 +49,12 @@ namespace GameProject
         private static void MainForm_MouseMove(object sender, MouseEventArgs e)
         {
             Controller.ControlMouse(e);
+            
         }
         protected override void OnPaint(PaintEventArgs e)
         {
-            var graphics = e.Graphics;
-            //graphics.DrawImage(Game.Player.Image, Game.Player.Location.ToPoint());
-            View.UpdateTextures(graphics);
+            var eGraphics = e.Graphics;
+            View.UpdateTextures(eGraphics);
         }
 
         #region Fullscreen, FormLoad

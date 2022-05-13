@@ -1,17 +1,20 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Drawing;
+using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 using GameProject.Physics;
 
 namespace GameProject.Entities
 {
+    
     internal class Player
     {
         internal Vector Location { get; private set; }
         internal int Speed{ get; private set; }
-        internal float RotationAngle { get; set; }
-        internal bool Up, Left, Down, Right;
+        internal float RotationAngle { get; set; } //in radians
+        internal bool Forward, Left, Back, Right;
         internal Size Size { get; }
         internal Image Image { get; set; }
         internal PictureBox PictureBox { get; set; }
@@ -25,6 +28,7 @@ namespace GameProject.Entities
             Image = Image.FromFile(@"C:\Учёба\Прога\GameProject\Sprites\survivor-idle_knife_0.png");
             PictureBox = new PictureBox
             {
+                //Anchor = AnchorStyles.None,
                 Location = Location.ToPoint(),
                 Size = Size,
                 SizeMode = PictureBoxSizeMode.StretchImage
@@ -38,22 +42,19 @@ namespace GameProject.Entities
 
         internal void Move()
         {
-            if (Up)
-                Location = new Vector(Location.X, Location.Y - Speed);
+            if (Forward)
+                Location += Speed * new Vector(Math.Cos(RotationAngle), Math.Sin(RotationAngle));
             else if (Left)
-                Location = new Vector(Location.X - Speed, Location.Y);
-            else if (Down)
-                Location = new Vector(Location.X, Location.Y + Speed);
+                Location += Speed * new Vector(Math.Cos(RotationAngle - Math.PI / 2), Math.Sin(RotationAngle - Math.PI / 2));
+            else if (Back)
+                Location -= Speed * new Vector(Math.Cos(RotationAngle), Math.Sin(RotationAngle));
             else if (Right)
-                Location = new Vector(Location.X + Speed, Location.Y);
+                Location -= Speed * new Vector(Math.Cos(RotationAngle - Math.PI / 2), Math.Sin(RotationAngle - Math.PI / 2));
         }
 
-        internal void GetMouseRotation()
+        internal void GetMouseRotation(float angle)
         {
-            PictureBox.Image?.Dispose();
-            var bitmap = new Bitmap(Image, PictureBox.Size);
-
-            PictureBox.Image = View.RotateImageMatrix(bitmap, RotationAngle);
+            RotationAngle = angle;
         }
 
         internal void Accelerate(int speed)
@@ -63,11 +64,12 @@ namespace GameProject.Entities
 
         internal float AngleToTarget(Vector targetLocation)
         {
-            //TO DO: consider the size of the target
-            var x = targetLocation.X - (Location.X + Size.Width) / 2f;
-            var y = targetLocation.Y - (Location.Y + Size.Height) / 2f;
-            return new Vector(x, y).AngleInDegrees;
-            //return new Vector(x, y).AngleInRadians;
+            //TODO: consider the size of the target
+
+            var x = targetLocation.X - (Location.X + Size.Width / 2f);
+            var y = targetLocation.Y - (Location.Y + Size.Height / 2f);
+            //return new Vector(x, y).AngleInDegrees;
+            return new Vector(x, y).AngleInRadians;
         }
     }
 }
