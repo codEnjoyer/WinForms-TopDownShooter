@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Drawing;
 using System.Runtime.CompilerServices;
+using System.Runtime.Remoting.Messaging;
 using System.Windows.Forms;
 using GameProject.Physics;
 
@@ -14,7 +15,7 @@ namespace GameProject.Entities
         internal Vector Location { get; private set; }
         internal int Speed{ get; private set; }
         internal float RotationAngle { get; set; } //in radians
-        internal bool Forward, Left, Back, Right;
+        internal bool Forward, Left, Back, Right; //TODO: replace with enums?
         internal Size Size { get; }
         internal Image Image { get; set; }
         internal PictureBox PictureBox { get; set; }
@@ -23,33 +24,41 @@ namespace GameProject.Entities
         {
             Location = new Vector(100, 100);
             Speed = 5;
-            Size = new Size(289, 224);
+            Size = new Size(289, 289);
             RotationAngle = 0;
             Image = Image.FromFile(@"C:\Учёба\Прога\GameProject\Sprites\survivor-idle_knife_0.png");
             PictureBox = new PictureBox
             {
-                //Anchor = AnchorStyles.None,
                 Location = Location.ToPoint(),
                 Size = Size,
-                SizeMode = PictureBoxSizeMode.StretchImage
             };
-            
+
         }
         internal Player(Vector location) : this()
         {
-            Location = new Vector(location.X - Image.Width / 2, location.Y - Image.Height / 2);
+            Location = new Vector(location.X - PictureBox.Size.Width / 2, location.Y - PictureBox.Size.Height / 2);
         }
 
         internal void Move()
         {
             if (Forward)
-                Location += Speed * new Vector(Math.Cos(RotationAngle), Math.Sin(RotationAngle));
-            else if (Left)
-                Location += Speed * new Vector(Math.Cos(RotationAngle - Math.PI / 2), Math.Sin(RotationAngle - Math.PI / 2));
-            else if (Back)
-                Location -= Speed * new Vector(Math.Cos(RotationAngle), Math.Sin(RotationAngle));
-            else if (Right)
-                Location -= Speed * new Vector(Math.Cos(RotationAngle - Math.PI / 2), Math.Sin(RotationAngle - Math.PI / 2));
+                Location += new Vector(0, -Speed);
+            if (Left)
+                Location += new Vector(-Speed, 0);
+            if (Back)
+                Location += new Vector(0, Speed);
+            if (Right)
+                Location += new Vector(Speed, 0);
+
+            //Movement relative to cursor:
+            //if (Forward)
+            //    Location += Speed * new Vector(Math.Cos(RotationAngle), Math.Sin(RotationAngle));
+            //if (Left)
+            //    Location += Speed * new Vector(Math.Cos(RotationAngle - Math.PI / 2), Math.Sin(RotationAngle - Math.PI / 2));
+            //if (Back)
+            //    Location -= Speed * new Vector(Math.Cos(RotationAngle), Math.Sin(RotationAngle));
+            //if (Right)
+            //    Location -= Speed * new Vector(Math.Cos(RotationAngle - Math.PI / 2), Math.Sin(RotationAngle - Math.PI / 2));
         }
 
         internal void GetMouseRotation(float angle)

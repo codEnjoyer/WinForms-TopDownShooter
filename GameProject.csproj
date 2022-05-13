@@ -87,6 +87,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="Sprites\pixel.png" />
     <Content Include="Sprites\survivor-idle_knife_0.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

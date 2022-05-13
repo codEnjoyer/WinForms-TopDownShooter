@@ -20,8 +20,8 @@ namespace GameProject
         {
             InitializeComponent();
 
-            var x = Screen.PrimaryScreen.WorkingArea.Width / 2;
-            var y = Screen.PrimaryScreen.WorkingArea.Height / 2;
+            var x = Screen.PrimaryScreen.Bounds.Width / 2;
+            var y = Screen.PrimaryScreen.Bounds.Height / 2;
 
             game = new Game(new Player(new Vector(x, y)));
             timer = new Timer();
@@ -30,6 +30,8 @@ namespace GameProject
             timer.Tick += (sender, args) => Invalidate();
             timer.Start();
 
+            Cursor = Cursors.Cross;
+            
             KeyDown += MainForm_KeyDown;
             KeyUp += MainForm_KeyUp;
             MouseMove += MainForm_MouseMove;
@@ -64,18 +66,21 @@ namespace GameProject
             DoubleBuffered = true;
         }
 
+
+        //TODO : Move to View.cs
         private void GoFullscreen(bool fullscreen)
         {
             if (fullscreen)
             {
-                WindowState = FormWindowState.Normal;
+                TopMost = true;
                 FormBorderStyle = FormBorderStyle.None;
-                Bounds = Screen.PrimaryScreen.Bounds;
+                WindowState = FormWindowState.Maximized;
             }
             else
             {
-                WindowState = FormWindowState.Maximized;
                 FormBorderStyle = FormBorderStyle.Sizable;
+                WindowState = FormWindowState.Normal;
+                Bounds = Screen.PrimaryScreen.Bounds;
             }
         }
         #endregion

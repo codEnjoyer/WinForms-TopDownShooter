@@ -5,6 +5,7 @@ using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using GameProject.Domain;
 using GameProject.Entities;
 
@@ -30,6 +31,7 @@ namespace GameProject
 
             Game.Player.PictureBox.Image = RotateBitmap(bitmap, Game.Player.RotationAngle);
             graphics.DrawImage(Game.Player.PictureBox.Image, Game.Player.Location.ToPoint());
+
         }
 
         internal static Bitmap RotateBitmap(Bitmap bitmap, float angle)
@@ -45,5 +47,7 @@ namespace GameProject
             }
             return bitmap;
         }
+
+        
     }
 }

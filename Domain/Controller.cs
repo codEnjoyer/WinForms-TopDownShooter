@@ -34,6 +34,9 @@ namespace GameProject.Domain
                 case Keys.R:
                     Application.Restart();
                     break;
+                //case Keys.F:
+                //    View.GoFullscreen();
+                //    break;
             }
         }
 
