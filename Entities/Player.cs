@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Runtime.CompilerServices;
 using System.Runtime.Remoting.Messaging;
 using System.Windows.Forms;
+using GameProject.Domain;
 using GameProject.Physics;
 
 namespace GameProject.Entities
@@ -12,6 +13,7 @@ namespace GameProject.Entities
     
     internal class Player
     {
+        //internal bool InBounds;
         internal Vector Location { get; private set; }
         internal int Speed{ get; private set; }
         internal float RotationAngle { get; set; } //in radians
@@ -42,13 +44,37 @@ namespace GameProject.Entities
         internal void Move()
         {
             if (Forward)
-                Location += new Vector(0, -Speed);
+            {
+                var delta = new Vector(0, -1) * Speed;
+                Location += delta;
+                //if (Location.Y >= 100)
+                //    View.Offset += delta;
+            }
+
             if (Left)
-                Location += new Vector(-Speed, 0);
+            {
+                var delta = new Vector(-1, 0) * Speed;
+                Location += delta;
+                //if (Location.X <= 1000)
+                //    View.Offset += delta;
+            }
+
             if (Back)
-                Location += new Vector(0, Speed);
+            {
+                var delta = new Vector(0, 1) * Speed;
+                Location += delta;
+                //if (Location.Y <= 1000)
+                //    View.Offset += delta;
+            }
+
             if (Right)
-                Location += new Vector(Speed, 0);
+            {
+                var delta = new Vector(1, 0) * Speed;
+                Location += delta;
+                //if(Location.X >= 100)
+                //    View.Offset += delta;
+            }
+                
 
             //Movement relative to cursor:
             //if (Forward)

@@ -11,10 +11,16 @@ namespace GameProject.Domain
     internal class Game
     {
         internal static Player Player { get; set; }
+        internal Size GameSize { get; }
         internal GameStage Stage { get; private set; } = GameStage.NotStarted;
         internal event Action<GameStage> StageChanged;
         internal static bool KeyPressed = false;
-        internal Game(Player player)
+
+        internal Game()
+        {
+            GameSize = new Size(10000, 10000);
+        }
+        internal Game(Player player) : this()
         {
             Player = player;
         }
@@ -24,5 +30,11 @@ namespace GameProject.Domain
             Stage = stage;
             StageChanged?.Invoke(stage);
         }
+
+        //private bool InBounds(Vector location)
+        //{
+        //    return location.X >= 0 && location.X <= GameSize.Width &&
+        //           location.Y >= 0 && location.Y <= GameSize.Height;
+        //}
     }
 }

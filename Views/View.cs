@@ -8,11 +8,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using GameProject.Domain;
 using GameProject.Entities;
+using GameProject.Physics;
 
 namespace GameProject
 {
     internal class View
     {
+        internal static Vector Offset = Vector.Zero;
         internal static void UpdateTextures(Graphics graphics)
         {
             UpdateMovement(graphics);
@@ -31,7 +33,6 @@ namespace GameProject
 
             Game.Player.PictureBox.Image = RotateBitmap(bitmap, Game.Player.RotationAngle);
             graphics.DrawImage(Game.Player.PictureBox.Image, Game.Player.Location.ToPoint());
-
         }
 
         internal static Bitmap RotateBitmap(Bitmap bitmap, float angle)
@@ -47,7 +48,5 @@ namespace GameProject
             }
             return bitmap;
         }
-
-        
     }
 }
