@@ -7,6 +7,7 @@ using System.Runtime.Remoting.Messaging;
 using System.Windows.Forms;
 using GameProject.Domain;
 using GameProject.Physics;
+using GameProject.Properties;
 
 namespace GameProject.Entities
 {
@@ -28,7 +29,7 @@ namespace GameProject.Entities
             Speed = 5;
             Size = new Size(289, 289);
             RotationAngle = 0;
-            Image = Image.FromFile(@"C:\Учёба\Прога\GameProject\Sprites\survivor-idle_knife_0.png");
+            Image = Resources.Hero;
             PictureBox = new PictureBox
             {
                 Location = Location.ToPoint(),
