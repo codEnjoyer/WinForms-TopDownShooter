@@ -35,6 +35,7 @@ namespace GameProject
             KeyDown += MainForm_KeyDown;
             KeyUp += MainForm_KeyUp;
             MouseMove += MainForm_MouseMove;
+            MouseClick += MainForm_MouseClick;
         }
 
 
@@ -48,10 +49,15 @@ namespace GameProject
         {
             Controller.ControlKeys(e.KeyCode, false);
         }
+
         private static void MainForm_MouseMove(object sender, MouseEventArgs e)
         {
             Controller.ControlMouse(e);
-            
+        }
+
+        private static void MainForm_MouseClick(object sender, MouseEventArgs e)
+        {
+            Controller.ControlMouse(e);
         }
         protected override void OnPaint(PaintEventArgs e)
         {

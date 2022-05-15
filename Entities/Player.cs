@@ -26,7 +26,7 @@ namespace GameProject.Entities
         internal Player()
         {
             Location = new Vector(100, 100);
-            Speed = 7;
+            Speed = 2;
             Size = new Size(289, 289);
             RotationAngle = 0;
             Image = Resources.Hero;
@@ -114,6 +114,14 @@ namespace GameProject.Entities
 
             var x = targetLocation.X - (Location.X + Size.Width / 2f);
             var y = targetLocation.Y - (Location.Y + Size.Height / 2f);
+            //return new Vector(x, y).AngleInDegrees;
+            return new Vector(x, y).AngleInRadians;
+        }
+
+        internal float AngleToTarget(Vector targetLocation, Size targetSize)
+        {
+            var x = (targetLocation.X + targetSize.Width / 2f) - (Location.X + Size.Width / 2f);
+            var y = (targetLocation.Y + targetSize.Height / 2f)- (Location.Y + Size.Height / 2f);
             //return new Vector(x, y).AngleInDegrees;
             return new Vector(x, y).AngleInRadians;
         }

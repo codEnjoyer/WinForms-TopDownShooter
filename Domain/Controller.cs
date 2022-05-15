@@ -11,9 +11,9 @@ namespace GameProject.Domain
 {
     internal class Controller
     {
-        internal static void ControlKeys(Keys pressed, bool isActive)
+        internal static void ControlKeys(Keys key, bool isActive)
         {
-            switch (pressed)
+            switch (key)
             {
                 case Keys.W:
                     Game.Player.Forward = isActive;
@@ -44,8 +44,15 @@ namespace GameProject.Domain
         {
             var cursorLocation = new Vector(e.Location.X, e.Location.Y);
             var angleToCursor = Game.Player.AngleToTarget(cursorLocation); //in radians
-
             Game.Player.GetMouseRotation(angleToCursor);
+
+            var button = e.Button;
+            switch (button)
+            {
+                case MouseButtons.Left:
+                    Game.Player.Accelerate(3);
+                    break;
+            }
         }
     }
 }
