@@ -18,7 +18,7 @@ namespace GameProject.Entities
         internal Vector Location { get; private set; }
         internal int Speed{ get; private set; }
         internal float RotationAngle { get; set; } //in radians
-        internal bool Forward, Left, Back, Right; //TODO: replace with enums?
+        internal bool Forward, Left, Back, Right; //TODO: replace with Enums?
         internal Size Size { get; }
         internal Image Image { get; set; }
         internal PictureBox PictureBox { get; set; }
@@ -26,7 +26,7 @@ namespace GameProject.Entities
         internal Player()
         {
             Location = new Vector(100, 100);
-            Speed = 5;
+            Speed = 7;
             Size = new Size(289, 289);
             RotationAngle = 0;
             Image = Resources.Hero;
@@ -44,10 +44,13 @@ namespace GameProject.Entities
 
         internal void Move()
         {
+
             if (Forward)
             {
                 var delta = new Vector(0, -1) * Speed;
-                Location += delta;
+                var nextLocation = new Point((int)(Location.X + delta.X), (int)(Location.Y + delta.Y));
+                if (Game.InBounds(new Rectangle(nextLocation, Size)))
+                    Location += delta;
                 //if (Location.Y >= 100)
                 //    View.Offset += delta;
             }
@@ -55,7 +58,9 @@ namespace GameProject.Entities
             if (Left)
             {
                 var delta = new Vector(-1, 0) * Speed;
-                Location += delta;
+                var nextLocation = new Point((int)(Location.X + delta.X), (int)(Location.Y + delta.Y));
+                if (Game.InBounds(new Rectangle(nextLocation, Size)))
+                    Location += delta;
                 //if (Location.X <= 1000)
                 //    View.Offset += delta;
             }
@@ -63,7 +68,9 @@ namespace GameProject.Entities
             if (Back)
             {
                 var delta = new Vector(0, 1) * Speed;
-                Location += delta;
+                var nextLocation = new Point((int)(Location.X + delta.X), (int)(Location.Y + delta.Y));
+                if (Game.InBounds(new Rectangle(nextLocation, Size)))
+                    Location += delta;
                 //if (Location.Y <= 1000)
                 //    View.Offset += delta;
             }
@@ -71,11 +78,14 @@ namespace GameProject.Entities
             if (Right)
             {
                 var delta = new Vector(1, 0) * Speed;
-                Location += delta;
+                var nextLocation = new Point((int) (Location.X + delta.X), (int) (Location.Y + delta.Y));
+                if (Game.InBounds(new Rectangle(nextLocation, Size)))
+                    Location += delta;
                 //if(Location.X >= 100)
                 //    View.Offset += delta;
             }
-                
+
+
 
             //Movement relative to cursor:
             //if (Forward)

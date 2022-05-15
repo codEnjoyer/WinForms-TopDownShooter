@@ -63,6 +63,7 @@ namespace GameProject
         private void MainForm_Load(object sender, EventArgs e)
         {
             GoFullscreen(true);
+            //Size = Screen.PrimaryScreen.WorkingArea.Size;
             DoubleBuffered = true;
         }
 
