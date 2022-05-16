@@ -49,6 +49,7 @@
     <Compile Include="Domain\Controller.cs" />
     <Compile Include="Domain\Game.cs" />
     <Compile Include="Domain\GameStage.cs" />
+    <Compile Include="Domain\MovementCondition.cs" />
     <Compile Include="Entities\Player.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>

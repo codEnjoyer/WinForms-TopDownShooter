@@ -19,6 +19,8 @@ namespace GameProject
         {
             UpdateMovement(graphics);
             UpdateRotation(graphics);
+
+            
         }
 
         internal static void UpdateMovement(Graphics graphics)
@@ -30,23 +32,22 @@ namespace GameProject
         {
             Game.Player.PictureBox.Image?.Dispose();
             var bitmap = new Bitmap(Game.Player.Image, Game.Player.PictureBox.Size);
-
-            Game.Player.PictureBox.Image = RotateBitmap(bitmap, Game.Player.RotationAngle);
-            graphics.DrawImage(Game.Player.PictureBox.Image, Game.Player.Location.ToPoint());
+            RotateBitmap(bitmap, Game.Player.RotationAngle, graphics);
         }
 
-        internal static Bitmap RotateBitmap(Bitmap bitmap, float angle)
+        internal static void RotateBitmap(Bitmap bitmap, float angle, Graphics g)
         {
             const float convertToDegree = 180 / (float)Math.PI;
+            var rotated = new Bitmap(bitmap.Width, bitmap.Height);
 
-            using (var graphics = Graphics.FromImage(bitmap))
+            using (var graphics = Graphics.FromImage(rotated))
             {
                 graphics.TranslateTransform((float)bitmap.Width / 2, (float)bitmap.Height / 2);
                 graphics.RotateTransform(angle * convertToDegree);
                 graphics.TranslateTransform(-(float)bitmap.Width / 2, -(float)bitmap.Height / 2);
-                graphics.DrawImage(bitmap, new PointF(0, 0));
+                graphics.DrawImage(bitmap, 0, 0, bitmap.Width, bitmap.Height);
             }
-            return bitmap;
+            g.DrawImage(rotated, Game.Player.Location.ToPoint());
         }
     }
 }

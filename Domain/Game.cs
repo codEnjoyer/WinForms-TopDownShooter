@@ -11,7 +11,7 @@ namespace GameProject.Domain
     internal class Game
     {
         internal static Player Player { get; set; }
-        internal static Size GameSize { get; private set; }
+        internal static Size Size { get; private set; }
         internal GameStage Stage { get; private set; } = GameStage.NotStarted;
         internal event Action<GameStage> StageChanged;
         internal static bool KeyPressed = false;
@@ -23,7 +23,7 @@ namespace GameProject.Domain
         internal Game(Player player) : this()
         {
             Player = player;
-            GameSize = new Size(1920 - (int)(1.3 * Player.Size.Width), 1080 - (int)(0.7 * Player.Size.Height));
+            Size = new Size(1920 - (int)(1.3 * Player.Size.Width), 1080 - (int)(0.7 * Player.Size.Height));
         }
 
         private void ChangeStage(GameStage stage)
@@ -34,7 +34,7 @@ namespace GameProject.Domain
         
         internal static bool InBounds(Rectangle hitbox)
         {
-            return new Rectangle(new Point(0, 0), GameSize).Contains(hitbox);
+            return new Rectangle(new Point(0, 0), Size).Contains(hitbox);
         }
     }
 }

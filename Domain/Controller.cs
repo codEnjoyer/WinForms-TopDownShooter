@@ -44,6 +44,7 @@ namespace GameProject.Domain
         {
             var cursorLocation = new Vector(e.Location.X, e.Location.Y);
             var angleToCursor = Game.Player.AngleToTarget(cursorLocation); //in radians
+
             Game.Player.GetMouseRotation(angleToCursor);
 
             var button = e.Button;
@@ -51,6 +52,9 @@ namespace GameProject.Domain
             {
                 case MouseButtons.Left:
                     Game.Player.Accelerate(3);
+                    break;
+                case MouseButtons.Right:
+                    Game.Player.Accelerate(-3);
                     break;
             }
         }
