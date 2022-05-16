@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Windows.Forms;
 using GameProject.Domain;
@@ -16,6 +17,7 @@ namespace GameProject
     {
         private Game game;
         private Timer timer;
+        private Label testLabel;
         public MainForm()
         {
             InitializeComponent();
@@ -36,6 +38,18 @@ namespace GameProject
             KeyUp += MainForm_KeyUp;
             MouseMove += MainForm_MouseMove;
             MouseClick += MainForm_MouseClick;
+
+            testLabel = new Label()
+            {
+                Location = new Point(50, 50),
+                Size = new Size(100, 30),
+            };
+            Controls.Add(testLabel);
+
+            KeyDown += (s, e) =>
+            {
+                testLabel.Text = View.Offset.ToString();
+            };
         }
 
 
@@ -43,6 +57,7 @@ namespace GameProject
         {
             Game.KeyPressed = true;
             Controller.ControlKeys(e.KeyCode, true);
+            
         }
 
         private static void MainForm_KeyUp(object sender, KeyEventArgs e)
@@ -69,7 +84,7 @@ namespace GameProject
         private void MainForm_Load(object sender, EventArgs e)
         {
             GoFullscreen(true);
-            //Size = Screen.PrimaryScreen.WorkingArea.Size;
+            //GameZone = Screen.PrimaryScreen.WorkingArea.GameZone;
             DoubleBuffered = true;
         }
 

@@ -17,6 +17,14 @@ namespace GameProject
         internal static Vector Offset = Vector.Zero;
         internal static void UpdateTextures(Graphics graphics)
         {
+            if (Game.InCameraBounds(Game.Player.Location))
+            {
+                graphics.TranslateTransform(-(int)Offset.X, -(int)Offset.Y);
+            }
+
+            graphics.DrawRectangle(new Pen(Color.Red), new Rectangle(Game.GameZone.Location, Game.GameZone.Size));
+            graphics.DrawRectangle(new Pen(Color.Blue), new Rectangle(Game.CameraZone.Location, Game.CameraZone.Size));
+
             UpdateMovement(graphics);
             UpdateRotation(graphics);
 
@@ -26,6 +34,8 @@ namespace GameProject
         internal static void UpdateMovement(Graphics graphics)
         {
             Game.Player.Move();
+            var playerLocation = Game.Player.Location.ToPoint();
+            graphics.DrawRectangle(new Pen(Color.Green), new Rectangle(playerLocation, Game.Player.Size));
         }
 
         internal static void UpdateRotation(Graphics graphics)

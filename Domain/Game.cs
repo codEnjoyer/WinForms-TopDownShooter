@@ -11,7 +11,8 @@ namespace GameProject.Domain
     internal class Game
     {
         internal static Player Player { get; set; }
-        internal static Size Size { get; private set; }
+        internal static Rectangle GameZone { get; private set; }
+        internal static Rectangle CameraZone { get; private set; }
         internal GameStage Stage { get; private set; } = GameStage.NotStarted;
         internal event Action<GameStage> StageChanged;
         internal static bool KeyPressed = false;
@@ -23,7 +24,11 @@ namespace GameProject.Domain
         internal Game(Player player) : this()
         {
             Player = player;
-            Size = new Size(1920 - (int)(1.3 * Player.Size.Width), 1080 - (int)(0.7 * Player.Size.Height));
+            GameZone = new Rectangle(new Point(0, 0),
+                new Size(3860 - (int)(1.3 * Player.Size.Width),2140 - (int)(0.7 * Player.Size.Height)));
+
+            CameraZone = new Rectangle(new Point(Player.Size.Width, Player.Size.Height),
+                new Size(GameZone.Width - 2 * Player.Size.Width, GameZone.Height - 2 * Player.Size.Height));
         }
 
         private void ChangeStage(GameStage stage)
@@ -34,7 +39,13 @@ namespace GameProject.Domain
         
         internal static bool InBounds(Rectangle hitbox)
         {
-            return new Rectangle(new Point(0, 0), Size).Contains(hitbox);
+            return GameZone.Contains(hitbox);
+        }
+
+        internal static bool InCameraBounds(Vector location)
+        {
+            return location.X > CameraZone.Left && location.X < CameraZone.Right &&
+                   location.Y > CameraZone.Top && location.Y < CameraZone.Bottom;
         }
     }
 }
