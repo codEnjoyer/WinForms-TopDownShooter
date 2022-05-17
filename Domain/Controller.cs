@@ -16,16 +16,16 @@ namespace GameProject.Domain
             switch (key)
             {
                 case Keys.W:
-                    Game.Player.Up = isActive;
+                    Game.Player.IsMovingUp = isActive;
                     break;
                 case Keys.A:
-                    Game.Player.Left = isActive;
+                    Game.Player.IsMovingLeft = isActive;
                     break;
                 case Keys.S:
-                    Game.Player.Down = isActive;
+                    Game.Player.IsMovingDown = isActive;
                     break;
                 case Keys.D:
-                    Game.Player.Right = isActive;
+                    Game.Player.IsMovingRight = isActive;
                     break;
 
                 case Keys.Escape:

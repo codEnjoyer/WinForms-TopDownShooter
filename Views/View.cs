@@ -9,7 +9,6 @@ using System.Windows.Forms;
 using GameProject.Domain;
 using GameProject.Entities;
 using GameProject.Physics;
-using GameProject.Views;
 
 namespace GameProject
 {

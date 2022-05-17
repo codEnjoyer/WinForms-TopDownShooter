@@ -6,44 +6,38 @@ using System.Runtime.CompilerServices;
 using System.Runtime.Remoting.Messaging;
 using System.Windows.Forms;
 using GameProject.Domain;
+using GameProject.Interfaces;
 using GameProject.Physics;
 using GameProject.Properties;
 
 namespace GameProject.Entities
 {
     
-    internal class Player
+    internal class Player : Entity, IMovable
     {
-        internal Vector Location { get; private set; }
-        internal int Speed{ get; private set; }
-        internal float RotationAngle { get; set; } //in radians
-        internal bool Up, Left, Down, Right;
-        internal Size Size { get; }
-        internal Image Image { get; set; }
+        public int Speed{ get; set; }
+        public float RotationAngle { get; set; } //in radians
+        public bool IsMovingUp { get; set; }
+        public bool IsMovingLeft { get; set; }
+        public bool IsMovingDown { get; set; }
+        public bool IsMovingRight { get; set; }
         internal PictureBox PictureBox { get; set; }
 
-        internal Player()
+        internal Player(Vector location) : base(location, Resources.Hero)
         {
-            Location = new Vector(100, 100);
             Speed = 7;
             RotationAngle = 0;
-            Image = Resources.Hero;
-            Size = new Size(Math.Max(Image.Width, Image.Height), Math.Max(Image.Width, Image.Height));
             PictureBox = new PictureBox
             {
                 Location = Location.ToPoint(),
                 Size = Size,
             };
-
-        }
-        internal Player(Vector location) : this()
-        {
             Location = new Vector(location.X - PictureBox.Size.Width / 2, location.Y - PictureBox.Size.Height / 2);
         }
 
-        internal void Move()
+        public void Move()
         {
-            if (Up)
+            if (IsMovingUp)
             {
                 var delta = new Vector(0, -1) * Speed;
                 var nextLocation = new Point((int)(Location.X + delta.X), (int)(Location.Y + delta.Y));
@@ -55,7 +49,7 @@ namespace GameProject.Entities
                     View.Offset += delta;
             }
 
-            if (Left)
+            if (IsMovingLeft)
             {
                 var delta = new Vector(-1, 0) * Speed;
                 var nextLocation = new Point((int)(Location.X + delta.X), (int)(Location.Y + delta.Y));
@@ -67,7 +61,7 @@ namespace GameProject.Entities
                     View.Offset += delta;
             }
 
-            if (Down)
+            if (IsMovingDown)
             {
                 var delta = new Vector(0, 1) * Speed;
                 var nextLocation = new Point((int)(Location.X + delta.X), (int)(Location.Y + delta.Y));
@@ -79,7 +73,7 @@ namespace GameProject.Entities
                     View.Offset += delta;
             }
 
-            if (Right)
+            if (IsMovingRight)
             {
                 var delta = new Vector(1, 0) * Speed;
                 var nextLocation = new Point((int) (Location.X + delta.X), (int) (Location.Y + delta.Y));
@@ -92,13 +86,13 @@ namespace GameProject.Entities
             }
 
             //Movement relative to cursor:
-            //if (Up)
+            //if (IsMovingUp)
             //    Location += Speed * new Vector(Math.Cos(RotationAngle), Math.Sin(RotationAngle));
-            //if (Left)
+            //if (IsMovingLeft)
             //    Location += Speed * new Vector(Math.Cos(RotationAngle - Math.PI / 2), Math.Sin(RotationAngle - Math.PI / 2));
-            //if (Down)
+            //if (IsMovingDown)
             //    Location -= Speed * new Vector(Math.Cos(RotationAngle), Math.Sin(RotationAngle));
-            //if (Right)
+            //if (IsMovingRight)
             //    Location -= Speed * new Vector(Math.Cos(RotationAngle - Math.PI / 2), Math.Sin(RotationAngle - Math.PI / 2));
         }
 
@@ -107,7 +101,7 @@ namespace GameProject.Entities
             RotationAngle = angle;
         }
 
-        internal void Accelerate(int speed)
+        public void Accelerate(int speed)
         {
             Speed += speed;
         }

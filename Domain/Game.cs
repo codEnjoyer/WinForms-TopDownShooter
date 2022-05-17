@@ -5,7 +5,6 @@ using System.Linq;
 using System.Windows.Forms;
 using GameProject.Entities;
 using GameProject.Physics;
-using GameProject.Views;
 
 namespace GameProject.Domain
 {
