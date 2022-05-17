@@ -16,7 +16,7 @@ namespace GameProject.Domain
         internal static Rectangle CameraZone { get; private set; }
         internal GameStage Stage { get; private set; } = GameStage.NotStarted;
         internal event Action<GameStage> StageChanged;
-        internal static bool KeyPressed = false;
+        //internal static bool KeyPressed = false;
 
         internal Game()
         {
@@ -27,10 +27,15 @@ namespace GameProject.Domain
             Player = player;
             GameZone = gameZone;
 
-            CameraZone = new Rectangle(GameZone.Location.X + Screen.PrimaryScreen.WorkingArea.Width / 2 - Player.Size.Width / 2,
-                GameZone.Location.Y + Screen.PrimaryScreen.WorkingArea.Height / 2 - Player.Size.Height / 2,
+            var cameraZoneLocation = new Point(
+                GameZone.Location.X + (Screen.PrimaryScreen.WorkingArea.Width - Player.Size.Width) / 2,
+                GameZone.Location.Y + (Screen.PrimaryScreen.WorkingArea.Height - Player.Size.Height) / 2);
+
+            var cameraZoneSize = new Size(
                 GameZone.Width - Screen.PrimaryScreen.WorkingArea.Width,
                 GameZone.Height - Screen.PrimaryScreen.WorkingArea.Height);
+
+            CameraZone = new Rectangle(cameraZoneLocation, cameraZoneSize);
 
         }
 

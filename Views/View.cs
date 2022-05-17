@@ -16,31 +16,19 @@ namespace GameProject
     internal class View
     {
         internal static Vector Offset = Vector.Zero;
-        internal static Vector Location = Vector.Zero;
         internal static void UpdateTextures(Graphics graphics)
         {
             UpdateCamera(graphics);
 
-            graphics.DrawRectangle(new Pen(Color.Red), new Rectangle(Game.GameZone.Location, Game.GameZone.Size));
-            graphics.DrawRectangle(new Pen(Color.Blue), new Rectangle(Game.CameraZone.Location, Game.CameraZone.Size));
+            graphics.DrawRectangle(new Pen(Color.Red), new Rectangle(Game.GameZone.Location, Game.GameZone.Size)); //GameZone hitbox
+            graphics.DrawRectangle(new Pen(Color.Blue), new Rectangle(Game.CameraZone.Location, Game.CameraZone.Size)); //CameraZone hitbox
 
             UpdateMovement(graphics);
             UpdateRotation(graphics);
-
-            
         }
 
         internal static void UpdateCamera(Graphics graphics)
         {
-            //if(Game.InCameraBounds(Game.Player.Location))
-            //{
-
-            //}
-            //else
-            //{
-            //    var offset = Location - Game.Player.Spawnpoint;
-            //    graphics.TranslateTransform(-(int)offset.X, -(int)offset.Y);
-            //}
             graphics.TranslateTransform(-(int)Offset.X, -(int)Offset.Y);
         }
 
@@ -48,7 +36,7 @@ namespace GameProject
         {
             Game.Player.Move();
             var playerLocation = Game.Player.Location.ToPoint();
-            graphics.DrawRectangle(new Pen(Color.Green), new Rectangle(playerLocation, Game.Player.Size));
+            graphics.DrawRectangle(new Pen(Color.Green), new Rectangle(playerLocation, Game.Player.Size)); //Player hitbox
         }
 
         internal static void UpdateRotation(Graphics graphics)

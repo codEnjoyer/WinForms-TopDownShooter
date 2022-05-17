@@ -42,22 +42,24 @@ namespace GameProject.Domain
 
         internal static void ControlMouse(MouseEventArgs e)
         {
-            var cursorLocation = new Vector(e.Location.X, e.Location.Y) + View.Offset;
-            var angleToCursor = Game.Player.AngleToTarget(cursorLocation); //in radians
+
+            var cursorLocationOnScreen = new Vector(e.Location.X, e.Location.Y);
+            var pressedButton = e.Button;
+
+            var cursorLocationWithOffset = cursorLocationOnScreen + View.Offset;
+            var angleToCursor = Game.Player.AngleToTarget(cursorLocationWithOffset); //in radians
 
             Game.Player.GetMouseRotation(angleToCursor);
 
-            var button = e.Button;
-
-            //switch (button)
-            //{
-            //    case MouseButtons.Left:
-            //        Game.Player.Accelerate(3);
-            //        break;
-            //    case MouseButtons.Right:
-            //        Game.Player.Accelerate(-3);
-            //        break;
-            //}
+            switch (pressedButton)
+            {
+                case MouseButtons.Left:
+                    Game.Player.Accelerate(3);
+                    break;
+                case MouseButtons.Right:
+                    Game.Player.Accelerate(-3);
+                    break;
+            }
         }
     }
 }

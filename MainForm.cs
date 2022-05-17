@@ -15,25 +15,13 @@ namespace GameProject
 {
     public partial class MainForm : Form
     {
-        private Game game;
         private Timer timer;
         private Label testLabel;
         public MainForm()
         {
             InitializeComponent();
-            var center = new Vector(Screen.PrimaryScreen.WorkingArea.Width / 2,
-                Screen.PrimaryScreen.WorkingArea.Height / 2);
-            var gameSize = new Size(3000, 3000);
-            var gameZone = new Rectangle(new Point((int)(-gameSize.Width / 2 + center.X),
-                    (int)(-gameSize.Height / 2 + center.Y)),
-                gameSize);
 
-            var playerSpawnPoint = new Vector(center.X, center.Y);
-            View.Location = playerSpawnPoint;
-
-            game = new Game(new Player(playerSpawnPoint), gameZone);
-
-            
+            InitGame();
 
             timer = new Timer();
 
@@ -55,16 +43,33 @@ namespace GameProject
             };
             Controls.Add(testLabel);
 
+            MouseMove += (s, e) =>
+            {
+                testLabel.Text = "Camera offset: " + View.Offset + "\nPlayer location: " + Game.Player.Location;
+            };
             KeyDown += (s, e) =>
             {
                 testLabel.Text = "Camera offset: " + View.Offset + "\nPlayer location: " + Game.Player.Location;
             };
         }
 
+        private static void InitGame()
+        {
+            var center = new Vector(Screen.PrimaryScreen.WorkingArea.Width / 2,
+                Screen.PrimaryScreen.WorkingArea.Height / 2);
+            var gameSize = new Size(3000, 3000);
+            var gameZone = new Rectangle(new Point((int)(-gameSize.Width / 2 + center.X),
+                    (int)(-gameSize.Height / 2 + center.Y)),
+                gameSize);
+
+            var playerSpawnPoint = new Vector(center.X, center.Y);
+
+            new Game(new Player(playerSpawnPoint), gameZone);
+        }
 
         private static void MainForm_KeyDown(object sender, KeyEventArgs e)
         {
-            Game.KeyPressed = true;
+            //Game.KeyPressed = true;
             Controller.ControlKeys(e.KeyCode, true);
             
         }

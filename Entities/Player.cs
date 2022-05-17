@@ -14,8 +14,6 @@ namespace GameProject.Entities
     
     internal class Player
     {
-        internal Vector Spawnpoint { get; }
-
         internal Vector Location { get; private set; }
         internal int Speed{ get; private set; }
         internal float RotationAngle { get; set; } //in radians
@@ -40,8 +38,7 @@ namespace GameProject.Entities
         }
         internal Player(Vector location) : this()
         {
-            Spawnpoint = new Vector(location.X - PictureBox.Size.Width / 2, location.Y - PictureBox.Size.Height / 2);
-            Location = Spawnpoint;
+            Location = new Vector(location.X - PictureBox.Size.Width / 2, location.Y - PictureBox.Size.Height / 2);
         }
 
         internal void Move()
@@ -50,59 +47,49 @@ namespace GameProject.Entities
             {
                 var delta = new Vector(0, -1) * Speed;
                 var nextLocation = new Point((int)(Location.X + delta.X), (int)(Location.Y + delta.Y));
-                if (Game.InBounds(new Rectangle(nextLocation, Size)))
-                {
-                    Location += delta;
-                    //if (!Game.InCameraBounds(Location))
-                    //{
-                    //    View.Location = Game.SnapToCameraZone(Location);
-                    //}
 
-                    if (Game.InCameraBoundsY(Location))
-                        View.Offset += delta;
-                }
+                if (!Game.InBounds(new Rectangle(nextLocation, Size))) return;
+                Location += delta;
+
+                if (Game.InCameraBoundsY(Location))
+                    View.Offset += delta;
             }
 
             if (Left)
             {
                 var delta = new Vector(-1, 0) * Speed;
                 var nextLocation = new Point((int)(Location.X + delta.X), (int)(Location.Y + delta.Y));
-                if (Game.InBounds(new Rectangle(nextLocation, Size)))
-                {
-                    Location += delta;
-                    if (Game.InCameraBoundsX(Location))
-                        View.Offset += delta;
-                }
+
+                if (!Game.InBounds(new Rectangle(nextLocation, Size))) return;
+                Location += delta;
+
+                if (Game.InCameraBoundsX(Location))
+                    View.Offset += delta;
             }
 
             if (Down)
             {
                 var delta = new Vector(0, 1) * Speed;
                 var nextLocation = new Point((int)(Location.X + delta.X), (int)(Location.Y + delta.Y));
-                if (Game.InBounds(new Rectangle(nextLocation, Size)))
-                {
-                    Location += delta;
-                    if (Game.InCameraBoundsY(Location))
-                        View.Offset += delta;
-                }
+
+                if (!Game.InBounds(new Rectangle(nextLocation, Size))) return;
+                Location += delta;
+
+                if (Game.InCameraBoundsY(Location))
+                    View.Offset += delta;
             }
 
             if (Right)
             {
                 var delta = new Vector(1, 0) * Speed;
                 var nextLocation = new Point((int) (Location.X + delta.X), (int) (Location.Y + delta.Y));
-                if (Game.InBounds(new Rectangle(nextLocation, Size)))
-                {
-                    Location += delta;
-                    if (Game.InCameraBoundsX(Location))
-                        View.Offset += delta;
-                }
-                    
-                    //if (Game.InCameraBounds(Location))
-                        
+
+                if (!Game.InBounds(new Rectangle(nextLocation, Size))) return;
+                Location += delta;
+
+                if (Game.InCameraBoundsX(Location))
+                    View.Offset += delta;
             }
-
-
 
             //Movement relative to cursor:
             //if (Up)
@@ -127,8 +114,6 @@ namespace GameProject.Entities
 
         internal float AngleToTarget(Vector targetLocation)
         {
-            //TODO: consider the size of the target
-
             var x = targetLocation.X - (Location.X + Size.Width / 2f);
             var y = targetLocation.Y - (Location.Y + Size.Height / 2f);
             //return new Vector(x, y).AngleInDegrees;
