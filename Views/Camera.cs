@@ -16,7 +16,6 @@ namespace GameProject.Views
         internal Camera()
         {
             Offset = Vector.Zero;
-            
         }
         internal Camera(Vector location)
         {

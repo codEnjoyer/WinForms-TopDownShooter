@@ -45,34 +45,15 @@ namespace GameProject.Domain
             return GameZone.Contains(hitbox);
         }
 
-        internal static bool InCameraBounds(Vector location)
+        internal static bool InCameraBoundsX(Vector location)
         {
-            return location.X > CameraZone.Left && location.X < CameraZone.Right &&
-                   location.Y > CameraZone.Top && location.Y < CameraZone.Bottom;
+            return location.X > CameraZone.Left && location.X < CameraZone.Right;
+
         }
 
-        internal static Vector SnapToCameraZone(Vector location)
+        internal static bool InCameraBoundsY(Vector location)
         {
-            var result = Vector.Zero;
-
-            if (location.X < CameraZone.Left)
-            {
-                result.X = CameraZone.Left;
-            }
-            if (location.Y < CameraZone.Top)
-            {
-                result.Y = CameraZone.Top;
-            }
-            if (location.X > CameraZone.Right)
-            {
-                result.X = CameraZone.Right;
-            }
-            if (location.Y > CameraZone.Bottom)
-            {
-                result.Y = CameraZone.Bottom;
-            }
-
-            return result;
+            return location.Y > CameraZone.Top && location.Y < CameraZone.Bottom;
         }
     }
 }

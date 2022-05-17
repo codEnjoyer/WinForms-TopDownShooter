@@ -23,12 +23,12 @@ namespace GameProject
             InitializeComponent();
             var center = new Vector(Screen.PrimaryScreen.WorkingArea.Width / 2,
                 Screen.PrimaryScreen.WorkingArea.Height / 2);
-            var gameSize = new Size(4000, 4000);
+            var gameSize = new Size(3000, 3000);
             var gameZone = new Rectangle(new Point((int)(-gameSize.Width / 2 + center.X),
                     (int)(-gameSize.Height / 2 + center.Y)),
                 gameSize);
 
-            var playerSpawnPoint = new Vector(center.X, center.Y + 2);
+            var playerSpawnPoint = new Vector(center.X, center.Y);
             View.Location = playerSpawnPoint;
 
             game = new Game(new Player(playerSpawnPoint), gameZone);
@@ -51,13 +51,13 @@ namespace GameProject
             testLabel = new Label()
             {
                 Location = new Point(50, 50),
-                Size = new Size(90, 30),
+                Size = new Size(90, 70),
             };
             Controls.Add(testLabel);
 
             KeyDown += (s, e) =>
             {
-                testLabel.Text = "Camera offset: " + View.Offset;
+                testLabel.Text = "Camera offset: " + View.Offset + "\nPlayer location: " + Game.Player.Location;
             };
         }
 

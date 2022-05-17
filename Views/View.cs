@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using GameProject.Domain;
 using GameProject.Entities;
 using GameProject.Physics;
+using GameProject.Views;
 
 namespace GameProject
 {
@@ -31,16 +32,16 @@ namespace GameProject
 
         internal static void UpdateCamera(Graphics graphics)
         {
-            if(Game.InCameraBounds(Game.Player.Location))
-            {
-                graphics.TranslateTransform(-(int)Offset.X, -(int)Offset.Y);
-            }
-            else
-            {
-                graphics.TranslateTransform(-(int)Offset.X, -(int)Offset.Y);
-            }
-            
+            //if(Game.InCameraBounds(Game.Player.Location))
+            //{
 
+            //}
+            //else
+            //{
+            //    var offset = Location - Game.Player.Spawnpoint;
+            //    graphics.TranslateTransform(-(int)offset.X, -(int)offset.Y);
+            //}
+            graphics.TranslateTransform(-(int)Offset.X, -(int)Offset.Y);
         }
 
         internal static void UpdateMovement(Graphics graphics)
