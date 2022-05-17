@@ -23,8 +23,8 @@ namespace GameProject.Physics
             Y = point.Y;
         }
 
-        public readonly double X;
-        public readonly double Y;
+        public double X { get; set; }
+        public double Y { get; set; }
         public double Length => Math.Sqrt(X * X + Y * Y);
 
         public float AngleInRadians => (float)Math.Atan2(Y, X);

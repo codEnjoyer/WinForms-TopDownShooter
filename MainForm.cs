@@ -21,11 +21,20 @@ namespace GameProject
         public MainForm()
         {
             InitializeComponent();
+            var center = new Vector(Screen.PrimaryScreen.WorkingArea.Width / 2,
+                Screen.PrimaryScreen.WorkingArea.Height / 2);
+            var gameSize = new Size(4000, 4000);
+            var gameZone = new Rectangle(new Point((int)(-gameSize.Width / 2 + center.X),
+                    (int)(-gameSize.Height / 2 + center.Y)),
+                gameSize);
 
-            var x = Screen.PrimaryScreen.Bounds.Width / 2;
-            var y = Screen.PrimaryScreen.Bounds.Height / 2;
+            var playerSpawnPoint = new Vector(center.X, center.Y + 2);
+            View.Location = playerSpawnPoint;
 
-            game = new Game(new Player(new Vector(x, y)));
+            game = new Game(new Player(playerSpawnPoint), gameZone);
+
+            
+
             timer = new Timer();
 
             timer.Interval = 15;
@@ -42,13 +51,13 @@ namespace GameProject
             testLabel = new Label()
             {
                 Location = new Point(50, 50),
-                Size = new Size(100, 30),
+                Size = new Size(90, 30),
             };
             Controls.Add(testLabel);
 
             KeyDown += (s, e) =>
             {
-                testLabel.Text = View.Offset.ToString();
+                testLabel.Text = "Camera offset: " + View.Offset;
             };
         }
 
@@ -94,7 +103,7 @@ namespace GameProject
         {
             if (fullscreen)
             {
-                TopMost = true;
+                //TopMost = true;
                 FormBorderStyle = FormBorderStyle.None;
                 WindowState = FormWindowState.Maximized;
             }

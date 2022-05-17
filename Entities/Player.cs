@@ -14,6 +14,8 @@ namespace GameProject.Entities
     
     internal class Player
     {
+        internal Vector Spawnpoint { get; }
+
         internal Vector Location { get; private set; }
         internal int Speed{ get; private set; }
         internal float RotationAngle { get; set; } //in radians
@@ -38,7 +40,8 @@ namespace GameProject.Entities
         }
         internal Player(Vector location) : this()
         {
-            Location = new Vector(location.X - PictureBox.Size.Width / 2, location.Y - PictureBox.Size.Height / 2);
+            Spawnpoint = new Vector(location.X - PictureBox.Size.Width / 2, location.Y - PictureBox.Size.Height / 2);
+            Location = Spawnpoint;
         }
 
         internal void Move()
@@ -50,6 +53,10 @@ namespace GameProject.Entities
                 if (Game.InBounds(new Rectangle(nextLocation, Size)))
                 {
                     Location += delta;
+                    if (!Game.InCameraBounds(Location))
+                    {
+
+                    }
                     View.Offset += delta;
                 }
             }
@@ -61,6 +68,7 @@ namespace GameProject.Entities
                 if (Game.InBounds(new Rectangle(nextLocation, Size)))
                 {
                     Location += delta;
+                    
                     View.Offset += delta;
                 }
             }

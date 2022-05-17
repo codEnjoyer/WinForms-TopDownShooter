@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows.Forms;
 using GameProject.Entities;
 using GameProject.Physics;
+using GameProject.Views;
 
 namespace GameProject.Domain
 {
@@ -21,14 +22,16 @@ namespace GameProject.Domain
         {
             
         }
-        internal Game(Player player) : this()
+        internal Game(Player player, Rectangle gameZone) : this()
         {
             Player = player;
-            GameZone = new Rectangle(new Point(0, 0),
-                new Size(3860 - (int)(1.3 * Player.Size.Width),2140 - (int)(0.7 * Player.Size.Height)));
+            GameZone = gameZone;
 
-            CameraZone = new Rectangle(new Point(Player.Size.Width, Player.Size.Height),
-                new Size(GameZone.Width - 2 * Player.Size.Width, GameZone.Height - 2 * Player.Size.Height));
+            CameraZone = new Rectangle(GameZone.Location.X + Screen.PrimaryScreen.WorkingArea.Width / 2 - Player.Size.Width / 2,
+                GameZone.Location.Y + Screen.PrimaryScreen.WorkingArea.Height / 2 - Player.Size.Height / 2,
+                GameZone.Width - Screen.PrimaryScreen.WorkingArea.Width,
+                GameZone.Height - Screen.PrimaryScreen.WorkingArea.Height);
+
         }
 
         private void ChangeStage(GameStage stage)
@@ -46,6 +49,30 @@ namespace GameProject.Domain
         {
             return location.X > CameraZone.Left && location.X < CameraZone.Right &&
                    location.Y > CameraZone.Top && location.Y < CameraZone.Bottom;
+        }
+
+        internal static Vector SnapToCameraZone(Vector location)
+        {
+            var result = Vector.Zero;
+
+            if (location.X < CameraZone.Left)
+            {
+                result.X = CameraZone.Left;
+            }
+            if (location.Y < CameraZone.Top)
+            {
+                result.Y = CameraZone.Top;
+            }
+            if (location.X > CameraZone.Right)
+            {
+                result.X = CameraZone.Right;
+            }
+            if (location.Y > CameraZone.Bottom)
+            {
+                result.Y = CameraZone.Bottom;
+            }
+
+            return result;
         }
     }
 }

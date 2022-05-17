@@ -49,15 +49,15 @@ namespace GameProject.Domain
 
             var button = e.Button;
 
-            switch (button)
-            {
-                //case MouseButtons.Left:
-                //    Game.Player.Accelerate(3);
-                //    break;
-                case MouseButtons.Right:
-                    Game.Player.Accelerate(-3);
-                    break;
-            }
+            //switch (button)
+            //{
+            //    case MouseButtons.Left:
+            //        Game.Player.Accelerate(3);
+            //        break;
+            //    case MouseButtons.Right:
+            //        Game.Player.Accelerate(-3);
+            //        break;
+            //}
         }
     }
 }
