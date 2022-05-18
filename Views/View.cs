@@ -19,11 +19,13 @@ namespace GameProject
         {
             UpdateCamera(graphics);
 
-            graphics.DrawRectangle(new Pen(Color.Red), new Rectangle(Game.GameZone.Location, Game.GameZone.Size)); //GameZone hitbox
-            graphics.DrawRectangle(new Pen(Color.Blue), new Rectangle(Game.CameraZone.Location, Game.CameraZone.Size)); //CameraZone hitbox
+            graphics.DrawRectangle(new Pen(Color.Red), Game.GameZone); //GameZone hitbox
+            graphics.DrawRectangle(new Pen(Color.Blue), Game.CameraZone); //CameraZone hitbox
+            graphics.DrawRectangle(new Pen(Color.Yellow), Game.Player.ViewedZone); //Rectangle covering the observed area (and slightly larger)
 
             UpdateMovement(graphics);
             UpdateRotation(graphics);
+            
         }
 
         internal static void UpdateCamera(Graphics graphics)

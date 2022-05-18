@@ -13,8 +13,10 @@ namespace GameProject.Domain
         internal static Player Player { get; set; }
         internal static Rectangle GameZone { get; private set; }
         internal static Rectangle CameraZone { get; private set; }
-        internal GameStage Stage { get; private set; } = GameStage.NotStarted;
+        internal static GameStage Stage { get; private set; } = GameStage.NotStarted;
         internal event Action<GameStage> StageChanged;
+
+        internal static SpawnManager SpawnManager;
         //internal static bool KeyPressed = false;
 
         internal Game()
@@ -25,6 +27,7 @@ namespace GameProject.Domain
         {
             Player = player;
             GameZone = gameZone;
+            ChangeStage(Stage);
 
             var cameraZoneLocation = new Point(
                 GameZone.Location.X + (Screen.PrimaryScreen.WorkingArea.Width - Player.Size.Width) / 2,
@@ -36,6 +39,7 @@ namespace GameProject.Domain
 
             CameraZone = new Rectangle(cameraZoneLocation, cameraZoneSize);
 
+            SpawnManager = new SpawnManager();
         }
 
         private void ChangeStage(GameStage stage)
@@ -43,7 +47,10 @@ namespace GameProject.Domain
             Stage = stage;
             StageChanged?.Invoke(stage);
         }
-        
+        internal static bool InBounds(Vector location)
+        {
+            return GameZone.Contains(location.ToPoint());
+        }
         internal static bool InBounds(Rectangle hitbox)
         {
             return GameZone.Contains(hitbox);

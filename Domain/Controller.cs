@@ -49,7 +49,7 @@ namespace GameProject.Domain
             var cursorLocationWithOffset = cursorLocationOnScreen + View.Offset;
             var angleToCursor = Game.Player.AngleToTarget(cursorLocationWithOffset); //in radians
 
-            Game.Player.GetMouseRotation(angleToCursor);
+            Game.Player.RotationAngle = angleToCursor;
 
             switch (pressedButton)
             {

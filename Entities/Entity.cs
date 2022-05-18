@@ -16,13 +16,18 @@ namespace GameProject.Entities
         public Vector Location { get; set; }
         
         public Size Size { get; set; }
-
+        public PictureBox PictureBox { get; set; }
         protected Entity(Vector location, Image image)
         {
             Image = image;
             Location = location;
             Size = new Size(Math.Max(Image.Width, Image.Height), Math.Max(Image.Width, Image.Height));
-            
+            PictureBox = new PictureBox
+            {
+                Location = Location.ToPoint(),
+                Size = Size,
+            };
+            Location = new Vector(location.X - Size.Width / 2, location.Y - Size.Height / 2);
         }
     }
 }

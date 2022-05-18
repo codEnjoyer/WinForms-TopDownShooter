@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Drawing;
+using System.Net.Http.Headers;
 using System.Runtime.CompilerServices;
 using System.Runtime.Remoting.Messaging;
 using System.Windows.Forms;
@@ -21,18 +22,19 @@ namespace GameProject.Entities
         public bool IsMovingLeft { get; set; }
         public bool IsMovingDown { get; set; }
         public bool IsMovingRight { get; set; }
-        internal PictureBox PictureBox { get; set; }
+        internal Rectangle ViewedZone { get; set; }
 
         internal Player(Vector location) : base(location, Resources.Hero)
         {
             Speed = 7;
             RotationAngle = 0;
-            PictureBox = new PictureBox
-            {
-                Location = Location.ToPoint(),
-                Size = Size,
-            };
-            Location = new Vector(location.X - PictureBox.Size.Width / 2, location.Y - PictureBox.Size.Height / 2);
+            ViewedZone = new Rectangle(
+                new Point(
+                    Screen.PrimaryScreen.WorkingArea.Location.X - Size.Width * 2,
+                    Screen.PrimaryScreen.WorkingArea.Location.Y - Size.Height * 2),
+                new Size(
+                    Screen.PrimaryScreen.WorkingArea.Width + 4 * Size.Width,
+                    Screen.PrimaryScreen.WorkingArea.Height + 4 * Size.Height));
         }
 
         public void Move()
@@ -47,6 +49,8 @@ namespace GameProject.Entities
 
                 if (Game.InCameraBoundsY(Location))
                     View.Offset += delta;
+
+                ViewedZone = new Rectangle(new Point(ViewedZone.X + nextLocation.X, ViewedZone.Y + nextLocation.Y), ViewedZone.Size);
             }
 
             if (IsMovingLeft)
@@ -59,6 +63,8 @@ namespace GameProject.Entities
 
                 if (Game.InCameraBoundsX(Location))
                     View.Offset += delta;
+
+                ViewedZone = new Rectangle(new Point(ViewedZone.X + nextLocation.X, ViewedZone.Y - nextLocation.Y), ViewedZone.Size);
             }
 
             if (IsMovingDown)
@@ -71,6 +77,8 @@ namespace GameProject.Entities
 
                 if (Game.InCameraBoundsY(Location))
                     View.Offset += delta;
+
+                ViewedZone = new Rectangle(new Point(ViewedZone.X + nextLocation.X, ViewedZone.Y + nextLocation.Y), ViewedZone.Size);
             }
 
             if (IsMovingRight)
@@ -83,6 +91,8 @@ namespace GameProject.Entities
 
                 if (Game.InCameraBoundsX(Location))
                     View.Offset += delta;
+
+                ViewedZone = new Rectangle(new Point(ViewedZone.X + nextLocation.X, ViewedZone.Y + nextLocation.Y), ViewedZone.Size);
             }
 
             //Movement relative to cursor:
@@ -94,11 +104,6 @@ namespace GameProject.Entities
             //    Location -= Speed * new Vector(Math.Cos(RotationAngle), Math.Sin(RotationAngle));
             //if (IsMovingRight)
             //    Location -= Speed * new Vector(Math.Cos(RotationAngle - Math.PI / 2), Math.Sin(RotationAngle - Math.PI / 2));
-        }
-
-        internal void GetMouseRotation(float angle)
-        {
-            RotationAngle = angle;
         }
 
         public void Accelerate(int speed)
