@@ -14,7 +14,7 @@ using GameProject.Properties;
 namespace GameProject.Entities
 {
     
-    internal class Player : Entity, IMovable
+    internal class Player : Entity, IMovable/*, IFightable*/
     {
         public int Speed{ get; set; }
         public float RotationAngle { get; set; } //in radians
@@ -30,11 +30,11 @@ namespace GameProject.Entities
             RotationAngle = 0;
             ViewedZone = new Rectangle(
                 new Point(
-                    Screen.PrimaryScreen.WorkingArea.Location.X - Size.Width * 2,
-                    Screen.PrimaryScreen.WorkingArea.Location.Y - Size.Height * 2),
+                    Screen.PrimaryScreen.WorkingArea.Location.X - Hitbox.Size.Width * 2,
+                    Screen.PrimaryScreen.WorkingArea.Location.Y - Hitbox.Size.Height * 2),
                 new Size(
-                    Screen.PrimaryScreen.WorkingArea.Width + 4 * Size.Width,
-                    Screen.PrimaryScreen.WorkingArea.Height + 4 * Size.Height));
+                    Screen.PrimaryScreen.WorkingArea.Width + 4 * Hitbox.Size.Width,
+                    Screen.PrimaryScreen.WorkingArea.Height + 4 * Hitbox.Size.Height)); //Move to View.cs
         }
 
         public void Move()
@@ -42,26 +42,28 @@ namespace GameProject.Entities
             if (IsMovingUp)
             {
                 var delta = new Vector(0, -1) * Speed;
-                var nextLocation = new Point((int)(Location.X + delta.X), (int)(Location.Y + delta.Y));
+                var nextLocation = new Point((int)(Hitbox.Location.X + delta.X), (int)(Hitbox.Location.Y + delta.Y));
 
-                if (!Game.InBounds(new Rectangle(nextLocation, Size))) return;
-                Location += delta;
+                if (!Game.InBounds(new Rectangle(nextLocation, Hitbox.Size))) return;
 
-                if (Game.InCameraBoundsY(Location))
+                Hitbox = new Rectangle(nextLocation, Hitbox.Size);
+
+                if (Game.InCameraBoundsY(Hitbox))
                     View.Offset += delta;
 
-                ViewedZone = new Rectangle(new Point(ViewedZone.X + nextLocation.X, ViewedZone.Y + nextLocation.Y), ViewedZone.Size);
+                ViewedZone = new Rectangle(new Point(ViewedZone.X + nextLocation.X, ViewedZone.Y - nextLocation.Y), ViewedZone.Size);
             }
 
             if (IsMovingLeft)
             {
                 var delta = new Vector(-1, 0) * Speed;
-                var nextLocation = new Point((int)(Location.X + delta.X), (int)(Location.Y + delta.Y));
+                var nextLocation = new Point((int)(Hitbox.Location.X + delta.X), (int)(Hitbox.Location.Y + delta.Y));
 
-                if (!Game.InBounds(new Rectangle(nextLocation, Size))) return;
-                Location += delta;
+                if (!Game.InBounds(new Rectangle(nextLocation, Hitbox.Size))) return;
 
-                if (Game.InCameraBoundsX(Location))
+                Hitbox = new Rectangle(nextLocation, Hitbox.Size);
+
+                if (Game.InCameraBoundsY(Hitbox))
                     View.Offset += delta;
 
                 ViewedZone = new Rectangle(new Point(ViewedZone.X + nextLocation.X, ViewedZone.Y - nextLocation.Y), ViewedZone.Size);
@@ -70,29 +72,31 @@ namespace GameProject.Entities
             if (IsMovingDown)
             {
                 var delta = new Vector(0, 1) * Speed;
-                var nextLocation = new Point((int)(Location.X + delta.X), (int)(Location.Y + delta.Y));
+                var nextLocation = new Point((int)(Hitbox.Location.X + delta.X), (int)(Hitbox.Location.Y + delta.Y));
 
-                if (!Game.InBounds(new Rectangle(nextLocation, Size))) return;
-                Location += delta;
+                if (!Game.InBounds(new Rectangle(nextLocation, Hitbox.Size))) return;
 
-                if (Game.InCameraBoundsY(Location))
+                Hitbox = new Rectangle(nextLocation, Hitbox.Size);
+
+                if (Game.InCameraBoundsY(Hitbox))
                     View.Offset += delta;
 
-                ViewedZone = new Rectangle(new Point(ViewedZone.X + nextLocation.X, ViewedZone.Y + nextLocation.Y), ViewedZone.Size);
+                ViewedZone = new Rectangle(new Point(ViewedZone.X + nextLocation.X, ViewedZone.Y - nextLocation.Y), ViewedZone.Size);
             }
 
             if (IsMovingRight)
             {
                 var delta = new Vector(1, 0) * Speed;
-                var nextLocation = new Point((int) (Location.X + delta.X), (int) (Location.Y + delta.Y));
+                var nextLocation = new Point((int)(Hitbox.Location.X + delta.X), (int)(Hitbox.Location.Y + delta.Y));
 
-                if (!Game.InBounds(new Rectangle(nextLocation, Size))) return;
-                Location += delta;
+                if (!Game.InBounds(new Rectangle(nextLocation, Hitbox.Size))) return;
 
-                if (Game.InCameraBoundsX(Location))
+                Hitbox = new Rectangle(nextLocation, Hitbox.Size);
+
+                if (Game.InCameraBoundsY(Hitbox))
                     View.Offset += delta;
 
-                ViewedZone = new Rectangle(new Point(ViewedZone.X + nextLocation.X, ViewedZone.Y + nextLocation.Y), ViewedZone.Size);
+                ViewedZone = new Rectangle(new Point(ViewedZone.X + nextLocation.X, ViewedZone.Y - nextLocation.Y), ViewedZone.Size);
             }
 
             //Movement relative to cursor:
@@ -113,16 +117,16 @@ namespace GameProject.Entities
 
         internal float AngleToTarget(Vector targetLocation)
         {
-            var x = targetLocation.X - (Location.X + Size.Width / 2f);
-            var y = targetLocation.Y - (Location.Y + Size.Height / 2f);
+            var x = targetLocation.X - (Hitbox.Location.X + Hitbox.Size.Width / 2f);
+            var y = targetLocation.Y - (Hitbox.Location.Y + Hitbox.Size.Height / 2f);
             //return new Vector(x, y).AngleInDegrees;
             return new Vector(x, y).AngleInRadians;
         }
 
-        internal float AngleToTarget(Vector targetLocation, Size targetSize)
+        internal float AngleToTarget(Rectangle hitbox)
         {
-            var x = (targetLocation.X + targetSize.Width / 2f) - (Location.X + Size.Width / 2f);
-            var y = (targetLocation.Y + targetSize.Height / 2f)- (Location.Y + Size.Height / 2f);
+            var x = (hitbox.Location.X + hitbox.Size.Width / 2f) - (Hitbox.Location.X + Hitbox.Size.Width / 2f);
+            var y = (hitbox.Location.Y + hitbox.Size.Height / 2f)- (Hitbox.Location.Y + Hitbox.Size.Height / 2f);
             //return new Vector(x, y).AngleInDegrees;
             return new Vector(x, y).AngleInRadians;
         }

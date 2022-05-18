@@ -45,11 +45,11 @@ namespace GameProject
 
             MouseMove += (s, e) =>
             {
-                testLabel.Text = "Camera offset: " + View.Offset + "\nPlayer location: " + Game.Player.Location;
+                testLabel.Text = "Camera offset: " + View.Offset + "\nPlayer location: " + Game.Player.Hitbox.Location;
             };
             KeyDown += (s, e) =>
             {
-                testLabel.Text = "Camera offset: " + View.Offset + "\nPlayer location: " + Game.Player.Location;
+                testLabel.Text = "Camera offset: " + View.Offset + "\nPlayer location: " + Game.Player.Hitbox.Location;
             };
         }
 

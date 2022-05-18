@@ -15,21 +15,21 @@ namespace GameProject.Domain
         private Timer enemySpawner;
         private Timer itemSpawner;
 
-        internal SpawnManager()
-        {
-            random = new Random();
-            
-
-            //enemySpawner = new Timer
-            //{
-            //    Interval = 5 * 1000,
-            //    Tick += SpawnEnemy(Game.Enemies[0], GetValidSpawnLocation())
-            //}
-        }
-
-        //private void SpawnEnemy(IEnemy enemy, Vector location)
+        //internal SpawnManager()
         //{
-            
+        //    random = new Random();
+
+
+        //    enemySpawner = new Timer
+        //    {
+        //        Interval = 5 * 1000,
+        //        Tick += SpawnEnemy(Game.Enemies[0], GetValidSpawnLocation()) //Enemy ENUMs
+        //    }
+        //}
+
+        //private void SpawnEnemy(IFightable enemy, Vector location)
+        //{
+
         //}
 
         private Vector GetValidSpawnLocation()
@@ -38,10 +38,10 @@ namespace GameProject.Domain
 
             while (!InSpawnZone(result))
             {
-                var randomLocationX = random.Next(Game.GameZone.X + Game.Player.Size.Width,
-                    Game.GameZone.Right - Game.Player.Size.Width);
-                var randomLocationY = random.Next(Game.GameZone.Y + Game.Player.Size.Height,
-                    Game.GameZone.Bottom - Game.Player.Size.Height);
+                var randomLocationX = random.Next(Game.GameZone.X + Game.Player.Hitbox.Size.Width,
+                    Game.GameZone.Right - Game.Player.Hitbox.Size.Width);
+                var randomLocationY = random.Next(Game.GameZone.Y + Game.Player.Hitbox.Size.Height,
+                    Game.GameZone.Bottom - Game.Player.Hitbox.Size.Height);
                 result = new Vector(randomLocationX, randomLocationY);
             }
 

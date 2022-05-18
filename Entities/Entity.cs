@@ -13,21 +13,21 @@ namespace GameProject.Entities
     abstract class Entity
     {
         public Image Image { get; set; }
-        public Vector Location { get; set; }
-        
-        public Size Size { get; set; }
+        public Rectangle Hitbox { get; set; }
         public PictureBox PictureBox { get; set; }
         protected Entity(Vector location, Image image)
         {
             Image = image;
-            Location = location;
-            Size = new Size(Math.Max(Image.Width, Image.Height), Math.Max(Image.Width, Image.Height));
+            var size = new Size(Math.Max(Image.Width, Image.Height), Math.Max(Image.Width, Image.Height));
+            Hitbox = new Rectangle(location.ToPoint(), size);
+
             PictureBox = new PictureBox
             {
-                Location = Location.ToPoint(),
-                Size = Size,
+                Location = Hitbox.Location,
+                Size = Hitbox.Size,
             };
-            Location = new Vector(location.X - Size.Width / 2, location.Y - Size.Height / 2);
+
+            Hitbox = new Rectangle(new Vector(location.X - Hitbox.Size.Width / 2, location.Y - Hitbox.Size.Height / 2).ToPoint(), size);
         }
     }
 }

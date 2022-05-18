@@ -7,10 +7,11 @@ using GameProject.Entities;
 
 namespace GameProject.Interfaces
 {
-    internal interface IEnemy
+    internal interface IFightable
     {
-        void DealDamage(Entity entity);
-        void TakeDamage();
+        //int Health { get; set; }
+        //void DealDamage(Player entity);
+        //void TakeDamage();
 
     }
 }

@@ -36,8 +36,8 @@ namespace GameProject
         internal static void UpdateMovement(Graphics graphics)
         {
             Game.Player.Move();
-            var playerLocation = Game.Player.Location.ToPoint();
-            graphics.DrawRectangle(new Pen(Color.Green), new Rectangle(playerLocation, Game.Player.Size)); //Player hitbox
+            var playerLocation = Game.Player.Hitbox.Location;
+            graphics.DrawRectangle(new Pen(Color.Green), Game.Player.Hitbox);
         }
 
         internal static void UpdateRotation(Graphics graphics)
@@ -59,7 +59,7 @@ namespace GameProject
                 graphics.TranslateTransform(-(float)bitmap.Width / 2, -(float)bitmap.Height / 2);
                 graphics.DrawImage(bitmap, 0, 0, bitmap.Width, bitmap.Height);
             }
-            g.DrawImage(rotated, Game.Player.Location.ToPoint());
+            g.DrawImage(rotated, Game.Player.Hitbox.Location);
         }
     }
 }

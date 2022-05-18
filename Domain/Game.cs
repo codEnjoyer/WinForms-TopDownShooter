@@ -30,8 +30,8 @@ namespace GameProject.Domain
             ChangeStage(Stage);
 
             var cameraZoneLocation = new Point(
-                GameZone.Location.X + (Screen.PrimaryScreen.WorkingArea.Width - Player.Size.Width) / 2,
-                GameZone.Location.Y + (Screen.PrimaryScreen.WorkingArea.Height - Player.Size.Height) / 2);
+                GameZone.Location.X + (Screen.PrimaryScreen.WorkingArea.Width - Player.Hitbox.Size.Width) / 2,
+                GameZone.Location.Y + (Screen.PrimaryScreen.WorkingArea.Height - Player.Hitbox.Size.Height) / 2);
 
             var cameraZoneSize = new Size(
                 GameZone.Width - Screen.PrimaryScreen.WorkingArea.Width,
@@ -59,12 +59,19 @@ namespace GameProject.Domain
         internal static bool InCameraBoundsX(Vector location)
         {
             return location.X > CameraZone.Left && location.X < CameraZone.Right;
-
+        }
+        internal static bool InCameraBoundsX(Rectangle hitbox)
+        {
+            return hitbox.Location.X > CameraZone.Left && hitbox.Location.X < CameraZone.Right;
         }
 
         internal static bool InCameraBoundsY(Vector location)
         {
             return location.Y > CameraZone.Top && location.Y < CameraZone.Bottom;
+        }
+        internal static bool InCameraBoundsY(Rectangle hitbox)
+        {
+            return hitbox.Location.Y > CameraZone.Top && hitbox.Location.Y < CameraZone.Bottom;
         }
     }
 }
