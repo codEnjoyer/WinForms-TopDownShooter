@@ -18,12 +18,12 @@ namespace GameProject.Entities
 
         protected Enemy(Vector location, Image image) : base(location, image)
         {
-            RotationAngle = Game.Player.AngleToTarget(Hitbox);
+            RotationAngle = AngleToPlayer();
         }
 
         public void Move()
         {
-            RotationAngle = Game.Player.AngleToTarget(Hitbox);
+            RotationAngle = AngleToPlayer();
 
             var delta = new Vector(Math.Cos(RotationAngle), Math.Sin(RotationAngle)) * Speed;
             var nextLocation = new Point((int)(Hitbox.Location.X + delta.X), (int)(Hitbox.Location.Y + delta.Y));
@@ -34,6 +34,14 @@ namespace GameProject.Entities
         public void Accelerate(int speed)
         {
             Speed += speed;
+        }
+
+        public float AngleToPlayer()
+        {
+            var x = (Game.Player.Hitbox.Location.X + Game.Player.Hitbox.Size.Width / 2f) - (Hitbox.Location.X + Hitbox.Size.Width / 2f);
+            var y = (Game.Player.Hitbox.Location.Y + Game.Player.Hitbox.Size.Height / 2f) - (Hitbox.Location.Y + Hitbox.Size.Height / 2f);
+            //return new Vector(x, y).AngleInDegrees;
+            return new Vector(x, y).AngleInRadians;
         }
     }
 }

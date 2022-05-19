@@ -27,7 +27,7 @@ namespace GameProject.Entities
                 Size = Hitbox.Size,
             };
 
-            Hitbox = new Rectangle(new Vector(location.X - Hitbox.Size.Width / 2, location.Y - Hitbox.Size.Height / 2).ToPoint(), size);
+            Hitbox = new Rectangle(new Vector(location.X - size.Width / 2, location.Y - size.Height / 2).ToPoint(), size);
         }
     }
 }

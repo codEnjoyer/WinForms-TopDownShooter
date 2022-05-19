@@ -21,7 +21,7 @@ namespace GameProject
             UpdateCamera(graphics);
 
             graphics.DrawRectangle(new Pen(Color.Red), Game.GameZone); //GameZone hitbox
-            graphics.DrawRectangle(new Pen(Color.Blue), Game.CameraZone); //CameraZone hitbox
+            //graphics.DrawRectangle(new Pen(Color.Blue), Game.CameraZone); //CameraZone hitbox
             graphics.DrawRectangle(new Pen(Color.Yellow), ViewedZone); //Rectangle covering the observed area (and slightly larger)
 
             UpdateMovement(graphics);
@@ -29,7 +29,7 @@ namespace GameProject
             
         }
 
-        internal static void UpdateCamera(Graphics graphics)
+        private static void UpdateCamera(Graphics graphics)
         {
             //if(ViewedZone == default)
             //    ViewedZone = new Rectangle(
@@ -43,9 +43,10 @@ namespace GameProject
             graphics.TranslateTransform(-(int)Offset.X, -(int)Offset.Y);
         }
 
-        internal static void UpdateMovement(Graphics graphics)
+        private static void UpdateMovement(Graphics graphics)
         {
             Game.Player.Move();
+
             ViewedZone = new Rectangle(
                 new Point(
                     Game.Player.Hitbox.Location.X - Game.Player.Hitbox.Size.Width * 2,
@@ -57,14 +58,14 @@ namespace GameProject
             
         }
 
-        internal static void UpdateRotation(Graphics graphics)
+        private static void UpdateRotation(Graphics graphics)
         {
             Game.Player.PictureBox.Image?.Dispose();
             var bitmap = new Bitmap(Game.Player.Image, Game.Player.PictureBox.Size);
             RotateBitmap(bitmap, Game.Player.RotationAngle, graphics);
         }
 
-        internal static void RotateBitmap(Bitmap bitmap, float angle, Graphics g)
+        private static void RotateBitmap(Bitmap bitmap, float angle, Graphics g)
         {
             const float convertToDegree = 180 / (float)Math.PI;
             var rotated = new Bitmap(bitmap.Width, bitmap.Height);

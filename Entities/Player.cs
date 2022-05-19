@@ -112,7 +112,7 @@ namespace GameProject.Entities
         internal float AngleToTarget(Rectangle hitbox)
         {
             var x = (hitbox.Location.X + hitbox.Size.Width / 2f) - (Hitbox.Location.X + Hitbox.Size.Width / 2f);
-            var y = (hitbox.Location.Y + hitbox.Size.Height / 2f)- (Hitbox.Location.Y + Hitbox.Size.Height / 2f);
+            var y = (hitbox.Location.Y + hitbox.Size.Height / 2f) - (Hitbox.Location.Y + Hitbox.Size.Height / 2f);
             //return new Vector(x, y).AngleInDegrees;
             return new Vector(x, y).AngleInRadians;
         }

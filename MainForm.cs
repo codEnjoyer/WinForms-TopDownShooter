@@ -23,9 +23,10 @@ namespace GameProject
 
             InitGame();
 
-            timer = new Timer();
-
-            timer.Interval = 15;
+            timer = new Timer
+            {
+                Interval = 15
+            };
             timer.Tick += (sender, args) => Invalidate();
             timer.Start();
 

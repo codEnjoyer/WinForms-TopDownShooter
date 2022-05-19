@@ -15,8 +15,8 @@ namespace GameProject.Domain
         internal static Rectangle CameraZone { get; private set; }
         internal static GameStage Stage { get; private set; } = GameStage.NotStarted;
         internal event Action<GameStage> StageChanged;
-
         internal static SpawnManager SpawnManager;
+        internal static List<Enemy> Enemies { get; private set; }
         //internal static bool KeyPressed = false;
 
         internal Game()
@@ -39,7 +39,9 @@ namespace GameProject.Domain
 
             CameraZone = new Rectangle(cameraZoneLocation, cameraZoneSize);
 
+            Enemies = new List<Enemy> { new SmallEnemy(Vector.Zero) };
             SpawnManager = new SpawnManager();
+
         }
 
         private void ChangeStage(GameStage stage)
