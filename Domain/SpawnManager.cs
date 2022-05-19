@@ -49,7 +49,7 @@ namespace GameProject.Domain
         }
         private bool InSpawnZone(Vector location)
         {
-            return Game.InBounds(location) && !Game.Player.ViewedZone.Contains(location.ToPoint());
+            return Game.InBounds(location) && !View.ViewedZone.Contains(location.ToPoint());
         }
     }
 }

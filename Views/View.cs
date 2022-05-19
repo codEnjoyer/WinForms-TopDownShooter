@@ -15,13 +15,14 @@ namespace GameProject
     internal class View
     {
         internal static Vector Offset = Vector.Zero;
+        internal static Rectangle ViewedZone { get; set; }
         internal static void UpdateTextures(Graphics graphics)
         {
             UpdateCamera(graphics);
 
             graphics.DrawRectangle(new Pen(Color.Red), Game.GameZone); //GameZone hitbox
             graphics.DrawRectangle(new Pen(Color.Blue), Game.CameraZone); //CameraZone hitbox
-            graphics.DrawRectangle(new Pen(Color.Yellow), Game.Player.ViewedZone); //Rectangle covering the observed area (and slightly larger)
+            graphics.DrawRectangle(new Pen(Color.Yellow), ViewedZone); //Rectangle covering the observed area (and slightly larger)
 
             UpdateMovement(graphics);
             UpdateRotation(graphics);
@@ -30,14 +31,30 @@ namespace GameProject
 
         internal static void UpdateCamera(Graphics graphics)
         {
+            //if(ViewedZone == default)
+            //    ViewedZone = new Rectangle(
+            //        new Point(
+            //            Screen.PrimaryScreen.WorkingArea.Location.X - Game.Player.Hitbox.Size.Width * 2,
+            //            Screen.PrimaryScreen.WorkingArea.Location.Y - Game.Player.Hitbox.Size.Height * 2),
+            //        new Size(
+            //            Screen.PrimaryScreen.WorkingArea.Width + 4 * Game.Player.Hitbox.Size.Width,
+            //            Screen.PrimaryScreen.WorkingArea.Height + 4 * Game.Player.Hitbox.Size.Height));
+
             graphics.TranslateTransform(-(int)Offset.X, -(int)Offset.Y);
         }
 
         internal static void UpdateMovement(Graphics graphics)
         {
             Game.Player.Move();
-            var playerLocation = Game.Player.Hitbox.Location;
+            ViewedZone = new Rectangle(
+                new Point(
+                    Game.Player.Hitbox.Location.X - Game.Player.Hitbox.Size.Width * 2,
+                    Game.Player.Hitbox.Location.Y - Game.Player.Hitbox.Size.Height * 2),
+                ViewedZone.Size);
+
             graphics.DrawRectangle(new Pen(Color.Green), Game.Player.Hitbox);
+
+            
         }
 
         internal static void UpdateRotation(Graphics graphics)

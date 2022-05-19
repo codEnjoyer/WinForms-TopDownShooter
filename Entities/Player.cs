@@ -22,19 +22,11 @@ namespace GameProject.Entities
         public bool IsMovingLeft { get; set; }
         public bool IsMovingDown { get; set; }
         public bool IsMovingRight { get; set; }
-        internal Rectangle ViewedZone { get; set; }
 
         internal Player(Vector location) : base(location, Resources.Hero)
         {
             Speed = 7;
             RotationAngle = 0;
-            ViewedZone = new Rectangle(
-                new Point(
-                    Screen.PrimaryScreen.WorkingArea.Location.X - Hitbox.Size.Width * 2,
-                    Screen.PrimaryScreen.WorkingArea.Location.Y - Hitbox.Size.Height * 2),
-                new Size(
-                    Screen.PrimaryScreen.WorkingArea.Width + 4 * Hitbox.Size.Width,
-                    Screen.PrimaryScreen.WorkingArea.Height + 4 * Hitbox.Size.Height)); //Move to View.cs
         }
 
         public void Move()
@@ -50,8 +42,6 @@ namespace GameProject.Entities
 
                 if (Game.InCameraBoundsY(Hitbox))
                     View.Offset += delta;
-
-                ViewedZone = new Rectangle(new Point(ViewedZone.X + nextLocation.X, ViewedZone.Y - nextLocation.Y), ViewedZone.Size);
             }
 
             if (IsMovingLeft)
@@ -63,10 +53,10 @@ namespace GameProject.Entities
 
                 Hitbox = new Rectangle(nextLocation, Hitbox.Size);
 
-                if (Game.InCameraBoundsY(Hitbox))
+                if (Game.InCameraBoundsX(Hitbox))
                     View.Offset += delta;
 
-                ViewedZone = new Rectangle(new Point(ViewedZone.X + nextLocation.X, ViewedZone.Y - nextLocation.Y), ViewedZone.Size);
+                
             }
 
             if (IsMovingDown)
@@ -80,8 +70,6 @@ namespace GameProject.Entities
 
                 if (Game.InCameraBoundsY(Hitbox))
                     View.Offset += delta;
-
-                ViewedZone = new Rectangle(new Point(ViewedZone.X + nextLocation.X, ViewedZone.Y - nextLocation.Y), ViewedZone.Size);
             }
 
             if (IsMovingRight)
@@ -93,10 +81,8 @@ namespace GameProject.Entities
 
                 Hitbox = new Rectangle(nextLocation, Hitbox.Size);
 
-                if (Game.InCameraBoundsY(Hitbox))
+                if (Game.InCameraBoundsX(Hitbox))
                     View.Offset += delta;
-
-                ViewedZone = new Rectangle(new Point(ViewedZone.X + nextLocation.X, ViewedZone.Y - nextLocation.Y), ViewedZone.Size);
             }
 
             //Movement relative to cursor:
