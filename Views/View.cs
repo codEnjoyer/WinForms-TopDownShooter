@@ -47,15 +47,24 @@ namespace GameProject
         {
             Game.Player.Move();
 
-            ViewedZone = new Rectangle(
-                new Point(
-                    Game.Player.Hitbox.Location.X - Game.Player.Hitbox.Size.Width * 2,
-                    Game.Player.Hitbox.Location.Y - Game.Player.Hitbox.Size.Height * 2),
-                ViewedZone.Size);
+            var viewedZoneLocation = new Point(
+                Game.Player.Hitbox.Location.X - Screen.PrimaryScreen.WorkingArea.Width,
+                Game.Player.Hitbox.Location.Y - Screen.PrimaryScreen.WorkingArea.Height);
+            var viewedZoneSize = new Size((int)(2 * Screen.PrimaryScreen.WorkingArea.Width),
+                (int)(2 * Screen.PrimaryScreen.WorkingArea.Height));
+            
+            ViewedZone = new Rectangle(viewedZoneLocation,
+                viewedZoneSize);
 
             graphics.DrawRectangle(new Pen(Color.Green), Game.Player.Hitbox);
 
-            
+            if (Game.SpawnedEnemies == null) return;
+
+            foreach (var enemy in Game.SpawnedEnemies)
+            {
+                enemy.Move();
+                graphics.DrawRectangle(new Pen(Color.Red), enemy.Hitbox);
+            }
         }
 
         private static void UpdateRotation(Graphics graphics)

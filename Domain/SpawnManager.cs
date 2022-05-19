@@ -18,7 +18,6 @@ namespace GameProject.Domain
         private readonly Random random;
         private Timer enemySpawner;
         private Timer itemSpawner;
-        private int spawnedEnemies;
         private int spawnedItems;
         private int enemiesLimit;
         private int itemsLimit;
@@ -35,16 +34,20 @@ namespace GameProject.Domain
                 Interval = 5 * 1000
                 
             };
-            enemySpawner.Tick += (sender, args) =>
-                SpawnEnemy(Game.Enemies[(int) Enemies.SmallEnemy], GetValidSpawnLocation());
+            enemySpawner.Tick += (s,a) =>
+                SpawnEnemy(Game.EnemiesSpecies[(int)Enemies.SmallEnemy], GetValidSpawnLocation());
+            enemySpawner.Start();
         }
 
         private void SpawnEnemy(Enemy enemy, Vector location)
         {
-            if (spawnedItems >= enemiesLimit) return;
+            if (Game.SpawnedEnemies.Count >= enemiesLimit) return;
+
             enemy.Hitbox = new Rectangle(location.ToPoint(), enemy.Hitbox.Size);
 
-            spawnedEnemies++;
+            Form.ActiveForm.Controls.Add(enemy.PictureBox);
+            enemy.PictureBox.BringToFront();
+            Game.SpawnedEnemies.Add(enemy);
         }
 
         private Vector GetValidSpawnLocation()

@@ -37,7 +37,7 @@ namespace GameProject
             MouseMove += MainForm_MouseMove;
             MouseClick += MainForm_MouseClick;
 
-            testLabel = new Label()
+            testLabel = new Label
             {
                 Location = new Point(50, 50),
                 Size = new Size(90, 70),

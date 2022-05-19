@@ -16,7 +16,10 @@ namespace GameProject.Domain
         internal static GameStage Stage { get; private set; } = GameStage.NotStarted;
         internal event Action<GameStage> StageChanged;
         internal static SpawnManager SpawnManager;
-        internal static List<Enemy> Enemies { get; private set; }
+        internal static List<Enemy> EnemiesSpecies { get; private set; }
+        internal static List<Enemy> ItemsSpecies { get; private set; } //TODO: Enum
+        internal static List<Enemy> SpawnedEnemies { get; set; }
+        internal static List<Enemy> SpawnedItems { get; set; }
         //internal static bool KeyPressed = false;
 
         internal Game()
@@ -39,9 +42,13 @@ namespace GameProject.Domain
 
             CameraZone = new Rectangle(cameraZoneLocation, cameraZoneSize);
 
-            Enemies = new List<Enemy> { new SmallEnemy(Vector.Zero) };
-            SpawnManager = new SpawnManager();
+            EnemiesSpecies = new List<Enemy> { new SmallEnemy(Vector.Zero) };
+            //ItemsSpecies = new List<Item>();
 
+            SpawnedEnemies = new List<Enemy>();
+            //SpawnedItems = new List<Item>();
+
+            SpawnManager = new SpawnManager();
         }
 
         private void ChangeStage(GameStage stage)
