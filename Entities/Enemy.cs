@@ -18,12 +18,10 @@ namespace GameProject.Entities
 
         protected Enemy(Vector location, Image image) : base(location, image)
         {
-            RotationAngle = AngleToPlayer();
         }
 
         public void Move()
         {
-
             var delta = new Vector(Math.Cos(RotationAngle), Math.Sin(RotationAngle)) * Speed;
             var nextLocation = new Point((int)(Hitbox.Location.X + delta.X), (int)(Hitbox.Location.Y + delta.Y));
 

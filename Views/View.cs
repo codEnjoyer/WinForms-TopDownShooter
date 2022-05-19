@@ -24,22 +24,15 @@ namespace GameProject
             //graphics.DrawRectangle(new Pen(Color.Blue), Game.CameraZone); //CameraZone hitbox
             graphics.DrawRectangle(new Pen(Color.Yellow), ViewedZone); //Rectangle covering the observed area (and slightly larger)
 
+            
             UpdateMovement(graphics);
             UpdateRotation(graphics);
-            
+            UpdateBoosters(graphics);
+
         }
 
         private static void UpdateCamera(Graphics graphics)
         {
-            //if(ViewedZone == default)
-            //    ViewedZone = new Rectangle(
-            //        new Point(
-            //            Screen.PrimaryScreen.WorkingArea.Location.X - Game.Player.Hitbox.Size.Width * 2,
-            //            Screen.PrimaryScreen.WorkingArea.Location.Y - Game.Player.Hitbox.Size.Height * 2),
-            //        new Size(
-            //            Screen.PrimaryScreen.WorkingArea.Width + 4 * Game.Player.Hitbox.Size.Width,
-            //            Screen.PrimaryScreen.WorkingArea.Height + 4 * Game.Player.Hitbox.Size.Height));
-
             graphics.TranslateTransform(-(int)Offset.X, -(int)Offset.Y);
         }
 
@@ -83,6 +76,21 @@ namespace GameProject
                 var enemyBitmap = new Bitmap(enemy.Image, enemy.PictureBox.Size);
                 RotateBitmap(enemyBitmap, enemy.RotationAngle, graphics, enemy.Hitbox.Location);
             }
+        }
+
+        private static void UpdateBoosters(Graphics graphics)
+        {
+            if (Game.SpawnedBoosters.Count == 0) return;
+
+            foreach (var booster in Game.SpawnedBoosters)
+            {
+                graphics.DrawRectangle(new Pen(Color.BlueViolet), booster.Hitbox);
+            }
+        }
+
+        private static void UpdatePlayer(Graphics graphics)
+        {
+
         }
 
         private static void RotateBitmap(Bitmap bitmap, float angle, Graphics g, Point location)

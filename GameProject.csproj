@@ -50,13 +50,19 @@
     <Compile Include="Domain\Game.cs" />
     <Compile Include="Domain\GameStage.cs" />
     <Compile Include="Domain\SpawnManager.cs" />
-    <Compile Include="Entities\EnemyTypes.cs" />
+    <Compile Include="Entities\Boosters\BoosterTypes.cs" />
+    <Compile Include="Entities\Boosters\DamageBoost.cs" />
+    <Compile Include="Entities\Boosters\HealthBoost.cs" />
+    <Compile Include="Entities\Enemies\EnemyTypes.cs" />
     <Compile Include="Entities\Enemy.cs" />
     <Compile Include="Entities\Entity.cs" />
+    <Compile Include="Entities\Booster.cs" />
     <Compile Include="Entities\Player.cs" />
-    <Compile Include="Entities\SmallEnemy.cs" />
+    <Compile Include="Entities\Enemies\SmallEnemy.cs" />
+    <Compile Include="Entities\Boosters\SpeedBoost.cs" />
     <Compile Include="Interfaces\IMovable.cs" />
     <Compile Include="Interfaces\IFightable.cs" />
+    <Compile Include="Interfaces\ITakeable.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -94,7 +100,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DamageBoost.png" />
+    <Content Include="HealthBoost.png" />
     <Content Include="SmallZombie.png" />
+    <Content Include="SpeedBoost.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

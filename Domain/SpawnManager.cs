@@ -17,31 +17,34 @@ namespace GameProject.Domain
     internal class SpawnManager
     {
         private readonly Random r;
+
         private static Timer enemySpawner;
-        private static Timer itemSpawner;
-        private static int spawnedItems;
+        private static Timer boosterSpawner;
+
         private static int enemiesLimit;
-        private static int itemsLimit;
+        private static int boostersLimit;
 
         internal SpawnManager()
         {
             enemiesLimit = 1;
-            itemsLimit = 10;
+            boostersLimit = 10;
 
             r = new Random();
-            enemySpawner = new Timer
-            {
-                Interval = 1000
-                
-            };
 
+            enemySpawner = new Timer();
+            enemySpawner.Interval = 5 * 1000;
             enemySpawner.Tick += (s,a) =>
                 SpawnEnemy((EnemyTypes)r.Next(1), GetValidSpawnLocation());
-            enemySpawner.Start();
-            
+            //enemySpawner.Start();
+
+            boosterSpawner = new Timer();
+            boosterSpawner.Interval = 1000;
+            boosterSpawner.Tick += (s, a) =>
+                SpawnBooster((BoosterTypes)r.Next(3), GetValidSpawnLocation());
+            boosterSpawner.Start();
         }
 
-        private void SpawnEnemy(EnemyTypes enemyType, Vector location)
+        private static void SpawnEnemy(EnemyTypes enemyType, Vector location)
         {
             if (!CanSpawnEnemy()) return;
             switch (enemyType)
@@ -53,6 +56,39 @@ namespace GameProject.Domain
                     smallEnemy.PictureBox.BringToFront();
                     Form.ActiveForm.Controls.Add(smallEnemy.PictureBox);
                     Game.SpawnedEnemies.Add(smallEnemy);
+                    break;
+            }
+        }
+        private static void SpawnBooster(BoosterTypes booster, Vector location)
+        {
+            if (!CanSpawnBooster()) return;
+            switch (booster)
+            {
+                case BoosterTypes.HealthBoost:
+                    var healthBoost = new HealthBoost(location);
+
+                    healthBoost.Hitbox = new Rectangle(location.ToPoint(), healthBoost.Hitbox.Size);
+                    healthBoost.PictureBox.BringToFront();
+                    Form.ActiveForm.Controls.Add(healthBoost.PictureBox);
+                    Game.SpawnedBoosters.Add(healthBoost);
+                    break;
+
+                case BoosterTypes.DamageBoost:
+                    var damageBoost = new DamageBoost(location);
+
+                    damageBoost.Hitbox = new Rectangle(location.ToPoint(), damageBoost.Hitbox.Size);
+                    damageBoost.PictureBox.BringToFront();
+                    Form.ActiveForm.Controls.Add(damageBoost.PictureBox);
+                    Game.SpawnedBoosters.Add(damageBoost);
+                    break;
+
+                case BoosterTypes.SpeedBoost:
+                    var speedBoost = new SpeedBoost(location);
+
+                    speedBoost.Hitbox = new Rectangle(location.ToPoint(), speedBoost.Hitbox.Size);
+                    speedBoost.PictureBox.BringToFront();
+                    Form.ActiveForm.Controls.Add(speedBoost.PictureBox);
+                    Game.SpawnedBoosters.Add(speedBoost);
                     break;
             }
         }
@@ -82,6 +118,10 @@ namespace GameProject.Domain
         private static bool CanSpawnEnemy()
         {
             return Game.SpawnedEnemies.Count < enemiesLimit;
+        }
+        private static bool CanSpawnBooster()
+        {
+            return Game.SpawnedBoosters.Count < boostersLimit;
         }
     }
 }

@@ -17,7 +17,7 @@ namespace GameProject.Domain
         internal event Action<GameStage> StageChanged;
         internal static SpawnManager SpawnManager;
         internal static List<Enemy> SpawnedEnemies { get; set; }
-        internal static List<Enemy> SpawnedItems { get; set; }
+        internal static List<Booster> SpawnedBoosters { get; set; }
         //internal static bool KeyPressed = false;
 
         internal Game()
@@ -41,7 +41,7 @@ namespace GameProject.Domain
             CameraZone = new Rectangle(cameraZoneLocation, cameraZoneSize);
 
             SpawnedEnemies = new List<Enemy>();
-            //SpawnedItems = new List<Item>();
+            SpawnedBoosters = new List<Booster>();
 
             SpawnManager = new SpawnManager();
         }

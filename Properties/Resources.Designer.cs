@@ -63,6 +63,26 @@ namespace GameProject.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap DamageBoost {
+            get {
+                object obj = ResourceManager.GetObject("DamageBoost", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap HealthBoost {
+            get {
+                object obj = ResourceManager.GetObject("HealthBoost", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Hero {
             get {
                 object obj = ResourceManager.GetObject("Hero", resourceCulture);
@@ -76,6 +96,16 @@ namespace GameProject.Properties {
         internal static System.Drawing.Bitmap SmallZombie {
             get {
                 object obj = ResourceManager.GetObject("SmallZombie", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SpeedBoost {
+            get {
+                object obj = ResourceManager.GetObject("SpeedBoost", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
