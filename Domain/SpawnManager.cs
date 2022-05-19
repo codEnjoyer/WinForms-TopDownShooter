@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Deployment.Application;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,7 +16,7 @@ namespace GameProject.Domain
 {
     internal class SpawnManager
     {
-        private readonly Random random;
+        private readonly Random r;
         private Timer enemySpawner;
         private Timer itemSpawner;
         private int spawnedItems;
@@ -24,30 +25,33 @@ namespace GameProject.Domain
 
         internal SpawnManager()
         {
-            enemiesLimit = 10;
+            enemiesLimit = 2;
             itemsLimit = 10;
 
-            random = new Random();
-
+            r = new Random();
             enemySpawner = new Timer
             {
                 Interval = 5 * 1000
                 
             };
             enemySpawner.Tick += (s,a) =>
-                SpawnEnemy(Game.EnemiesSpecies[(int)Enemies.SmallEnemy], GetValidSpawnLocation());
+                SpawnEnemy((EnemyTypes)r.Next(1), GetValidSpawnLocation());
             enemySpawner.Start();
         }
 
-        private void SpawnEnemy(Enemy enemy, Vector location)
+        private void SpawnEnemy(EnemyTypes enemyType, Vector location)
         {
             if (Game.SpawnedEnemies.Count >= enemiesLimit) return;
+            switch (enemyType)
+            {
+                case EnemyTypes.SmallEnemy:
+                    var enemy = new SmallEnemy(location);
+                    enemy.Hitbox = new Rectangle(location.ToPoint(), enemy.Hitbox.Size);
 
-            enemy.Hitbox = new Rectangle(location.ToPoint(), enemy.Hitbox.Size);
-
-            Form.ActiveForm.Controls.Add(enemy.PictureBox);
-            enemy.PictureBox.BringToFront();
-            Game.SpawnedEnemies.Add(enemy);
+                    Form.ActiveForm.Controls.Add(enemy.PictureBox);
+                    Game.SpawnedEnemies.Add(enemy);
+                    break;
+            }
         }
 
         private Vector GetValidSpawnLocation()
@@ -56,10 +60,10 @@ namespace GameProject.Domain
 
             while (!InSpawnZone(result))
             {
-                var randomLocationX = random.Next(Game.GameZone.X + Game.Player.Hitbox.Size.Width,
+                var randomLocationX = r.Next(Game.GameZone.X + Game.Player.Hitbox.Size.Width,
                     Game.GameZone.Right - Game.Player.Hitbox.Size.Width);
 
-                var randomLocationY = random.Next(Game.GameZone.Y + Game.Player.Hitbox.Size.Height,
+                var randomLocationY = r.Next(Game.GameZone.Y + Game.Player.Hitbox.Size.Height,
                     Game.GameZone.Bottom - Game.Player.Hitbox.Size.Height);
 
                 result = new Vector(randomLocationX, randomLocationY);

@@ -13,7 +13,7 @@ namespace GameProject.Entities
     {
         internal SmallEnemy(Vector location) : base(location, Resources.SmallZombie)
         {
-            Speed = 10;
+            Speed = 5;
         }
     }
 }
