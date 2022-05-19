@@ -23,7 +23,6 @@ namespace GameProject.Entities
 
         public void Move()
         {
-            RotationAngle = AngleToPlayer();
 
             var delta = new Vector(Math.Cos(RotationAngle), Math.Sin(RotationAngle)) * Speed;
             var nextLocation = new Point((int)(Hitbox.Location.X + delta.X), (int)(Hitbox.Location.Y + delta.Y));

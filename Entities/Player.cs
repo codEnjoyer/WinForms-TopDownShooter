@@ -25,6 +25,7 @@ namespace GameProject.Entities
 
         internal Player(Vector location) : base(location, Resources.Hero)
         {
+            Hitbox = new Rectangle(new Vector(location.X - Hitbox.Size.Width / 2, location.Y - Hitbox.Size.Height / 2).ToPoint(), Hitbox.Size);
             Speed = 7;
             RotationAngle = 0;
         }

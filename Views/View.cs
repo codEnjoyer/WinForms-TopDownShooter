@@ -58,7 +58,7 @@ namespace GameProject
 
             graphics.DrawRectangle(new Pen(Color.Green), Game.Player.Hitbox);
 
-            if (Game.SpawnedEnemies == null) return;
+            if (Game.SpawnedEnemies.Count == 0) return;
 
             foreach (var enemy in Game.SpawnedEnemies)
             {
@@ -70,11 +70,22 @@ namespace GameProject
         private static void UpdateRotation(Graphics graphics)
         {
             Game.Player.PictureBox.Image?.Dispose();
-            var bitmap = new Bitmap(Game.Player.Image, Game.Player.PictureBox.Size);
-            RotateBitmap(bitmap, Game.Player.RotationAngle, graphics);
+            var playerBitmap = new Bitmap(Game.Player.Image, Game.Player.PictureBox.Size);
+            RotateBitmap(playerBitmap, Game.Player.RotationAngle, graphics, Game.Player.Hitbox.Location);
+
+            if (Game.SpawnedEnemies.Count == 0) return;
+
+            foreach (var enemy in Game.SpawnedEnemies)
+            {
+                enemy.PictureBox.Location = enemy.Hitbox.Location;
+                enemy.RotationAngle = enemy.AngleToPlayer();
+                enemy.PictureBox.Image?.Dispose();
+                var enemyBitmap = new Bitmap(enemy.Image, enemy.PictureBox.Size);
+                RotateBitmap(enemyBitmap, enemy.RotationAngle, graphics, enemy.Hitbox.Location);
+            }
         }
 
-        private static void RotateBitmap(Bitmap bitmap, float angle, Graphics g)
+        private static void RotateBitmap(Bitmap bitmap, float angle, Graphics g, Point location)
         {
             const float convertToDegree = 180 / (float)Math.PI;
             var rotated = new Bitmap(bitmap.Width, bitmap.Height);
@@ -86,7 +97,7 @@ namespace GameProject
                 graphics.TranslateTransform(-(float)bitmap.Width / 2, -(float)bitmap.Height / 2);
                 graphics.DrawImage(bitmap, 0, 0, bitmap.Width, bitmap.Height);
             }
-            g.DrawImage(rotated, Game.Player.Hitbox.Location);
+            g.DrawImage(rotated, location);
         }
     }
 }

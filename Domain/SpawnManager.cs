@@ -17,39 +17,42 @@ namespace GameProject.Domain
     internal class SpawnManager
     {
         private readonly Random r;
-        private Timer enemySpawner;
-        private Timer itemSpawner;
-        private int spawnedItems;
-        private int enemiesLimit;
-        private int itemsLimit;
+        private static Timer enemySpawner;
+        private static Timer itemSpawner;
+        private static int spawnedItems;
+        private static int enemiesLimit;
+        private static int itemsLimit;
 
         internal SpawnManager()
         {
-            enemiesLimit = 2;
+            enemiesLimit = 1;
             itemsLimit = 10;
 
             r = new Random();
             enemySpawner = new Timer
             {
-                Interval = 5 * 1000
+                Interval = 1000
                 
             };
+
             enemySpawner.Tick += (s,a) =>
                 SpawnEnemy((EnemyTypes)r.Next(1), GetValidSpawnLocation());
             enemySpawner.Start();
+            
         }
 
         private void SpawnEnemy(EnemyTypes enemyType, Vector location)
         {
-            if (Game.SpawnedEnemies.Count >= enemiesLimit) return;
+            if (!CanSpawnEnemy()) return;
             switch (enemyType)
             {
                 case EnemyTypes.SmallEnemy:
-                    var enemy = new SmallEnemy(location);
-                    enemy.Hitbox = new Rectangle(location.ToPoint(), enemy.Hitbox.Size);
+                    var smallEnemy = new SmallEnemy(location);
 
-                    Form.ActiveForm.Controls.Add(enemy.PictureBox);
-                    Game.SpawnedEnemies.Add(enemy);
+                    smallEnemy.Hitbox = new Rectangle(location.ToPoint(), smallEnemy.Hitbox.Size);
+                    smallEnemy.PictureBox.BringToFront();
+                    Form.ActiveForm.Controls.Add(smallEnemy.PictureBox);
+                    Game.SpawnedEnemies.Add(smallEnemy);
                     break;
             }
         }
@@ -74,6 +77,11 @@ namespace GameProject.Domain
         private static bool InSpawnZone(Vector location)
         {
             return Game.InBounds(location) && !View.ViewedZone.Contains(location.ToPoint());
+        }
+
+        private static bool CanSpawnEnemy()
+        {
+            return Game.SpawnedEnemies.Count < enemiesLimit;
         }
     }
 }

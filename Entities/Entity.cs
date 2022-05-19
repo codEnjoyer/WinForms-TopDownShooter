@@ -24,10 +24,11 @@ namespace GameProject.Entities
             PictureBox = new PictureBox
             {
                 Location = Hitbox.Location,
+                SizeMode = PictureBoxSizeMode.StretchImage,
                 Size = Hitbox.Size,
             };
 
-            Hitbox = new Rectangle(new Vector(location.X - size.Width / 2, location.Y - size.Height / 2).ToPoint(), size);
+            
         }
     }
 }
