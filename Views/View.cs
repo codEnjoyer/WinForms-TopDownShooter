@@ -54,7 +54,13 @@ namespace GameProject
 
             foreach (var booster in Game.SpawnedBoosters)
             {
-                graphics.DrawImage(booster.PictureBox.Image, booster.PictureBox.Location);
+                var image = new Bitmap(booster.Hitbox.Width, booster.Hitbox.Height);
+                using (var g = Graphics.FromImage(image))
+                {
+                    g.DrawImage(booster.Image, 0, 0, booster.Hitbox.Width, booster.Hitbox.Height);
+                }
+                graphics.DrawImage(image, booster.Hitbox.Location);
+
                 graphics.DrawRectangle(new Pen(Color.MediumPurple), booster.Hitbox);
             }
         }
@@ -108,19 +114,19 @@ namespace GameProject
             }
         }
         
-        private static void RotateBitmap(Bitmap bitmap, float angle, Graphics g, Point location)
+        private static void RotateBitmap(Bitmap bitmap, float angle, Graphics graphics, Point location)
         {
             const float convertToDegree = 180 / (float)Math.PI;
             var rotated = new Bitmap(bitmap.Width, bitmap.Height);
 
-            using (var graphics = Graphics.FromImage(rotated))
+            using (var g = Graphics.FromImage(rotated))
             {
-                graphics.TranslateTransform((float)bitmap.Width / 2, (float)bitmap.Height / 2);
-                graphics.RotateTransform(angle * convertToDegree);
-                graphics.TranslateTransform(-(float)bitmap.Width / 2, -(float)bitmap.Height / 2);
-                graphics.DrawImage(bitmap, 0, 0, bitmap.Width, bitmap.Height);
+                g.TranslateTransform((float)bitmap.Width / 2, (float)bitmap.Height / 2);
+                g.RotateTransform(angle * convertToDegree);
+                g.TranslateTransform(-(float)bitmap.Width / 2, -(float)bitmap.Height / 2);
+                g.DrawImage(bitmap, 0, 0, bitmap.Width, bitmap.Height);
             }
-            g.DrawImage(rotated, location);
+            graphics.DrawImage(rotated, location);
         }
     }
 }

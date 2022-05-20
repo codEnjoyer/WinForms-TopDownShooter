@@ -77,5 +77,26 @@ namespace GameProject.Domain
         {
             return hitbox.Location.Y > CameraZone.Top && hitbox.Location.Y < CameraZone.Bottom;
         }
+
+        internal static void CheckIntersections()
+        {
+            foreach (var enemy in SpawnedEnemies)
+            {
+                foreach (var booster in SpawnedBoosters)
+                {
+                    if (Player.Hitbox.IntersectsWith(booster.Hitbox))
+                    {
+                        Player.GetBoost(booster);
+                        SpawnedBoosters.Remove(booster);
+                    }
+                    if (enemy.Hitbox.IntersectsWith(booster.Hitbox))
+                    {
+                        enemy.GetBoost(booster);
+                        SpawnedBoosters.Remove(booster);
+                    }
+                        
+                }
+            }
+        }
     }
 }

@@ -24,7 +24,7 @@ namespace GameProject.Entities
             PictureBox = new PictureBox
             {
                 Location = Hitbox.Location,
-                SizeMode = PictureBoxSizeMode.StretchImage,
+                SizeMode = PictureBoxSizeMode.Zoom,
                 Size = Hitbox.Size,
             };
 

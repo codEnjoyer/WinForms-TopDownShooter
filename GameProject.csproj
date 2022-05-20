@@ -54,11 +54,13 @@
     <Compile Include="Entities\Boosters\DamageBoost.cs" />
     <Compile Include="Entities\Boosters\HealthBoost.cs" />
     <Compile Include="Entities\Enemies\EnemyTypes.cs" />
+    <Compile Include="Entities\Enemies\HeavyZombie.cs" />
+    <Compile Include="Entities\Enemies\MediumZombie.cs" />
     <Compile Include="Entities\Enemy.cs" />
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="Entities\Booster.cs" />
     <Compile Include="Entities\Player.cs" />
-    <Compile Include="Entities\Enemies\SmallEnemy.cs" />
+    <Compile Include="Entities\Enemies\SmallZombie.cs" />
     <Compile Include="Entities\Boosters\SpeedBoost.cs" />
     <Compile Include="Interfaces\IMovable.cs" />
     <Compile Include="Interfaces\IFightable.cs" />

@@ -9,9 +9,9 @@ using GameProject.Properties;
 
 namespace GameProject.Entities
 {
-    internal class SmallEnemy : Enemy
+    internal class SmallZombie : Enemy
     {
-        internal SmallEnemy(Vector location) : base(location, Resources.SmallZombie)
+        internal SmallZombie(Vector location) : base(location, Resources.SmallZombie)
         {
             Speed = 4;
         }

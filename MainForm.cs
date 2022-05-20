@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.Remoting.Channels;
 using System.Threading;
 using System.Windows.Forms;
 using GameProject.Domain;
@@ -28,6 +29,7 @@ namespace GameProject
                 Interval = 15
             };
             timer.Tick += (sender, args) => Invalidate();
+            //timer.Tick += (sender, args) => CheckIntersections();
             timer.Start();
 
             Cursor = Cursors.Cross;
@@ -95,7 +97,10 @@ namespace GameProject
             View.UpdateTextures(eGraphics);
         }
 
-        
+        private void CheckIntersections()
+        {
+            Game.CheckIntersections();
+        }
 
         #region Fullscreen, FormLoad
         private void MainForm_Load(object sender, EventArgs e)

@@ -117,5 +117,10 @@ namespace GameProject.Entities
             //return new Vector(x, y).AngleInDegrees;
             return new Vector(x, y).AngleInRadians;
         }
+
+        public void GetBoost(Booster booster)
+        {
+
+        }
     }
 }

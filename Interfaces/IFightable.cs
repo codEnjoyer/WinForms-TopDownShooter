@@ -12,6 +12,6 @@ namespace GameProject.Interfaces
         //int Health { get; set; }
         //void DealDamage(Player entity);
         //void TakeDamage();
-
+        void GetBoost(Booster booster);
     }
 }

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using GameProject.Entities;
+using GameProject.Entities.Enemies;
 using GameProject.Interfaces;
 using GameProject.Physics;
 using Microsoft.Win32;
@@ -34,7 +35,7 @@ namespace GameProject.Domain
             enemySpawner = new Timer();
             enemySpawner.Interval = 1000;
             enemySpawner.Tick += (s,a) =>
-                SpawnEnemy((EnemyTypes)r.Next(1), GetValidSpawnLocation());
+                SpawnEnemy((EnemyTypes)r.Next(3), GetValidSpawnLocation());
             enemySpawner.Start();
 
             boosterSpawner = new Timer();
@@ -50,8 +51,18 @@ namespace GameProject.Domain
             switch (enemyType)
             {
                 case EnemyTypes.SmallEnemy:
-                    var smallEnemy = new SmallEnemy(location);
-                    Game.SpawnedEnemies.Add(smallEnemy);
+                    var smallZombie = new SmallZombie(location);
+                    Game.SpawnedEnemies.Add(smallZombie);
+                    break;
+
+                case EnemyTypes.MediumZombie:
+                    var mediumZombie = new MediumZombie(location);
+                    Game.SpawnedEnemies.Add(mediumZombie);
+                    break;
+
+                case EnemyTypes.HeavyZombie:
+                    var heavyZombie = new HeavyZombie(location);
+                    Game.SpawnedEnemies.Add(heavyZombie);
                     break;
             }
         }

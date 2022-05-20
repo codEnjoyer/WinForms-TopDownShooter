@@ -2,6 +2,8 @@
 
 internal enum EnemyTypes
 {
-    SmallEnemy
+    SmallEnemy,
+    MediumZombie,
+    HeavyZombie
 
 }
