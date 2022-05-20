@@ -28,8 +28,11 @@ namespace GameProject.Entities
         {
             Hitbox = new Rectangle(new Vector(location.X - Hitbox.Size.Width / 2, location.Y - Hitbox.Size.Height / 2).ToPoint(), Hitbox.Size);
             Speed = 5;
-            Health = 100;
+            MaxHealth = 100;
+            Health = 75;
             Damage = 10; //TODO: Make Weapons
+            HealthBar = new Rectangle(Hitbox.Location.X + (int) (0.25 * Hitbox.Width), Hitbox.Location.Y - 10,
+                (int) (0.5 * Hitbox.Width), 10);
         }
 
         public void Move()
@@ -125,6 +128,11 @@ namespace GameProject.Entities
             switch (booster.Type)
             {
                 case BoosterTypes.HealthBoost:
+                    if (Health + booster.Impact > MaxHealth)
+                    {
+                        Health = MaxHealth;
+                        break;
+                    }
                     Health += booster.Impact;
                     break;
 
@@ -140,7 +148,7 @@ namespace GameProject.Entities
 
         public void DealDamage(Entity entity)
         {
-            entity.Health -= Damage;
+            ((Enemy)entity).TakeDamage(Damage);
         }
 
         public void TakeDamage(int damage)

@@ -14,7 +14,8 @@ namespace GameProject.Entities.Enemies
         internal MediumZombie(Vector location) : base(location, Resources.MediumZombie)
         {
             Speed = 3;
-            Health = 100;
+            MaxHealth = 100;
+            Health = MaxHealth;
             Damage = 15;
         }
     }

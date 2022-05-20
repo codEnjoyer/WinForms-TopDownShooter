@@ -9,7 +9,6 @@ namespace GameProject.Interfaces
 {
     internal interface IFightable
     {
-        int Health { get; set; }
         int Damage { get; set; }
         void DealDamage(Entity entity);
         void TakeDamage(int damage);

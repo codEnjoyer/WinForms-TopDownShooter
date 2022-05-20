@@ -26,6 +26,7 @@ namespace GameProject
 
             UpdateBoosters(graphics);
             UpdateMovement(graphics);
+            UpdateHealth(graphics);
             UpdateRotation(graphics);
             
         }
@@ -41,7 +42,53 @@ namespace GameProject
             UpdatePlayerMovement(graphics);
             UpdateViewedZone();
         }
+        private static void UpdateHealth(Graphics graphics)
+        {
+            UpdatePlayerHealth(graphics);
+            UpdateEnemiesHealth(graphics);
+        }
 
+        private static void UpdatePlayerHealth(Graphics graphics)
+        {
+            var playerHealthBarPosition = new Point(
+                Game.Player.Hitbox.Location.X + (int)(0.25 * Game.Player.Hitbox.Width),
+                Game.Player.Hitbox.Location.Y - 10);
+
+            graphics.DrawRectangle(Pens.Black,
+                playerHealthBarPosition.X,
+                playerHealthBarPosition.Y,
+                Game.Player.HealthBar.Width,
+                Game.Player.HealthBar.Height);
+
+            graphics.FillRectangle(Brushes.Green,
+                playerHealthBarPosition.X,
+                playerHealthBarPosition.Y,
+                Game.Player.HealthBar.Width * Game.Player.GetHPPercent(),
+                Game.Player.HealthBar.Height);
+        }
+        private static void UpdateEnemiesHealth(Graphics graphics)
+        {
+            if(Game.SpawnedEnemies.Count == 0) return;
+            foreach (var enemy in Game.SpawnedEnemies)
+            {
+                var enemyHealthBarPosition = new Point(
+                    enemy.Hitbox.Location.X + (int)(0.25 * enemy.Hitbox.Width),
+                    enemy.Hitbox.Location.Y - 10);
+
+            graphics.DrawRectangle(Pens.Black,
+                enemyHealthBarPosition.X,
+                enemyHealthBarPosition.Y,
+                enemy.HealthBar.Width,
+                enemy.HealthBar.Height);
+
+            graphics.FillRectangle(Brushes.Red,
+                enemyHealthBarPosition.X,
+                enemyHealthBarPosition.Y,
+                enemy.HealthBar.Width * enemy.GetHPPercent(),
+                enemy.HealthBar.Height);
+            }
+            
+        }
         private static void UpdateRotation(Graphics graphics)
         {
             UpdateEnemiesRotation(graphics);

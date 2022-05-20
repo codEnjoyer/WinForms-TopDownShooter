@@ -19,6 +19,8 @@ namespace GameProject.Entities
 
         protected Enemy(Vector location, Image image) : base(location, image)
         {
+            HealthBar = new Rectangle(Hitbox.Location.X + (int)(0.25 * Hitbox.Width), Hitbox.Location.Y - 10,
+                (int)(0.5 * Hitbox.Width), 10);
         }
 
         internal void Move()
@@ -27,11 +29,6 @@ namespace GameProject.Entities
             var nextLocation = new Point((int)(Hitbox.Location.X + delta.X), (int)(Hitbox.Location.Y + delta.Y));
 
             Hitbox = new Rectangle(nextLocation, Hitbox.Size);
-        }
-
-        private void Accelerate(int speed)
-        {
-            Speed += speed;
         }
 
         internal float AngleToPlayer()
@@ -47,6 +44,11 @@ namespace GameProject.Entities
             switch (booster.Type)
             {
                 case BoosterTypes.HealthBoost:
+                    if (Health + booster.Impact > MaxHealth)
+                    {
+                        Health = MaxHealth;
+                        break;
+                    }
                     Health += booster.Impact;
                     break;
 
@@ -62,7 +64,7 @@ namespace GameProject.Entities
 
         public void DealDamage(Entity entity)
         {
-            entity.Health -= Damage;
+            ((Player)entity).TakeDamage(Damage);
         }
 
         public void TakeDamage(int damage)

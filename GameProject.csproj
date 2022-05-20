@@ -102,14 +102,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DamageBoost.png" />
-    <Content Include="HealthBoost.png" />
-    <Content Include="HeavyZombie.png" />
-    <Content Include="HeroNormal.png" />
-    <Content Include="HeroSmall.png" />
-    <Content Include="MediumZombie.png" />
-    <Content Include="SmallZombie.png" />
-    <Content Include="SpeedBoost.png" />
+    <Content Include="Sprites\DamageBoost.png" />
+    <Content Include="Sprites\HealthBoost.png" />
+    <Content Include="Sprites\HeavyZombie.png" />
+    <Content Include="Sprites\HeroNormal.png" />
+    <Content Include="Sprites\HeroSmall.png" />
+    <Content Include="Sprites\MediumZombie.png" />
+    <Content Include="Sprites\SmallZombie.png" />
+    <Content Include="Sprites\SpeedBoost.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

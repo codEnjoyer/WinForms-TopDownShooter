@@ -54,7 +54,8 @@ namespace GameProject.Domain
             switch (pressedButton)
             {
                 case MouseButtons.Left:
-                    Game.Player.Accelerate(3);
+                    //Game.Player.Accelerate(3);
+                    Game.Player.TakeDamage(10);
                     break;
                 case MouseButtons.Right:
                     Game.Player.Accelerate(-3);

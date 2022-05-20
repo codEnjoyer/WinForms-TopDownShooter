@@ -89,12 +89,18 @@ namespace GameProject.Domain
                         Player.GetBoost(booster);
                         SpawnedBoosters.Remove(booster);
                     }
+
                     if (enemy.Hitbox.IntersectsWith(booster.Hitbox))
                     {
                         enemy.GetBoost(booster);
                         SpawnedBoosters.Remove(booster);
                     }
-                        
+
+                    if (Player.Hitbox.IntersectsWith(enemy.Hitbox))
+                    {
+                        Player.DealDamage(enemy);
+                        enemy.DealDamage(Player);
+                    }
                 }
             }
         }
