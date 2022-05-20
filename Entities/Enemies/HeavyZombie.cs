@@ -10,9 +10,9 @@ namespace GameProject.Entities.Enemies
 {
     internal class HeavyZombie : Enemy
     {
-        internal HeavyZombie(Vector location) : base(location, Resources.SmallZombie)
+        internal HeavyZombie(Vector location) : base(location, Resources.HeavyZombie)
         {
-            Speed = 2;
+            Speed = 1;
         }
     }
 }

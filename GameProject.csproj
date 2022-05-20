@@ -104,6 +104,10 @@
   <ItemGroup>
     <Content Include="DamageBoost.png" />
     <Content Include="HealthBoost.png" />
+    <Content Include="HeavyZombie.png" />
+    <Content Include="HeroNormal.png" />
+    <Content Include="HeroSmall.png" />
+    <Content Include="MediumZombie.png" />
     <Content Include="SmallZombie.png" />
     <Content Include="SpeedBoost.png" />
   </ItemGroup>

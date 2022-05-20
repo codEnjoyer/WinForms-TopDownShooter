@@ -83,9 +83,39 @@ namespace GameProject.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Hero {
+        internal static System.Drawing.Bitmap HeavyZombie {
             get {
-                object obj = ResourceManager.GetObject("Hero", resourceCulture);
+                object obj = ResourceManager.GetObject("HeavyZombie", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap HeroBig {
+            get {
+                object obj = ResourceManager.GetObject("HeroBig", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap HeroNormal {
+            get {
+                object obj = ResourceManager.GetObject("HeroNormal", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap MediumZombie {
+            get {
+                object obj = ResourceManager.GetObject("MediumZombie", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

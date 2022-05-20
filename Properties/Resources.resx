@@ -124,8 +124,17 @@
   <data name="HealthBoost" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\healthboost.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Hero" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="HeavyZombie" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\heavyzombie.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="HeroBig" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\survivor-idle_knife_0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="HeroNormal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\heronormal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MediumZombie" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\mediumzombie.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SmallZombie" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\smallzombie.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

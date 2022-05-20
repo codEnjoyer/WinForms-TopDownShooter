@@ -23,7 +23,7 @@ namespace GameProject.Entities
         public bool IsMovingDown { get; set; }
         public bool IsMovingRight { get; set; }
 
-        internal Player(Vector location) : base(location, Resources.Hero)
+        internal Player(Vector location) : base(location, Resources.HeroNormal)
         {
             Hitbox = new Rectangle(new Vector(location.X - Hitbox.Size.Width / 2, location.Y - Hitbox.Size.Height / 2).ToPoint(), Hitbox.Size);
             Speed = 7;
