@@ -13,7 +13,7 @@ namespace GameProject.Entities
     {
         protected Booster(Vector location, Image image) : base(location, image)
         {
-            PictureBox.Image = image;
+            PictureBox.Image = Image;
         }
     }
 }

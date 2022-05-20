@@ -24,9 +24,10 @@ namespace GameProject
             //graphics.DrawRectangle(new Pen(Color.Blue), Game.CameraZone); //CameraZone hitbox
             //graphics.DrawRectangle(new Pen(Color.Yellow), ViewedZone); //Rectangle covering the observed area (and slightly larger)
 
+            UpdateBoosters(graphics);
             UpdateMovement(graphics);
             UpdateRotation(graphics);
-            UpdateBoosters(graphics);
+            
         }
 
         private static void UpdateCamera(Graphics graphics)
@@ -36,15 +37,15 @@ namespace GameProject
 
         private static void UpdateMovement(Graphics graphics)
         {
+            UpdateEnemiesMovement(graphics);
             UpdatePlayerMovement(graphics);
             UpdateViewedZone();
-            UpdateEnemiesMovement(graphics);
         }
 
         private static void UpdateRotation(Graphics graphics)
         {
-            UpdatePlayerRotation(graphics);
             UpdateEnemiesRotation(graphics);
+            UpdatePlayerRotation(graphics);
         }
 
         private static void UpdateBoosters(Graphics graphics)
@@ -53,14 +54,16 @@ namespace GameProject
 
             foreach (var booster in Game.SpawnedBoosters)
             {
-                graphics.DrawRectangle(new Pen(Color.BlueViolet), booster.Hitbox);
+                graphics.DrawImage(booster.PictureBox.Image, booster.PictureBox.Location);
+                graphics.DrawRectangle(new Pen(Color.MediumPurple), booster.Hitbox);
             }
         }
 
         private static void UpdatePlayerMovement(Graphics graphics)
         {
             Game.Player.Move();
-            graphics.DrawRectangle(new Pen(Color.Green), Game.Player.Hitbox);
+            //graphics.DrawRectangle(new Pen(Color.Green), Game.Player.Hitbox);
+            Game.Player.PictureBox.BringToFront();
         }
         private static void UpdateViewedZone()
         {
@@ -81,7 +84,7 @@ namespace GameProject
             foreach (var enemy in Game.SpawnedEnemies)
             {
                 enemy.Move();
-                graphics.DrawRectangle(new Pen(Color.Red), enemy.Hitbox);
+                //graphics.DrawRectangle(new Pen(Color.Red), enemy.Hitbox);
             }
         }
         private static void UpdatePlayerRotation(Graphics graphics)
@@ -89,6 +92,7 @@ namespace GameProject
             Game.Player.PictureBox.Image?.Dispose();
             var playerBitmap = new Bitmap(Game.Player.Image, Game.Player.PictureBox.Size);
             RotateBitmap(playerBitmap, Game.Player.RotationAngle, graphics, Game.Player.Hitbox.Location);
+            Game.Player.PictureBox.BringToFront();
         }
 
         private static void UpdateEnemiesRotation(Graphics graphics)
@@ -97,7 +101,6 @@ namespace GameProject
 
             foreach (var enemy in Game.SpawnedEnemies)
             {
-                enemy.PictureBox.Location = enemy.Hitbox.Location;
                 enemy.RotationAngle = enemy.AngleToPlayer();
                 enemy.PictureBox.Image?.Dispose();
                 var enemyBitmap = new Bitmap(enemy.Image, enemy.PictureBox.Size);

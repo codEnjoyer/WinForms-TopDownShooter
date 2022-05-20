@@ -26,19 +26,19 @@ namespace GameProject.Domain
 
         internal SpawnManager()
         {
-            enemiesLimit = 1;
-            boostersLimit = 10;
+            enemiesLimit = 5;
+            boostersLimit = 100;
 
             r = new Random();
 
             enemySpawner = new Timer();
-            enemySpawner.Interval = 5 * 1000;
+            enemySpawner.Interval = 1000;
             enemySpawner.Tick += (s,a) =>
                 SpawnEnemy((EnemyTypes)r.Next(1), GetValidSpawnLocation());
-            //enemySpawner.Start();
+            enemySpawner.Start();
 
             boosterSpawner = new Timer();
-            boosterSpawner.Interval = 1000;
+            boosterSpawner.Interval = 100;
             boosterSpawner.Tick += (s, a) =>
                 SpawnBooster((BoosterTypes)r.Next(3), GetValidSpawnLocation());
             boosterSpawner.Start();
@@ -51,10 +51,6 @@ namespace GameProject.Domain
             {
                 case EnemyTypes.SmallEnemy:
                     var smallEnemy = new SmallEnemy(location);
-
-                    smallEnemy.Hitbox = new Rectangle(location.ToPoint(), smallEnemy.Hitbox.Size);
-                    smallEnemy.PictureBox.BringToFront();
-                    Form.ActiveForm.Controls.Add(smallEnemy.PictureBox);
                     Game.SpawnedEnemies.Add(smallEnemy);
                     break;
             }
@@ -66,28 +62,16 @@ namespace GameProject.Domain
             {
                 case BoosterTypes.HealthBoost:
                     var healthBoost = new HealthBoost(location);
-
-                    healthBoost.Hitbox = new Rectangle(location.ToPoint(), healthBoost.Hitbox.Size);
-                    healthBoost.PictureBox.BringToFront();
-                    Form.ActiveForm.Controls.Add(healthBoost.PictureBox);
                     Game.SpawnedBoosters.Add(healthBoost);
                     break;
 
                 case BoosterTypes.DamageBoost:
                     var damageBoost = new DamageBoost(location);
-
-                    damageBoost.Hitbox = new Rectangle(location.ToPoint(), damageBoost.Hitbox.Size);
-                    damageBoost.PictureBox.BringToFront();
-                    Form.ActiveForm.Controls.Add(damageBoost.PictureBox);
                     Game.SpawnedBoosters.Add(damageBoost);
                     break;
 
                 case BoosterTypes.SpeedBoost:
                     var speedBoost = new SpeedBoost(location);
-
-                    speedBoost.Hitbox = new Rectangle(location.ToPoint(), speedBoost.Hitbox.Size);
-                    speedBoost.PictureBox.BringToFront();
-                    Form.ActiveForm.Controls.Add(speedBoost.PictureBox);
                     Game.SpawnedBoosters.Add(speedBoost);
                     break;
             }

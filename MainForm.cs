@@ -58,10 +58,10 @@ namespace GameProject
         {
             var center = new Vector(Screen.PrimaryScreen.WorkingArea.Width / 2,
                 Screen.PrimaryScreen.WorkingArea.Height / 2);
+
             var gameSize = new Size(3000, 3000);
-            var gameZone = new Rectangle(new Point((int)(-gameSize.Width / 2 + center.X),
-                    (int)(-gameSize.Height / 2 + center.Y)),
-                gameSize);
+
+            var gameZone = new Rectangle(Point.Empty, gameSize);
 
             var playerSpawnPoint = new Vector(center.X, center.Y);
 
@@ -94,6 +94,8 @@ namespace GameProject
             var eGraphics = e.Graphics;
             View.UpdateTextures(eGraphics);
         }
+
+        
 
         #region Fullscreen, FormLoad
         private void MainForm_Load(object sender, EventArgs e)
