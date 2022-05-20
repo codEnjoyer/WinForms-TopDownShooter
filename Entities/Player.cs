@@ -27,10 +27,16 @@ namespace GameProject.Entities
         internal Player(Vector location) : base(location, Resources.HeroNormal)
         {
             Hitbox = new Rectangle(new Vector(location.X - Hitbox.Size.Width / 2, location.Y - Hitbox.Size.Height / 2).ToPoint(), Hitbox.Size);
+            
             Speed = 5;
+            MaxSpeed = 2 * Speed;
+
+            Damage = 10;
+            MaxDamage = 2 * Damage;//TODO: Make weapons
+
             MaxHealth = 100;
             Health = 75;
-            Damage = 10; //TODO: Make Weapons
+
             HealthBar = new Rectangle(Hitbox.Location.X + (int) (0.25 * Hitbox.Width), Hitbox.Location.Y - 10,
                 (int) (0.5 * Hitbox.Width), 10);
         }
@@ -102,11 +108,6 @@ namespace GameProject.Entities
             //    Location -= Speed * new Vector(Math.Cos(RotationAngle - Math.PI / 2), Math.Sin(RotationAngle - Math.PI / 2));
         }
 
-        public void Accelerate(int speed)
-        {
-            Speed += speed;
-        }
-
         internal float AngleToTarget(Vector targetLocation)
         {
             var x = targetLocation.X - (Hitbox.Location.X + Hitbox.Size.Width / 2f);
@@ -123,27 +124,58 @@ namespace GameProject.Entities
             return new Vector(x, y).AngleInRadians;
         }
 
-        public void GetBoost(Booster booster)
+        public bool GetBoost(Booster booster)
         {
             switch (booster.Type)
             {
                 case BoosterTypes.HealthBoost:
-                    if (Health + booster.Impact > MaxHealth)
-                    {
-                        Health = MaxHealth;
-                        break;
-                    }
-                    Health += booster.Impact;
-                    break;
+                    return GetHealth(booster.Impact);
 
                 case BoosterTypes.DamageBoost:
-                    Damage += booster.Impact;
-                    break;
+                    return GetDamage(booster.Impact);
 
                 case BoosterTypes.SpeedBoost:
-                    Speed += booster.Impact;
-                    break;
+                    return GetSpeed(booster.Impact);
+
+                default: return false;
             }
+        }
+        public bool GetHealth(int health)
+        {
+            if (Health == MaxHealth) return false;
+
+            if (Health + health > MaxHealth)
+            {
+                Health = MaxHealth;
+                return true;
+            }
+            Health += health;
+            return true;
+        }
+
+        public bool GetDamage(int damage)
+        {
+            if (Damage == MaxDamage) return false;
+
+            if (Damage + damage > MaxDamage)
+            {
+                Damage = MaxDamage;
+                return true;
+            }
+            Damage += damage;
+            return true;
+        }
+        public bool GetSpeed(int speed)
+        {
+            if (Speed == MaxSpeed) return false;
+
+            if (Speed + speed > MaxSpeed)
+            {
+                Speed = MaxSpeed;
+                return true;
+            }
+            Speed += speed;
+            return true;
         }
 
         public void DealDamage(Entity entity)
@@ -153,12 +185,13 @@ namespace GameProject.Entities
 
         public void TakeDamage(int damage)
         {
-            if (Health - damage < Health)
+            if (Health - damage < MinHealth)
             {
                 Health = MinHealth;
                 return;
             }
             Health -= damage;
         }
+
     }
 }

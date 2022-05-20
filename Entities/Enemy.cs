@@ -39,27 +39,58 @@ namespace GameProject.Entities
             return new Vector(x, y).AngleInRadians;
         }
 
-        public void GetBoost(Booster booster)
+        public bool GetBoost(Booster booster)
         {
             switch (booster.Type)
             {
                 case BoosterTypes.HealthBoost:
-                    if (Health + booster.Impact > MaxHealth)
-                    {
-                        Health = MaxHealth;
-                        break;
-                    }
-                    Health += booster.Impact;
-                    break;
+                    return GetHealth(booster.Impact);
 
                 case BoosterTypes.DamageBoost:
-                    Damage += booster.Impact;
-                    break;
+                    return GetDamage(booster.Impact);
 
                 case BoosterTypes.SpeedBoost:
-                    Speed += booster.Impact;
-                    break;
+                    return GetSpeed(booster.Impact);
+
+                default: return false;
             }
+        }
+        public bool GetHealth(int health)
+        {
+            if (Health == MaxHealth) return false;
+
+            if (Health + health > MaxHealth)
+            {
+                Health = MaxHealth;
+                return true;
+            }
+            Health += health;
+            return true;
+        }
+
+        public bool GetDamage(int damage)
+        {
+            if (Damage == MaxDamage) return false;
+
+            if (Damage + damage > MaxDamage)
+            {
+                Damage = MaxDamage;
+                return true;
+            }
+            Damage += damage;
+            return true;
+        }
+        public bool GetSpeed(int speed)
+        {
+            if (Speed == MaxSpeed) return false;
+
+            if (Speed + speed > MaxSpeed)
+            {
+                Speed = MaxSpeed;
+                return true;
+            }
+            Speed += speed;
+            return true;
         }
 
         public void DealDamage(Entity entity)
@@ -69,7 +100,7 @@ namespace GameProject.Entities
 
         public void TakeDamage(int damage)
         {
-            if (Health - damage < Health)
+            if (Health - damage < MinHealth)
             {
                 Health = MinHealth;
                 return;

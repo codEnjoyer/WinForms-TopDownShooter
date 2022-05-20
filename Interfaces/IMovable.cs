@@ -17,6 +17,5 @@ namespace GameProject.Interfaces
         float RotationAngle { get; set; }
         int Speed { get; set; }
         void Move();
-        void Accelerate(int speed);
     }
 }

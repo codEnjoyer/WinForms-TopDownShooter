@@ -89,13 +89,13 @@ namespace GameProject.Domain
                 {
                     if (Player.Hitbox.IntersectsWith(booster.Hitbox))
                     {
-                        Player.GetBoost(booster);
+                        if(!Player.GetBoost(booster)) continue;
                         SpawnedBoosters.Remove(booster);
                     }
 
                     if (enemy.Hitbox.IntersectsWith(booster.Hitbox))
                     {
-                        enemy.GetBoost(booster);
+                        if(!enemy.GetBoost(booster)) continue;
                         SpawnedBoosters.Remove(booster);
                     }
 

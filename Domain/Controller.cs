@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using GameProject.Entities;
 using GameProject.Physics;
 
 namespace GameProject.Domain
@@ -54,11 +55,10 @@ namespace GameProject.Domain
             switch (pressedButton)
             {
                 case MouseButtons.Left:
-                    //Game.Player.Accelerate(3);
                     Game.Player.TakeDamage(10);
                     break;
                 case MouseButtons.Right:
-                    Game.Player.Accelerate(-3);
+                    Game.Player.GetHealth(10);
                     break;
             }
         }
