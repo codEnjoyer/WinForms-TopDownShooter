@@ -18,19 +18,37 @@ namespace GameProject
         internal static Rectangle ViewedZone { get; set; }
         internal static void UpdateTextures(Graphics graphics)
         {
-            UpdateCamera(graphics);
+            var gameStage = Game.Stage;
 
-            //graphics.DrawRectangle(new Pen(Color.Red), Game.GameZone); //GameZone hitbox
-            //graphics.DrawRectangle(new Pen(Color.Blue), Game.CameraZone); //CameraZone hitbox
-            //graphics.DrawRectangle(new Pen(Color.Yellow), ViewedZone); //Rectangle covering the observed area (and slightly larger)
+            switch (gameStage)
+            {
+                case GameStage.Battle:
+                    UpdateCamera(graphics);
 
-            UpdateBoosters(graphics);
-            UpdateMovement(graphics);
-            UpdateHealth(graphics);
-            UpdateRotation(graphics);
+                    //graphics.DrawRectangle(new Pen(Color.Red), Game.GameZone); //GameZone hitbox
+                    //graphics.DrawRectangle(new Pen(Color.Blue), Game.CameraZone); //CameraZone hitbox
+                    //graphics.DrawRectangle(new Pen(Color.Yellow), ViewedZone); //Rectangle covering the observed area (and slightly larger)
+
+                    UpdateBoosters(graphics);
+                    UpdateMovement(graphics);
+                    UpdateHealth(graphics);
+                    UpdateRotation(graphics);
+                    break;
+
+                case GameStage.Finished:
+                    var restart = new Button
+                    {
+                        Location = new Point(500, 500),
+                        Size = new Size(100, 50)
+                    };
+                    restart.Click += (s, e) => Application.Restart();
+                    Form.ActiveForm.Controls.Add(restart);
+                    MainForm.timer.Stop();
+                    return;
+            }
+
             
         }
-
         private static void UpdateCamera(Graphics graphics)
         {
             graphics.TranslateTransform(-(int)Offset.X, -(int)Offset.Y);

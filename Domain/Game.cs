@@ -42,7 +42,7 @@ namespace GameProject.Domain
             KillManager = new KillManager();
 
             ChangeStage(GameStage.Battle);
-            StageChanged += (gameStage) => CheckGameStage(gameStage);
+            StageChanged += CheckGameStage;
         }
 
         internal static void ChangeStage(GameStage stage)

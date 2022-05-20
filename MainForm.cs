@@ -16,7 +16,7 @@ namespace GameProject
 {
     public partial class MainForm : Form
     {
-        private static Timer timer;
+        internal static Timer timer;
         private Label testLabel;
         public MainForm()
         {
