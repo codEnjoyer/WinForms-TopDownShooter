@@ -11,6 +11,9 @@ namespace GameProject.Entities
 {
     abstract class Booster : Entity, ITakeable
     {
+        internal BoosterTypes Type { get; set; }
+        internal int Impact { get; set; }
+
         protected Booster(Vector location, Image image) : base(location, image)
         {
             PictureBox.Image = Image;

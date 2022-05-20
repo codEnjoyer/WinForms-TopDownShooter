@@ -122,7 +122,20 @@ namespace GameProject.Entities
 
         public void GetBoost(Booster booster)
         {
+            switch (booster.Type)
+            {
+                case BoosterTypes.HealthBoost:
+                    Health += booster.Impact;
+                    break;
 
+                case BoosterTypes.DamageBoost:
+                    Damage += booster.Impact;
+                    break;
+
+                case BoosterTypes.SpeedBoost:
+                    Speed += booster.Impact;
+                    break;
+            }
         }
 
         public void DealDamage(Entity entity)

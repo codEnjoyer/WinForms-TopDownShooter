@@ -12,7 +12,8 @@ namespace GameProject.Entities
     {
         internal HealthBoost(Vector location) : base(location, Resources.HealthBoost)
         {
-
+            Type = BoosterTypes.HealthBoost;
+            Impact = 25;
         }
     }
 }

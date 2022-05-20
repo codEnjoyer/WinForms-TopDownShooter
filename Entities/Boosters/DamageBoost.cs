@@ -12,6 +12,8 @@ namespace GameProject.Entities
     {
         internal DamageBoost(Vector location) : base(location, Resources.DamageBoost)
         {
+            Type = BoosterTypes.DamageBoost;
+            Impact = 5;
         }
     }
 }
