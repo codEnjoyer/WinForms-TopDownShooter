@@ -80,9 +80,12 @@ namespace GameProject.Domain
 
         internal static void CheckIntersections()
         {
-            foreach (var enemy in SpawnedEnemies)
+            var spawnedEnemies = new List<Enemy>(SpawnedEnemies);
+            var spawnedBoosters = new List<Booster>(SpawnedBoosters);
+
+            foreach (var enemy in spawnedEnemies)
             {
-                foreach (var booster in SpawnedBoosters)
+                foreach (var booster in spawnedBoosters)
                 {
                     if (Player.Hitbox.IntersectsWith(booster.Hitbox))
                     {

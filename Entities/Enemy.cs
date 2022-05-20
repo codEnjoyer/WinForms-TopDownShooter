@@ -69,6 +69,11 @@ namespace GameProject.Entities
 
         public void TakeDamage(int damage)
         {
+            if (Health - damage < Health)
+            {
+                Health = MinHealth;
+                return;
+            }
             Health -= damage;
         }
     }

@@ -27,8 +27,8 @@ namespace GameProject.Domain
 
         internal SpawnManager()
         {
-            enemiesLimit = 10;
-            boostersLimit = 5;
+            enemiesLimit = 1;
+            boostersLimit = 20;
 
             r = new Random();
 
@@ -39,7 +39,7 @@ namespace GameProject.Domain
             enemySpawner.Start();
 
             boosterSpawner = new Timer();
-            boosterSpawner.Interval = 10 * 1000;
+            boosterSpawner.Interval = 1000;
             boosterSpawner.Tick += (s, a) =>
                 SpawnBooster((BoosterTypes)r.Next(3), GetValidSpawnLocation());
             boosterSpawner.Start();

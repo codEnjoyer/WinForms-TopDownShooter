@@ -29,7 +29,7 @@ namespace GameProject
                 Interval = 15
             };
             timer.Tick += (sender, args) => Invalidate();
-            //timer.Tick += (sender, args) => CheckIntersections();
+            timer.Tick += (sender, args) => CheckIntersections();
             timer.Start();
 
             Cursor = Cursors.Cross;
