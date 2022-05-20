@@ -18,6 +18,7 @@ namespace GameProject.Entities
         public int MinHealth { get; set; }
         public double Health { get; set; }
         public double MaxHealth { get; set; }
+        public int MinSpeed { get; set; }
         public int MaxSpeed { get; set; }
         public int MaxDamage { get; set; }
         public Rectangle HealthBar { get; set; }
@@ -33,7 +34,8 @@ namespace GameProject.Entities
                 SizeMode = PictureBoxSizeMode.Zoom,
                 Size = Hitbox.Size,
             };
-            
+
+            MinSpeed = 1;
         }
 
         internal float GetHPPercent()

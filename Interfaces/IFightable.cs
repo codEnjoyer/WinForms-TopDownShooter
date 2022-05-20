@@ -16,5 +16,6 @@ namespace GameProject.Interfaces
         bool GetSpeed(int speed);
         bool GetDamage(int damage);
         bool GetHealth(int health);
+        bool GetSlowdown(int slowdown);
     }
 }

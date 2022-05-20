@@ -55,7 +55,7 @@ namespace GameProject.Domain
             switch (pressedButton)
             {
                 case MouseButtons.Left:
-                    Game.Player.TakeDamage(10);
+                    Game.Player.GetSpeed(5);
                     break;
                 case MouseButtons.Right:
                     Game.Player.GetHealth(10);

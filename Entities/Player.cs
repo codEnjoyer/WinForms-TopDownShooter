@@ -178,6 +178,19 @@ namespace GameProject.Entities
             return true;
         }
 
+        public bool GetSlowdown(int slowdown)
+        {
+            if (Speed == MinSpeed) return false;
+
+            if (Speed - slowdown < MinSpeed)
+            {
+                Speed = MinSpeed;
+                return true;
+            }
+            Speed -= slowdown;
+            return true;
+        }
+
         public void DealDamage(Entity entity)
         {
             ((Enemy)entity).TakeDamage(Damage);
@@ -192,6 +205,5 @@ namespace GameProject.Entities
             }
             Health -= damage;
         }
-
     }
 }

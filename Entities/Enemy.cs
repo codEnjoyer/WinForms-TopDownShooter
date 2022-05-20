@@ -92,10 +92,24 @@ namespace GameProject.Entities
             Speed += speed;
             return true;
         }
+        public bool GetSlowdown(int slowdown)
+        {
+            if (Speed == MinSpeed) return false;
+
+            if (Speed - slowdown < MinSpeed)
+            {
+                Speed = MinSpeed;
+                return true;
+            }
+            Speed -= slowdown;
+            return true;
+        }
 
         public void DealDamage(Entity entity)
         {
-            ((Player)entity).TakeDamage(Damage);
+            var player = (Player)entity;
+            player.TakeDamage(Damage);
+            player.GetSlowdown(1);
         }
 
         public void TakeDamage(int damage)
