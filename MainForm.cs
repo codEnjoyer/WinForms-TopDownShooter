@@ -16,7 +16,7 @@ namespace GameProject
 {
     public partial class MainForm : Form
     {
-        private Timer timer;
+        private static Timer timer;
         private Label testLabel;
         public MainForm()
         {
@@ -30,6 +30,7 @@ namespace GameProject
             };
             timer.Tick += (sender, args) => Invalidate();
             timer.Tick += (sender, args) => CheckIntersections();
+            //timer.Tick += (sender, args) => CheckGame();
             timer.Start();
 
             Cursor = Cursors.Cross;
@@ -72,9 +73,7 @@ namespace GameProject
 
         private static void MainForm_KeyDown(object sender, KeyEventArgs e)
         {
-            //Game.KeyPressed = true;
             Controller.ControlKeys(e.KeyCode, true);
-            
         }
 
         private static void MainForm_KeyUp(object sender, KeyEventArgs e)
@@ -102,6 +101,10 @@ namespace GameProject
             Game.CheckBoostersIntersections();
         }
 
+        private static void CheckGameFinished()
+        {
+
+        }
         #region Fullscreen, FormLoad
         private void MainForm_Load(object sender, EventArgs e)
         {

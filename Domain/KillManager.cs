@@ -24,11 +24,14 @@ namespace GameProject.Domain
             foreach (var enemy in spawnedEnemies.Where(enemy => Game.Player.Hitbox.IntersectsWith(enemy.Hitbox)))
             {
                 Game.Player.DealDamage(enemy);
+
                 if (enemy.Health == enemy.MinHealth)
                     Game.SpawnedEnemies.Remove(enemy);
+
                 enemy.DealDamage(Game.Player);
 
-
+                if(Game.Player.Health == Game.Player.MinHealth)
+                    Game.ChangeStage(GameStage.Finished);
             }
         }
     }

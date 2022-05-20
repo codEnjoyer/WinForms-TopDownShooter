@@ -14,23 +14,17 @@ namespace GameProject.Domain
         internal static Rectangle GameZone { get; private set; }
         internal static Rectangle CameraZone { get; private set; }
         internal static GameStage Stage { get; private set; } = GameStage.NotStarted;
-        internal event Action<GameStage> StageChanged;
+        internal static event Action<GameStage> StageChanged;
         internal static SpawnManager SpawnManager;
         internal static KillManager KillManager;
         internal static List<Enemy> SpawnedEnemies { get; set; }
         internal static List<Booster> SpawnedBoosters { get; set; }
-        //internal static bool KeyPressed = false;
 
-        internal Game()
-        {
-            
-        }
-        internal Game(Player player, Rectangle gameZone) : this()
+        internal Game(Player player, Rectangle gameZone)
         {
             Player = player;
             GameZone = gameZone;
-            ChangeStage(Stage);
-
+            
             var cameraZoneLocation = new Point(
                 GameZone.Location.X + (Screen.PrimaryScreen.WorkingArea.Width - Player.Hitbox.Size.Width) / 2,
                 GameZone.Location.Y + (Screen.PrimaryScreen.WorkingArea.Height - Player.Hitbox.Size.Height) / 2);
@@ -46,9 +40,12 @@ namespace GameProject.Domain
 
             SpawnManager = new SpawnManager();
             KillManager = new KillManager();
+
+            ChangeStage(GameStage.Battle);
+            StageChanged += (gameStage) => CheckGameStage(gameStage);
         }
 
-        private void ChangeStage(GameStage stage)
+        internal static void ChangeStage(GameStage stage)
         {
             Stage = stage;
             StageChanged?.Invoke(stage);
@@ -101,6 +98,16 @@ namespace GameProject.Domain
                          .Where(booster => Player.GetBoost(booster)))
             {
                 SpawnedBoosters.Remove(booster);
+            }
+        }
+
+        private static void CheckGameStage(GameStage gameStage)
+        {
+            switch (gameStage)
+            {
+                case GameStage.Finished:
+                    
+                    break;
             }
         }
     }
