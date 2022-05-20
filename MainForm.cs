@@ -99,7 +99,7 @@ namespace GameProject
 
         private static void CheckIntersections()
         {
-            Game.CheckIntersections();
+            Game.CheckBoostersIntersections();
         }
 
         #region Fullscreen, FormLoad

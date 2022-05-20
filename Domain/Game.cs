@@ -16,6 +16,7 @@ namespace GameProject.Domain
         internal static GameStage Stage { get; private set; } = GameStage.NotStarted;
         internal event Action<GameStage> StageChanged;
         internal static SpawnManager SpawnManager;
+        internal static KillManager KillManager;
         internal static List<Enemy> SpawnedEnemies { get; set; }
         internal static List<Booster> SpawnedBoosters { get; set; }
         //internal static bool KeyPressed = false;
@@ -44,6 +45,7 @@ namespace GameProject.Domain
             SpawnedBoosters = new List<Booster>();
 
             SpawnManager = new SpawnManager();
+            KillManager = new KillManager();
         }
 
         private void ChangeStage(GameStage stage)
@@ -60,51 +62,45 @@ namespace GameProject.Domain
             return GameZone.Contains(hitbox);
         }
 
-        internal static bool InCameraBoundsX(Vector location)
-        {
-            return location.X > CameraZone.Left && location.X < CameraZone.Right;
-        }
         internal static bool InCameraBoundsX(Rectangle hitbox)
         {
             return hitbox.Location.X > CameraZone.Left && hitbox.Location.X < CameraZone.Right;
         }
 
-        internal static bool InCameraBoundsY(Vector location)
-        {
-            return location.Y > CameraZone.Top && location.Y < CameraZone.Bottom;
-        }
         internal static bool InCameraBoundsY(Rectangle hitbox)
         {
             return hitbox.Location.Y > CameraZone.Top && hitbox.Location.Y < CameraZone.Bottom;
         }
 
-        internal static void CheckIntersections()
+        internal static void CheckBoostersIntersections()
         {
-            var spawnedEnemies = new List<Enemy>(SpawnedEnemies);
+            if(SpawnedBoosters.Count == 0) return;
             var spawnedBoosters = new List<Booster>(SpawnedBoosters);
 
-            foreach (var enemy in spawnedEnemies)
+            CheckPlayerBoosterIntersections(spawnedBoosters);
+
+            if(SpawnedEnemies.Count == 0) return;
+            var spawnedEnemies = new List<Enemy>(SpawnedEnemies);
+            CheckEnemyBoosterIntersections(spawnedEnemies, spawnedBoosters);
+        }
+
+        private static void CheckEnemyBoosterIntersections(List<Enemy> spawnedEnemies, List<Booster> spawnedBoosters)
+        {
+            foreach (var booster in spawnedEnemies.SelectMany(enemy => spawnedBoosters
+                         .Where(booster => enemy.Hitbox.IntersectsWith(booster.Hitbox))
+                         .Where(enemy.GetBoost)))
             {
-                foreach (var booster in spawnedBoosters)
-                {
-                    if (Player.Hitbox.IntersectsWith(booster.Hitbox))
-                    {
-                        if(!Player.GetBoost(booster)) continue;
-                        SpawnedBoosters.Remove(booster);
-                    }
+                SpawnedBoosters.Remove(booster);
+            }
+        }
 
-                    if (enemy.Hitbox.IntersectsWith(booster.Hitbox))
-                    {
-                        if(!enemy.GetBoost(booster)) continue;
-                        SpawnedBoosters.Remove(booster);
-                    }
-
-                    if (Player.Hitbox.IntersectsWith(enemy.Hitbox))
-                    {
-                        Player.DealDamage(enemy);
-                        enemy.DealDamage(Player);
-                    }
-                }
+        private static void CheckPlayerBoosterIntersections(List<Booster> spawnedBoosters)
+        {
+            foreach (var booster in spawnedBoosters
+                         .Where(booster => Player.Hitbox.IntersectsWith(booster.Hitbox))
+                         .Where(booster => Player.GetBoost(booster)))
+            {
+                SpawnedBoosters.Remove(booster);
             }
         }
     }

@@ -49,6 +49,7 @@
     <Compile Include="Domain\Controller.cs" />
     <Compile Include="Domain\Game.cs" />
     <Compile Include="Domain\GameStage.cs" />
+    <Compile Include="Domain\KillManager.cs" />
     <Compile Include="Domain\SpawnManager.cs" />
     <Compile Include="Entities\Boosters\BoosterTypes.cs" />
     <Compile Include="Entities\Boosters\DamageBoost.cs" />

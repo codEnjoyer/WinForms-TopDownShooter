@@ -1,17 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Deployment.Application;
-using System.Drawing;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using GameProject.Entities;
 using GameProject.Entities.Enemies;
-using GameProject.Interfaces;
 using GameProject.Physics;
-using Microsoft.Win32;
 
 namespace GameProject.Domain
 {
@@ -27,13 +18,13 @@ namespace GameProject.Domain
 
         internal SpawnManager()
         {
-            enemiesLimit = 1;
-            boostersLimit = 20;
+            enemiesLimit = 0;
+            boostersLimit = 7;
 
             r = new Random();
 
             enemySpawner = new Timer();
-            enemySpawner.Interval = 5 * 1000;
+            enemySpawner.Interval = 1000;
             enemySpawner.Tick += (s,a) =>
                 SpawnEnemy((EnemyTypes)r.Next(3), GetValidSpawnLocation());
             enemySpawner.Start();

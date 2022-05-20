@@ -43,19 +43,6 @@ namespace GameProject.Entities
 
         public void Move()
         {
-            if (IsMovingUp)
-            {
-                var delta = new Vector(0, -1) * Speed;
-                var nextLocation = new Point((int)(Hitbox.Location.X + delta.X), (int)(Hitbox.Location.Y + delta.Y));
-
-                if (!Game.InBounds(new Rectangle(nextLocation, Hitbox.Size))) return;
-
-                Hitbox = new Rectangle(nextLocation, Hitbox.Size);
-
-                if (Game.InCameraBoundsY(Hitbox))
-                    View.Offset += delta;
-            }
-
             if (IsMovingLeft)
             {
                 var delta = new Vector(-1, 0) * Speed;
@@ -66,21 +53,6 @@ namespace GameProject.Entities
                 Hitbox = new Rectangle(nextLocation, Hitbox.Size);
 
                 if (Game.InCameraBoundsX(Hitbox))
-                    View.Offset += delta;
-
-                
-            }
-
-            if (IsMovingDown)
-            {
-                var delta = new Vector(0, 1) * Speed;
-                var nextLocation = new Point((int)(Hitbox.Location.X + delta.X), (int)(Hitbox.Location.Y + delta.Y));
-
-                if (!Game.InBounds(new Rectangle(nextLocation, Hitbox.Size))) return;
-
-                Hitbox = new Rectangle(nextLocation, Hitbox.Size);
-
-                if (Game.InCameraBoundsY(Hitbox))
                     View.Offset += delta;
             }
 
@@ -96,6 +68,34 @@ namespace GameProject.Entities
                 if (Game.InCameraBoundsX(Hitbox))
                     View.Offset += delta;
             }
+
+            if (IsMovingUp)
+            {
+                var delta = new Vector(0, -1) * Speed;
+                var nextLocation = new Point((int)(Hitbox.Location.X + delta.X), (int)(Hitbox.Location.Y + delta.Y));
+
+                if (!Game.InBounds(new Rectangle(nextLocation, Hitbox.Size))) return;
+
+                Hitbox = new Rectangle(nextLocation, Hitbox.Size);
+
+                if (Game.InCameraBoundsY(Hitbox))
+                    View.Offset += delta;
+            }
+
+            if (IsMovingDown)
+            {
+                var delta = new Vector(0, 1) * Speed;
+                var nextLocation = new Point((int)(Hitbox.Location.X + delta.X), (int)(Hitbox.Location.Y + delta.Y));
+
+                if (!Game.InBounds(new Rectangle(nextLocation, Hitbox.Size))) return;
+
+                Hitbox = new Rectangle(nextLocation, Hitbox.Size);
+
+                if (Game.InCameraBoundsY(Hitbox))
+                    View.Offset += delta;
+            }
+
+            
 
             //Movement relative to cursor:
             //if (IsMovingUp)
@@ -140,54 +140,54 @@ namespace GameProject.Entities
                 default: return false;
             }
         }
-        public bool GetHealth(int health)
+        public bool GetHealth(int impact)
         {
             if (Health == MaxHealth) return false;
 
-            if (Health + health > MaxHealth)
+            if (Health + impact > MaxHealth)
             {
                 Health = MaxHealth;
                 return true;
             }
-            Health += health;
+            Health += impact;
             return true;
         }
 
-        public bool GetDamage(int damage)
+        public bool GetDamage(int impact)
         {
             if (Damage == MaxDamage) return false;
 
-            if (Damage + damage > MaxDamage)
+            if (Damage + impact > MaxDamage)
             {
                 Damage = MaxDamage;
                 return true;
             }
-            Damage += damage;
+            Damage += impact;
             return true;
         }
-        public bool GetSpeed(int speed)
+        public bool GetSpeed(int impact)
         {
             if (Speed == MaxSpeed) return false;
 
-            if (Speed + speed > MaxSpeed)
+            if (Speed + impact > MaxSpeed)
             {
                 Speed = MaxSpeed;
                 return true;
             }
-            Speed += speed;
+            Speed += impact;
             return true;
         }
 
-        public bool GetSlowdown(int slowdown)
+        public bool GetSlowdown(int impact)
         {
             if (Speed == MinSpeed) return false;
 
-            if (Speed - slowdown < MinSpeed)
+            if (Speed - impact < MinSpeed)
             {
                 Speed = MinSpeed;
                 return true;
             }
-            Speed -= slowdown;
+            Speed -= impact;
             return true;
         }
 

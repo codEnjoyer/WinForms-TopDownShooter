@@ -13,9 +13,9 @@ namespace GameProject.Interfaces
         void DealDamage(Entity entity);
         void TakeDamage(int damage);
         bool GetBoost(Booster booster);
-        bool GetSpeed(int speed);
-        bool GetDamage(int damage);
-        bool GetHealth(int health);
-        bool GetSlowdown(int slowdown);
+        bool GetSpeed(int impact);
+        bool GetDamage(int impact);
+        bool GetHealth(int impact);
+        bool GetSlowdown(int impact);
     }
 }
