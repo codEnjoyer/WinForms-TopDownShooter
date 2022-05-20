@@ -15,6 +15,7 @@ namespace GameProject.Entities
     {
         public float RotationAngle { get; set; }
         public int Speed { get; set; }
+        public int Damage { get; set; }
 
         protected Enemy(Vector location, Image image) : base(location, image)
         {
@@ -44,6 +45,16 @@ namespace GameProject.Entities
         public void GetBoost(Booster booster)
         {
 
+        }
+
+        public void DealDamage(Entity entity)
+        {
+            entity.Health -= Damage;
+        }
+
+        public void TakeDamage(int damage)
+        {
+            Health -= damage;
         }
     }
 }

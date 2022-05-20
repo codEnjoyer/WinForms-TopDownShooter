@@ -14,7 +14,7 @@ using GameProject.Properties;
 namespace GameProject.Entities
 {
     
-    internal class Player : Entity, IMovable/*, IFightable*/
+    internal class Player : Entity, IMovable, IFightable
     {
         public int Speed{ get; set; }
         public float RotationAngle { get; set; } //in radians
@@ -22,12 +22,14 @@ namespace GameProject.Entities
         public bool IsMovingLeft { get; set; }
         public bool IsMovingDown { get; set; }
         public bool IsMovingRight { get; set; }
+        public int Damage { get; set; }
 
         internal Player(Vector location) : base(location, Resources.HeroNormal)
         {
             Hitbox = new Rectangle(new Vector(location.X - Hitbox.Size.Width / 2, location.Y - Hitbox.Size.Height / 2).ToPoint(), Hitbox.Size);
             Speed = 5;
-            RotationAngle = 0;
+            Health = 100;
+            Damage = 10; //TODO: Make Weapons
         }
 
         public void Move()
@@ -121,6 +123,16 @@ namespace GameProject.Entities
         public void GetBoost(Booster booster)
         {
 
+        }
+
+        public void DealDamage(Entity entity)
+        {
+            entity.Health -= Damage;
+        }
+
+        public void TakeDamage(int damage)
+        {
+            Health -= damage;
         }
     }
 }

@@ -15,6 +15,8 @@ namespace GameProject.Entities
         public Image Image { get; set; }
         public Rectangle Hitbox { get; set; }
         public PictureBox PictureBox { get; set; }
+        public int Health { get; set; }
+
         protected Entity(Vector location, Image image)
         {
             Image = image;
@@ -27,8 +29,6 @@ namespace GameProject.Entities
                 SizeMode = PictureBoxSizeMode.Zoom,
                 Size = Hitbox.Size,
             };
-
-            
         }
     }
 }

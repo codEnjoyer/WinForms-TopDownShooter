@@ -97,7 +97,7 @@ namespace GameProject
             View.UpdateTextures(eGraphics);
         }
 
-        private void CheckIntersections()
+        private static void CheckIntersections()
         {
             Game.CheckIntersections();
         }
