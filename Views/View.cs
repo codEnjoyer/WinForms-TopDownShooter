@@ -61,7 +61,7 @@ namespace GameProject
                 }
                 graphics.DrawImage(image, booster.Hitbox.Location);
 
-                graphics.DrawRectangle(new Pen(Color.MediumPurple), booster.Hitbox);
+                //graphics.DrawRectangle(new Pen(Color.MediumPurple), booster.Hitbox);
             }
         }
 
