@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.SymbolStore;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
@@ -9,6 +10,7 @@ using System.Windows.Forms;
 using GameProject.Domain;
 using GameProject.Entities;
 using GameProject.Physics;
+using GameProject.Properties;
 
 namespace GameProject
 {
@@ -36,13 +38,7 @@ namespace GameProject
                     break;
 
                 case GameStage.Finished:
-                    var restart = new Button
-                    {
-                        Location = new Point(500, 500),
-                        Size = new Size(100, 50)
-                    };
-                    restart.Click += (s, e) => Application.Restart();
-                    Form.ActiveForm.Controls.Add(restart);
+                    ShowFinishWindow();
                     MainForm.timer.Stop();
                     return;
             }
@@ -192,6 +188,38 @@ namespace GameProject
                 g.DrawImage(bitmap, 0, 0, bitmap.Width, bitmap.Height);
             }
             graphics.DrawImage(rotated, location);
+        }
+
+        private static void ShowFinishWindow()
+        {
+            Form.ActiveForm.Controls.Remove(MainForm.Scores);
+            var pictureBox = new PictureBox()
+            {
+                Image = Resources.HealthBoost,
+                Location = new Point(320, 100),
+                Size = new Size(1200, 700)
+            };
+            
+            var restart = new Button
+            {
+                Text = "Restart",
+                Location = new Point(500, 400),
+                Size = new Size(500, 100),
+                Font = new Font(FontFamily.GenericMonospace, 40, FontStyle.Bold)
+            };
+            var result = new Label()
+            {
+                Text = "Your result: " + Game.Scores,
+                Location = new Point(restart.Left + restart.Width / 4 + 10, restart.Top - 30),
+                Size = new Size(restart.Width / 2, 20),
+                Font = new Font(FontFamily.GenericMonospace, 18, FontStyle.Bold)
+            };
+            restart.Click += (s, e) => Application.Restart();
+            //Form.ActiveForm.Controls.Add(pictureBox);
+            
+            Form.ActiveForm.Controls.Add(restart);
+            Form.ActiveForm.Controls.Add(result);
+
         }
     }
 }

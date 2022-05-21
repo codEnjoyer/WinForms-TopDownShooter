@@ -18,6 +18,8 @@ namespace GameProject
     {
         internal static Timer timer;
         private Label testLabel;
+        internal static Label Scores { get; set; }
+
         public MainForm()
         {
             InitializeComponent();
@@ -40,20 +42,29 @@ namespace GameProject
             MouseMove += MainForm_MouseMove;
             MouseClick += MainForm_MouseClick;
 
-            testLabel = new Label
+            //testLabel = new Label
+            //{
+            //    Location = new Point(50, 50),
+            //    Size = new Size(90, 70),
+            //};
+            //Controls.Add(testLabel);
+
+            Scores = new Label()
             {
-                Location = new Point(50, 50),
-                Size = new Size(90, 70),
+                Location = new Point(Screen.PrimaryScreen.WorkingArea.Right - 200, 50),
+                Size = new Size(200, 20),
+                Font = new Font(FontFamily.GenericMonospace, 18, FontStyle.Bold)
             };
-            Controls.Add(testLabel);
+            Controls.Add(Scores);
 
             MouseMove += (s, e) =>
             {
-                testLabel.Text = "Camera offset: " + View.Offset + "\nPlayer location: " + Game.Player.Hitbox.Location;
+                //testLabel.Text = "Camera offset: " + View.Offset + "\nPlayer location: " + Game.Player.Hitbox.Location;
+                Scores.Text = "Score:" + Game.Scores;
             };
             KeyDown += (s, e) =>
             {
-                testLabel.Text = "Camera offset: " + View.Offset + "\nPlayer location: " + Game.Player.Hitbox.Location;
+                //testLabel.Text = "Camera offset: " + View.Offset + "\nPlayer location: " + Game.Player.Hitbox.Location;
             };
         }
 

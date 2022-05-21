@@ -16,6 +16,7 @@ namespace GameProject.Entities
         public float RotationAngle { get; set; }
         public int Speed { get; set; }
         public int Damage { get; set; }
+        internal int Value { get; set; }
 
         protected Enemy(Vector location, Image image) : base(location, image)
         {

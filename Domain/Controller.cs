@@ -58,7 +58,7 @@ namespace GameProject.Domain
                     Game.Player.GetSpeed(5);
                     break;
                 case MouseButtons.Right:
-                    Game.Player.TakeDamage(10);
+                    Game.Player.GetHealth(50);
                     break;
             }
         }

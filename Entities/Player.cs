@@ -35,7 +35,7 @@ namespace GameProject.Entities
             MaxDamage = 2 * Damage;//TODO: Make weapons
 
             MaxHealth = 100;
-            Health = 75;
+            Health = MaxHealth;
 
             HealthBar = new Rectangle(Hitbox.Location.X + (int) (0.25 * Hitbox.Width), Hitbox.Location.Y - 10,
                 (int) (0.5 * Hitbox.Width), 10);

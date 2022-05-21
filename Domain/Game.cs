@@ -19,6 +19,7 @@ namespace GameProject.Domain
         internal static KillManager KillManager;
         internal static List<Enemy> SpawnedEnemies { get; set; }
         internal static List<Booster> SpawnedBoosters { get; set; }
+        internal static int Scores { get; set; }
 
         internal Game(Player player, Rectangle gameZone)
         {

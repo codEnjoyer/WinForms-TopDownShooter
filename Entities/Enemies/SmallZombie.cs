@@ -21,6 +21,8 @@ namespace GameProject.Entities
 
             MaxHealth = 50;
             Health = MaxHealth;
+
+            Value = 1;
         }
     }
 }

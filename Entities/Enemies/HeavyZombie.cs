@@ -20,6 +20,8 @@ namespace GameProject.Entities.Enemies
 
             MaxHealth = 200;
             Health = MaxHealth;
+
+            Value = 3;
         }
     }
 }

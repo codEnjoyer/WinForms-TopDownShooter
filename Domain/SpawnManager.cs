@@ -18,13 +18,13 @@ namespace GameProject.Domain
 
         internal SpawnManager()
         {
-            enemiesLimit = 5;
+            enemiesLimit = 10;
             boostersLimit = 7;
 
             r = new Random();
 
             enemySpawner = new Timer();
-            enemySpawner.Interval = 5 * 1000;
+            enemySpawner.Interval = 1000;
             enemySpawner.Tick += (s,a) =>
                 SpawnEnemy((EnemyTypes)r.Next(3), GetValidSpawnLocation());
             enemySpawner.Start();

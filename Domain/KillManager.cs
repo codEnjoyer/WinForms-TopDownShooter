@@ -26,7 +26,11 @@ namespace GameProject.Domain
                 Game.Player.DealDamage(enemy);
 
                 if (enemy.Health == enemy.MinHealth)
+                {
+                    Game.Scores += enemy.Value;
                     Game.SpawnedEnemies.Remove(enemy);
+                }
+                    
 
                 enemy.DealDamage(Game.Player);
 
