@@ -18,19 +18,19 @@ namespace GameProject.Domain
 
         internal SpawnManager()
         {
-            enemiesLimit = 10;
+            enemiesLimit = 7;
             boostersLimit = 7;
 
             r = new Random();
 
             enemySpawner = new Timer();
-            enemySpawner.Interval = 1000;
+            enemySpawner.Interval = 5 * 1000;
             enemySpawner.Tick += (s,a) =>
                 SpawnEnemy((EnemyTypes)r.Next(3), GetValidSpawnLocation());
             enemySpawner.Start();
 
             boosterSpawner = new Timer();
-            boosterSpawner.Interval = 10 * 1000;
+            boosterSpawner.Interval = 5 * 1000;
             boosterSpawner.Tick += (s, a) =>
                 SpawnBooster((BoosterTypes)r.Next(3), GetValidSpawnLocation());
             boosterSpawner.Start();
