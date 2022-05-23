@@ -4,6 +4,7 @@ using System.Diagnostics.SymbolStore;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -127,6 +128,24 @@ namespace GameProject
         }
 
         private static void UpdateBoosters(Graphics graphics)
+        {
+            UpdateSpawnedBoosters(graphics);
+            var playerSpeedBooster = new Point(
+                Game.Player.Hitbox.Location.X,
+                Game.Player.Hitbox.Location.Y + (int)(1.5 * Game.Player.Hitbox.Height));
+
+            graphics.DrawRectangle(Pens.Black,
+                playerSpeedBooster.X,
+                playerSpeedBooster.Y, 100, 20);
+
+            graphics.FillRectangle(Brushes.Green,
+                playerSpeedBooster.X,
+                playerSpeedBooster.Y,
+                5 * 10 + 100 * Game.Player.ActiveBoosters[BoosterTypes.SpeedBoost] / (10 * 1000),
+                20);
+        }
+
+        private static void UpdateSpawnedBoosters(Graphics graphics)
         {
             if (Game.SpawnedBoosters.Count == 0) return;
 

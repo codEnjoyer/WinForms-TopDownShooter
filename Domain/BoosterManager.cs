@@ -21,16 +21,17 @@ namespace GameProject.Domain
 
         private static void CheckBoostersRemainingTime()
         {
-            CheckPlayerBoostersRemainingTime();
+            var activeBoosters = new Dictionary<BoosterTypes, int>(Game.Player.ActiveBoosters);
+            CheckPlayerBoostersRemainingTime(activeBoosters);
 
             if (Game.SpawnedEnemies.Count == 0) return;
             var spawnedEnemies = new List<Enemy>(Game.SpawnedEnemies);
             CheckEnemiesBoostersRemainingTime(spawnedEnemies);
         }
 
-        private static void CheckPlayerBoostersRemainingTime()
+        private static void CheckPlayerBoostersRemainingTime(Dictionary<BoosterTypes, int> activeBoosters)
         {
-            foreach (var boosterTypeRemainingTime in Game.Player.ActiveBoosters)
+            foreach (var boosterTypeRemainingTime in activeBoosters)
             {
                 if (boosterTypeRemainingTime.Value <= 0) continue;
 
@@ -72,7 +73,8 @@ namespace GameProject.Domain
         {
             foreach (var enemy in spawnedEnemies)
             {
-                foreach (var boosterTypeRemainingTime in enemy.ActiveBoosters)
+                var activeBoosters = new Dictionary<BoosterTypes, int>(enemy.ActiveBoosters);
+                foreach (var boosterTypeRemainingTime in activeBoosters)
                 {
                     if (boosterTypeRemainingTime.Value <= 0) continue;
 
