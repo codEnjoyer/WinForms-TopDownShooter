@@ -11,9 +11,7 @@ namespace GameProject
 {
     public partial class MainForm : Form
     {
-        internal static Timer timer;
-        private Label testLabel;
-        internal static Label Scores { get; set; }
+        internal static Timer MainTimer;
 
         public MainForm()
         {
@@ -21,49 +19,20 @@ namespace GameProject
 
             InitGame();
 
-            timer = new Timer
-            {
-                Interval = 15
-            };
-            timer.Tick += (sender, args) => Invalidate();
-            //timer.Tick += (sender, args) => CheckGame();
-            timer.Start();
+            MainTimer = new Timer();
+            MainTimer.Interval = 15;
+            MainTimer.Tick += (sender, args) => Invalidate();
+            MainTimer.Start();
 
-            Cursor = Cursors.Cross;
-            
             KeyDown += MainForm_KeyDown;
             KeyUp += MainForm_KeyUp;
             MouseMove += MainForm_MouseMove;
             MouseClick += MainForm_MouseClick;
-
-            //testLabel = new Label
-            //{
-            //    Location = new Point(50, 50),
-            //    Size = new Size(90, 70),
-            //};
-            //Controls.Add(testLabel);
-
-            Scores = new Label()
-            {
-                Location = new Point(Screen.PrimaryScreen.WorkingArea.Right - 200, 50),
-                Size = new Size(200, 20),
-                Font = new Font(FontFamily.GenericMonospace, 18, FontStyle.Bold)
-            };
-            Controls.Add(Scores);
-
-            MouseMove += (s, e) =>
-            {
-                //testLabel.Text = "Camera offset: " + View.Offset + "\nPlayer location: " + Game.Player.Hitbox.Location;
-                Scores.Text = "Score:" + Game.Scores;
-            };
-            KeyDown += (s, e) =>
-            {
-                //testLabel.Text = "Camera offset: " + View.Offset + "\nPlayer location: " + Game.Player.Hitbox.Location;
-            };
         }
 
-        private static void InitGame()
+        private void InitGame()
         {
+
             var center = new Vector(Screen.PrimaryScreen.WorkingArea.Width / 2,
                 Screen.PrimaryScreen.WorkingArea.Height / 2);
 
@@ -73,7 +42,7 @@ namespace GameProject
 
             var playerSpawnPoint = new Vector(center.X, center.Y);
 
-            new Game(new Player(playerSpawnPoint), gameZone);
+            new Game(new Player(playerSpawnPoint), gameZone, this);
         }
 
         private static void MainForm_KeyDown(object sender, KeyEventArgs e)
@@ -97,34 +66,12 @@ namespace GameProject
         }
         protected override void OnPaint(PaintEventArgs e)
         {
-            var eGraphics = e.Graphics;
-            View.UpdateTextures(eGraphics);
+            View.UpdateTextures(e.Graphics, this);
         }
 
-        #region Fullscreen, FormLoad
         private void MainForm_Load(object sender, EventArgs e)
         {
-            GoFullscreen(true);
             DoubleBuffered = true;
         }
-
-
-        //TODO : Move to View.cs
-        private void GoFullscreen(bool fullscreen)
-        {
-            if (fullscreen)
-            {
-                //TopMost = true;
-                FormBorderStyle = FormBorderStyle.None;
-                WindowState = FormWindowState.Maximized;
-            }
-            else
-            {
-                FormBorderStyle = FormBorderStyle.Sizable;
-                WindowState = FormWindowState.Normal;
-                Bounds = Screen.PrimaryScreen.Bounds;
-            }
-        }
-        #endregion
     }
 }

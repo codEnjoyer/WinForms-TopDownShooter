@@ -16,10 +16,29 @@ namespace GameProject
 {
     internal class View
     {
+        private static bool Initialized;
         internal static Vector Offset = Vector.Zero;
         internal static Rectangle ViewedZone { get; set; }
-        internal static void UpdateTextures(Graphics graphics)
+        internal static Form Form { get; set; }
+        internal static bool IsFullscreen { get; set; }
+        internal static Label testLabel;
+        internal static Label ScoresLabel { get; set; }
+        internal static Button fullscreenButton { get; set; }
+
+        internal static void UpdateTextures(Graphics graphics, Form form)
         {
+            Form = form;
+
+            Form.Cursor = Cursors.Cross;
+
+            
+            if (!Initialized)
+            {
+                GoFullscreen(true);
+                ShowUserInterface();
+                InitializeUserInterface();
+            }
+
             var gameStage = Game.Stage;
 
             switch (gameStage)
@@ -29,7 +48,7 @@ namespace GameProject
 
                     //graphics.DrawRectangle(new Pen(Color.Red), Game.GameZone); //GameZone hitbox
                     //graphics.DrawRectangle(new Pen(Color.Blue), Game.CameraZone); //CameraZone hitbox
-                    //graphics.DrawRectangle(new Pen(Color.Yellow), ViewedZone); //Rectangle covering the observed area (and slightly larger)
+                    graphics.DrawRectangle(new Pen(Color.Yellow), ViewedZone); //Rectangle covering the observed area (and slightly larger)
 
                     UpdateBoosters(graphics);
                     UpdateMovement(graphics);
@@ -39,11 +58,9 @@ namespace GameProject
 
                 case GameStage.Finished:
                     ShowFinishWindow();
-                    MainForm.timer.Stop();
+                    MainForm.MainTimer.Stop();
                     return;
             }
-
-            
         }
         private static void UpdateCamera(Graphics graphics)
         {
@@ -77,7 +94,7 @@ namespace GameProject
             graphics.FillRectangle(Brushes.Green,
                 playerHealthBarPosition.X,
                 playerHealthBarPosition.Y,
-                Game.Player.HealthBar.Width * Game.Player.GetHPPercent(),
+                Game.Player.HealthBar.Width * Game.Player.GetHpPercent(),
                 Game.Player.HealthBar.Height);
         }
         private static void UpdateEnemiesHealth(Graphics graphics)
@@ -98,7 +115,7 @@ namespace GameProject
             graphics.FillRectangle(Brushes.Red,
                 enemyHealthBarPosition.X,
                 enemyHealthBarPosition.Y,
-                enemy.HealthBar.Width * enemy.GetHPPercent(),
+                enemy.HealthBar.Width * enemy.GetHpPercent(),
                 enemy.HealthBar.Height);
             }
             
@@ -135,10 +152,10 @@ namespace GameProject
         private static void UpdateViewedZone()
         {
             var viewedZoneLocation = new Point(
-                Game.Player.Hitbox.Location.X - Screen.PrimaryScreen.WorkingArea.Width,
-                Game.Player.Hitbox.Location.Y - Screen.PrimaryScreen.WorkingArea.Height);
-            var viewedZoneSize = new Size((int)(2 * Screen.PrimaryScreen.WorkingArea.Width),
-                (int)(2 * Screen.PrimaryScreen.WorkingArea.Height));
+                Game.Player.Hitbox.Location.X - Form.ClientSize.Width,
+                Game.Player.Hitbox.Location.Y - Form.ClientSize.Height);
+
+            var viewedZoneSize = new Size(2 * Form.ClientSize.Width, 2 * Form.ClientSize.Height);
 
             ViewedZone = new Rectangle(viewedZoneLocation,
                 viewedZoneSize);
@@ -192,14 +209,8 @@ namespace GameProject
 
         private static void ShowFinishWindow()
         {
-            Form.ActiveForm.Controls.Remove(MainForm.Scores);
-            var pictureBox = new PictureBox()
-            {
-                Image = Resources.HealthBoost,
-                Location = new Point(320, 100),
-                Size = new Size(1200, 700)
-            };
-            
+            Form.Controls.Remove(ScoresLabel);
+
             var restart = new Button
             {
                 Text = "Restart",
@@ -207,6 +218,7 @@ namespace GameProject
                 Size = new Size(500, 100),
                 Font = new Font(FontFamily.GenericMonospace, 40, FontStyle.Bold)
             };
+
             var result = new Label()
             {
                 Text = "Your result: " + Game.Scores,
@@ -215,11 +227,69 @@ namespace GameProject
                 Font = new Font(FontFamily.GenericMonospace, 18, FontStyle.Bold)
             };
             restart.Click += (s, e) => Application.Restart();
-            //Form.ActiveForm.Controls.Add(pictureBox);
-            
-            Form.ActiveForm.Controls.Add(restart);
-            Form.ActiveForm.Controls.Add(result);
 
+            Form.Controls.Add(restart);
+            Form.Controls.Add(result);
+
+        }
+        internal static void GoFullscreen(bool fullscreen)
+        {
+            if (fullscreen)
+            {
+                //TopMost = true;
+                Form.FormBorderStyle = FormBorderStyle.None;
+                Form.WindowState = FormWindowState.Maximized;
+                IsFullscreen = true;
+            }
+            else
+            {
+                Form.FormBorderStyle = FormBorderStyle.Sizable;
+                Form.WindowState = FormWindowState.Normal;
+                Form.Bounds = Screen.PrimaryScreen.Bounds;
+                IsFullscreen = false;
+            }
+        }
+
+        private static void ShowUserInterface()
+        {
+            testLabel = new Label
+            {
+                Location = new Point(50, 50),
+                Size = new Size(90, 70),
+            };
+            Form.Controls.Add(testLabel);
+
+            ScoresLabel = new Label
+            {
+                Location = new Point(Screen.PrimaryScreen.WorkingArea.Right - 200, 50),
+                Size = new Size(200, 20),
+                Font = new Font(FontFamily.GenericMonospace, 18, FontStyle.Bold)
+            };
+            Form.Controls.Add(ScoresLabel);
+
+            //fullscreenButton = new Button
+            //{
+            //    Location = new Point(testLabel.Right + 10, testLabel.Location.Y),
+            //    Size = new Size(80, 80),
+            //    Text = "Fullscreen"
+            //};
+            //fullscreenButton.TabStop = false;
+            //fullscreenButton.Click += (s, a) => GoFullscreen(!IsFullscreen);
+            //Form.Controls.Add(fullscreenButton); //TODO: Move to GameMenu
+        }
+
+        private static void InitializeUserInterface()
+        {
+            Form.MouseMove += (s, e) =>
+            {
+                testLabel.Text = "Camera offset: " + Offset + "\nPlayer location: " + Game.Player.Hitbox.Location;
+                ScoresLabel.Text = "Score:" + Game.Scores;
+            };
+            Form.KeyDown += (s, e) =>
+            {
+                testLabel.Text = "Camera offset: " + Offset + "\nPlayer location: " + Game.Player.Hitbox.Location;
+            };
+            Initialized = true;
         }
     }
 }

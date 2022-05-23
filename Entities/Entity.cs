@@ -33,7 +33,7 @@ namespace GameProject.Entities
             MinSpeed = 1;
         }
 
-        internal float GetHPPercent()
+        internal float GetHpPercent()
         {
             return (float)(Health / MaxHealth);
         }

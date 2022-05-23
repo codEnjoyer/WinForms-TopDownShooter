@@ -1,5 +1,4 @@
-﻿
-internal enum EnemyTypes
+﻿internal enum EnemyTypes
 {
     SmallEnemy,
     MediumZombie,

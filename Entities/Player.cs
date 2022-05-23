@@ -87,18 +87,6 @@ namespace GameProject.Entities
                 if (Game.InCameraBoundsY(Hitbox))
                     View.Offset += delta;
             }
-
-            
-
-            //Movement relative to cursor:
-            //if (IsMovingUp)
-            //    Location += Speed * new Vector(Math.Cos(RotationAngle), Math.Sin(RotationAngle));
-            //if (IsMovingLeft)
-            //    Location += Speed * new Vector(Math.Cos(RotationAngle - Math.PI / 2), Math.Sin(RotationAngle - Math.PI / 2));
-            //if (IsMovingDown)
-            //    Location -= Speed * new Vector(Math.Cos(RotationAngle), Math.Sin(RotationAngle));
-            //if (IsMovingRight)
-            //    Location -= Speed * new Vector(Math.Cos(RotationAngle - Math.PI / 2), Math.Sin(RotationAngle - Math.PI / 2));
         }
 
         internal float AngleToTarget(Vector targetLocation)

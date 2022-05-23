@@ -10,6 +10,7 @@ namespace GameProject.Domain
 {
     internal class Game
     {
+        internal Form Form { get; set; }
         internal static Player Player { get; set; }
         internal static Rectangle GameZone { get; private set; }
         internal static Rectangle CameraZone { get; private set; }
@@ -22,8 +23,9 @@ namespace GameProject.Domain
         internal static List<Booster> SpawnedBoosters { get; set; }
         internal static int Scores { get; set; }
 
-        internal Game(Player player, Rectangle gameZone)
+        internal Game(Player player, Rectangle gameZone, Form form)
         {
+            Form = form;
             Player = player;
             GameZone = gameZone;
             
