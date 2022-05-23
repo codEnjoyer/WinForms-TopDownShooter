@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\BoosterManager.cs" />
     <Compile Include="Domain\Controller.cs" />
     <Compile Include="Domain\Game.cs" />
     <Compile Include="Domain\GameStage.cs" />

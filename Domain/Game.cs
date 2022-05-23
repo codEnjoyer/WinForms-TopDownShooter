@@ -17,6 +17,7 @@ namespace GameProject.Domain
         internal static event Action<GameStage> StageChanged;
         internal static SpawnManager SpawnManager;
         internal static KillManager KillManager;
+        internal static BoosterManager BoosterManager;
         internal static List<Enemy> SpawnedEnemies { get; set; }
         internal static List<Booster> SpawnedBoosters { get; set; }
         internal static int Scores { get; set; }
@@ -41,6 +42,7 @@ namespace GameProject.Domain
 
             SpawnManager = new SpawnManager();
             KillManager = new KillManager();
+            BoosterManager = new BoosterManager();
 
             ChangeStage(GameStage.Battle);
             StageChanged += CheckGameStage;
@@ -68,38 +70,6 @@ namespace GameProject.Domain
         internal static bool InCameraBoundsY(Rectangle hitbox)
         {
             return hitbox.Location.Y > CameraZone.Top && hitbox.Location.Y < CameraZone.Bottom;
-        }
-
-        internal static void CheckBoostersIntersections()
-        {
-            if(SpawnedBoosters.Count == 0) return;
-            var spawnedBoosters = new List<Booster>(SpawnedBoosters);
-
-            CheckPlayerBoosterIntersections(spawnedBoosters);
-
-            if(SpawnedEnemies.Count == 0) return;
-            var spawnedEnemies = new List<Enemy>(SpawnedEnemies);
-            CheckEnemyBoosterIntersections(spawnedEnemies, spawnedBoosters);
-        }
-
-        private static void CheckEnemyBoosterIntersections(List<Enemy> spawnedEnemies, List<Booster> spawnedBoosters)
-        {
-            foreach (var booster in spawnedEnemies.SelectMany(enemy => spawnedBoosters
-                         .Where(booster => enemy.Hitbox.IntersectsWith(booster.Hitbox))
-                         .Where(enemy.GetBoost)))
-            {
-                SpawnedBoosters.Remove(booster);
-            }
-        }
-
-        private static void CheckPlayerBoosterIntersections(List<Booster> spawnedBoosters)
-        {
-            foreach (var booster in spawnedBoosters
-                         .Where(booster => Player.Hitbox.IntersectsWith(booster.Hitbox))
-                         .Where(booster => Player.GetBoost(booster)))
-            {
-                SpawnedBoosters.Remove(booster);
-            }
         }
 
         private static void CheckGameStage(GameStage gameStage)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 using GameProject.Domain;
 using GameProject.Entities;
@@ -25,7 +26,6 @@ namespace GameProject
                 Interval = 15
             };
             timer.Tick += (sender, args) => Invalidate();
-            timer.Tick += (sender, args) => CheckIntersections();
             //timer.Tick += (sender, args) => CheckGame();
             timer.Start();
 
@@ -101,20 +101,10 @@ namespace GameProject
             View.UpdateTextures(eGraphics);
         }
 
-        private static void CheckIntersections()
-        {
-            Game.CheckBoostersIntersections();
-        }
-
-        private static void CheckGameFinished()
-        {
-
-        }
         #region Fullscreen, FormLoad
         private void MainForm_Load(object sender, EventArgs e)
         {
             GoFullscreen(true);
-            //GameZone = Screen.PrimaryScreen.WorkingArea.GameZone;
             DoubleBuffered = true;
         }
 
