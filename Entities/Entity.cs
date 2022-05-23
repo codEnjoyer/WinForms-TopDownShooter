@@ -14,8 +14,8 @@ namespace GameProject.Entities
         public double Health { get; set; }
         public double MaxHealth { get; set; }
         public int MinSpeed { get; set; }
-        public int MaxSpeed { get; set; }
-        public int MaxDamage { get; set; }
+        //public int MaxSpeed { get; set; }
+        //public int MaxDamage { get; set; }
         public Rectangle HealthBar { get; set; }
 
         protected Entity(Vector location, Image image)

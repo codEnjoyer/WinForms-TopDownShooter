@@ -53,8 +53,8 @@
     <Compile Include="Domain\KillManager.cs" />
     <Compile Include="Domain\SpawnManager.cs" />
     <Compile Include="Entities\Boosters\BoosterTypes.cs" />
-    <Compile Include="Entities\Boosters\DamageBoost.cs" />
-    <Compile Include="Entities\Boosters\HealthBoost.cs" />
+    <Compile Include="Entities\Boosters\DamageBooster.cs" />
+    <Compile Include="Entities\Boosters\HealthBooster.cs" />
     <Compile Include="Entities\Enemies\EnemyTypes.cs" />
     <Compile Include="Entities\Enemies\HeavyZombie.cs" />
     <Compile Include="Entities\Enemies\MediumZombie.cs" />
@@ -63,7 +63,7 @@
     <Compile Include="Entities\Booster.cs" />
     <Compile Include="Entities\Player.cs" />
     <Compile Include="Entities\Enemies\SmallZombie.cs" />
-    <Compile Include="Entities\Boosters\SpeedBoost.cs" />
+    <Compile Include="Entities\Boosters\SpeedBooster.cs" />
     <Compile Include="Interfaces\IMovable.cs" />
     <Compile Include="Interfaces\IFightable.cs" />
     <Compile Include="MainForm.cs">

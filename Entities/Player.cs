@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System.Collections.Generic;
+using System.Drawing;
 using GameProject.Domain;
 using GameProject.Interfaces;
 using GameProject.Physics;
@@ -16,22 +17,29 @@ namespace GameProject.Entities
         public bool IsMovingDown { get; set; }
         public bool IsMovingRight { get; set; }
         public int Damage { get; set; }
+        public Dictionary<BoosterTypes, int> ActiveBoosters { get; set; }
 
         internal Player(Vector location) : base(location, Resources.HeroNormal)
         {
             Hitbox = new Rectangle(new Vector(location.X - Hitbox.Size.Width / 2, location.Y - Hitbox.Size.Height / 2).ToPoint(), Hitbox.Size);
             
             Speed = 5;
-            MaxSpeed = 2 * Speed;
 
-            Damage = 10;
-            MaxDamage = 2 * Damage;//TODO: Make weapons
+            Damage = 10; //TODO: Make weapons
 
             MaxHealth = 100;
             Health = MaxHealth;
 
             HealthBar = new Rectangle(Hitbox.Location.X + (int) (0.25 * Hitbox.Width), Hitbox.Location.Y - 10,
                 (int) (0.5 * Hitbox.Width), 10);
+
+            ActiveBoosters = new Dictionary<BoosterTypes, int>
+            {
+                [BoosterTypes.HealthBoost] = 0,
+                [BoosterTypes.DamageBoost] = 0,
+                [BoosterTypes.SpeedBoost] = 0
+            };
+
         }
 
         public void Move()
@@ -105,71 +113,47 @@ namespace GameProject.Entities
             return new Vector(x, y).AngleInRadians;
         }
 
-        public bool GetBoost(Booster booster)
+        public void GetBoost(Booster booster)
         {
-            switch (booster.Type)
-            {
-                case BoosterTypes.HealthBoost:
-                    return GetHealth(booster.Impact);
-
-                case BoosterTypes.DamageBoost:
-                    return GetDamage(booster.Impact);
-
-                case BoosterTypes.SpeedBoost:
-                    return GetSpeed(booster.Impact);
-
-                default: return false;
-            }
+            ActiveBoosters[booster.Type] = booster.Time;
         }
-        public bool GetHealth(int impact)
+        public void GetHealth(int impact)
         {
-            if (Health == MaxHealth) return false;
-
+            if (Health == MaxHealth)
+            {
+                ActiveBoosters[BoosterTypes.HealthBoost] = 0;
+                return;
+            }
+            
             if (Health + impact > MaxHealth)
             {
                 Health = MaxHealth;
-                return true;
+                return;
             }
+
             Health += impact;
-            return true;
         }
 
-        public bool GetDamage(int impact)
+        public void GetDamage(int impact)
         {
-            if (Damage == MaxDamage) return false;
-
-            if (Damage + impact > MaxDamage)
-            {
-                Damage = MaxDamage;
-                return true;
-            }
             Damage += impact;
-            return true;
         }
-        public bool GetSpeed(int impact)
+        public void GetSpeed(int impact)
         {
-            if (Speed == MaxSpeed) return false;
-
-            if (Speed + impact > MaxSpeed)
-            {
-                Speed = MaxSpeed;
-                return true;
-            }
             Speed += impact;
-            return true;
         }
 
-        public bool GetSlowdown(int impact)
+        public void GetSlowdown(int impact)
         {
-            if (Speed == MinSpeed) return false;
+            if (Speed == MinSpeed) return;
 
             if (Speed - impact < MinSpeed)
             {
                 Speed = MinSpeed;
-                return true;
+                return;
             }
+
             Speed -= impact;
-            return true;
         }
 
         public void DealDamage(Entity entity)
@@ -185,6 +169,7 @@ namespace GameProject.Entities
                 return;
             }
             Health -= damage;
+            GetSlowdown(1);
         }
     }
 }

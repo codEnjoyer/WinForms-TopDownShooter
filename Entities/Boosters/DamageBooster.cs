@@ -3,12 +3,13 @@ using GameProject.Properties;
 
 namespace GameProject.Entities
 {
-    internal class DamageBoost : Booster
+    internal class DamageBooster : Booster
     {
-        internal DamageBoost(Vector location) : base(location, Resources.DamageBoost)
+        internal DamageBooster(Vector location) : base(location, Resources.DamageBoost)
         {
             Type = BoosterTypes.DamageBoost;
             Impact = 5;
+            Time = 10 * 1000;
         }
     }
 }

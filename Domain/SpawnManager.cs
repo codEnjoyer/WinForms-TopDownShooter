@@ -63,17 +63,17 @@ namespace GameProject.Domain
             switch (booster)
             {
                 case BoosterTypes.HealthBoost:
-                    var healthBoost = new HealthBoost(location);
+                    var healthBoost = new HealthBooster(location);
                     Game.SpawnedBoosters.Add(healthBoost);
                     break;
 
                 case BoosterTypes.DamageBoost:
-                    var damageBoost = new DamageBoost(location);
+                    var damageBoost = new DamageBooster(location);
                     Game.SpawnedBoosters.Add(damageBoost);
                     break;
 
                 case BoosterTypes.SpeedBoost:
-                    var speedBoost = new SpeedBoost(location);
+                    var speedBoost = new SpeedBooster(location);
                     Game.SpawnedBoosters.Add(speedBoost);
                     break;
             }

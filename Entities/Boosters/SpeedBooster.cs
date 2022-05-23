@@ -3,12 +3,13 @@ using GameProject.Properties;
 
 namespace GameProject.Entities
 {
-    internal class SpeedBoost : Booster
+    internal class SpeedBooster : Booster
     {
-        internal SpeedBoost(Vector location) : base(location, Resources.SpeedBoost)
+        internal SpeedBooster(Vector location) : base(location, Resources.SpeedBoost)
         {
             Type = BoosterTypes.SpeedBoost;
             Impact = 3;
+            Time = 10 * 1000;
         }
     }
 }
