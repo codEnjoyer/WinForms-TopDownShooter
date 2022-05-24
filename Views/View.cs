@@ -59,6 +59,9 @@ namespace GameProject
                     UpdateHealth(graphics);
                     UpdateRotation(graphics);
                     break;
+                case GameStage.InShop:
+                    ShowShop();
+                    break;
 
                 case GameStage.Finished:
                     ShowFinishWindow();
@@ -388,6 +391,11 @@ namespace GameProject
                 testLabel.Text = "Camera offset: " + Offset + "\nPlayer location: " + Game.Player.Hitbox.Location;
             };
             Initialized = true;
+        }
+
+        private static void ShowShop()
+        {
+            Form.Controls.Add(new Shop(Form));
         }
     }
 }

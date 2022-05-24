@@ -21,6 +21,9 @@ namespace GameProject.Domain
                 case Keys.D:
                     Game.Player.IsMovingRight = isActive;
                     break;
+                case Keys.M:
+                    Game.ChangeStage(GameStage.InShop);
+                    break;
 
                 case Keys.Escape:
                     Application.Exit();

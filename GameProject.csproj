@@ -51,6 +51,9 @@
     <Compile Include="Domain\Game.cs" />
     <Compile Include="Domain\GameStage.cs" />
     <Compile Include="Domain\KillManager.cs" />
+    <Compile Include="Domain\Shop.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Domain\SpawnManager.cs" />
     <Compile Include="Entities\Boosters\BoosterTypes.cs" />
     <Compile Include="Entities\Boosters\DamageBooster.cs" />
