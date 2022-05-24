@@ -24,9 +24,13 @@ namespace GameProject
         internal static bool IsFullscreen { get; set; }
         internal static Label testLabel;
         internal static Label ScoresLabel { get; set; }
-        internal static ProgressBar speedTimeBar { get; set; }
-        internal static ProgressBar damageTimeBar { get; set; }
         internal static ProgressBar healthTimeBar { get; set; }
+        internal static PictureBox healthBarIcon { get; set; }
+        internal static ProgressBar damageTimeBar { get; set; }
+        internal static PictureBox damageBarIcon { get; set; }
+        internal static ProgressBar speedTimeBar { get; set; }
+        internal static PictureBox speedBarIcon { get; set; }
+
 
         internal static void UpdateTextures(Graphics graphics, Form form)
         {
@@ -171,8 +175,8 @@ namespace GameProject
                 {
                     var enemyHealthTimeBarLocation = new Point(enemy.Hitbox.Left + (int)(0.25 * enemy.Hitbox.Width), enemy.Hitbox.Bottom + 5);
                     graphics.DrawRectangle(Pens.Black, enemyHealthTimeBarLocation.X, enemyHealthTimeBarLocation.Y, (int)(0.5 * enemy.Hitbox.Width), 10);
-                    graphics.FillRectangle(Brushes.LightGreen, enemyHealthTimeBarLocation.X, enemyHealthTimeBarLocation.Y,
-                        (int)(enemy.ActiveBoosters[BoosterTypes.HealthBoost] / (double)(10 * 1000) * (int)(0.5 * enemy.Hitbox.Width)), 10);
+                    graphics.FillRectangle(Brushes.OrangeRed, enemyHealthTimeBarLocation.X, enemyHealthTimeBarLocation.Y,
+                        (int)(enemy.ActiveBoosters[BoosterTypes.HealthBoost] / (double)(5 * 1000) * (int)(0.5 * enemy.Hitbox.Width)), 10);
                 }
 
                 if (enemy.ActiveBoosters[BoosterTypes.DamageBoost] != 0)
@@ -326,6 +330,15 @@ namespace GameProject
             };
             Form.Controls.Add(speedTimeBar);
 
+            speedBarIcon = new PictureBox
+            {
+                Location = new Point(speedTimeBar.Right + 5, speedTimeBar.Top),
+                Image = Resources.SpeedBoost,
+                Size = new Size(speedTimeBar.Height, speedTimeBar.Height),
+                SizeMode = PictureBoxSizeMode.StretchImage
+            };
+            Form.Controls.Add(speedBarIcon);
+
             damageTimeBar = new ProgressBar
             {
                 Location = new Point(speedTimeBar.Left, speedTimeBar.Top - 40),
@@ -335,14 +348,32 @@ namespace GameProject
             };
             Form.Controls.Add(damageTimeBar);
 
+            damageBarIcon = new PictureBox
+            {
+                Location = new Point(damageTimeBar.Right + 5, damageTimeBar.Top),
+                Image = Resources.DamageBoost,
+                Size = new Size(damageTimeBar.Height, damageTimeBar.Height),
+                SizeMode = PictureBoxSizeMode.StretchImage
+            };
+            Form.Controls.Add(damageBarIcon);
+
             healthTimeBar = new ProgressBar
             {
                 Location = new Point(damageTimeBar.Left, damageTimeBar.Top - 40),
                 Size = new Size(150, 30),
                 Minimum = 0,
-                Maximum = 10 * 1000,
+                Maximum = 5 * 1000,
             };
             Form.Controls.Add(healthTimeBar);
+
+            healthBarIcon = new PictureBox
+            {
+                Location = new Point(healthTimeBar.Right + 5, healthTimeBar.Top),
+                Image = Resources.HealthBoost,
+                Size = new Size(healthTimeBar.Height, healthTimeBar.Height),
+                SizeMode = PictureBoxSizeMode.StretchImage
+            };
+            Form.Controls.Add(healthBarIcon);
         }
 
         private static void InitializeUserInterface()

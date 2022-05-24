@@ -9,7 +9,7 @@ namespace GameProject.Entities
         {
             Type = BoosterTypes.HealthBoost;
             Impact = 25;
-            Time = 10 * 1000;
+            Time = 5 * 1000;
         }
     }
 }

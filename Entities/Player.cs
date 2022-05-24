@@ -11,12 +11,14 @@ namespace GameProject.Entities
     internal class Player : Entity, IMovable, IFightable
     {
         public int Speed{ get; set; }
+        public int BonusSpeed { get; set; }
         public float RotationAngle { get; set; } //in radians
         public bool IsMovingUp { get; set; }
         public bool IsMovingLeft { get; set; }
         public bool IsMovingDown { get; set; }
         public bool IsMovingRight { get; set; }
         public int Damage { get; set; }
+        public int BonusDamage { get; set; }
         public Dictionary<BoosterTypes, int> ActiveBoosters { get; set; }
 
         internal Player(Vector location) : base(location, Resources.HeroNormal)
@@ -136,11 +138,13 @@ namespace GameProject.Entities
 
         public void GetDamageBoost(int impact)
         {
-            Damage += impact;
+            BonusDamage = impact;
+            Damage += BonusDamage;
         }
         public void GetSpeedBoost(int impact)
         {
-            Speed += impact;
+            BonusSpeed = impact;
+            Speed += BonusSpeed;
         }
 
         public void DealDamage(Entity entity)

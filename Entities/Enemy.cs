@@ -11,7 +11,9 @@ namespace GameProject.Entities
     {
         public float RotationAngle { get; set; }
         public int Speed { get; set; }
+        public int BonusSpeed { get; set; }
         public int Damage { get; set; }
+        public int BonusDamage { get; set; }
         internal int Value { get; set; }
         public Dictionary<BoosterTypes, int> ActiveBoosters { get; set; }
 
@@ -67,11 +69,13 @@ namespace GameProject.Entities
 
         public void GetDamageBoost(int impact)
         {
-            Damage += impact;
+            BonusDamage = impact;
+            Damage += BonusDamage;
         }
         public void GetSpeedBoost(int impact)
         {
-            Speed += impact;
+            BonusSpeed = impact;
+            Speed += BonusSpeed;
         }
 
         public void DealDamage(Entity entity)

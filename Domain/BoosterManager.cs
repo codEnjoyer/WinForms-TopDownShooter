@@ -41,13 +41,13 @@ namespace GameProject.Domain
                         break;
 
                     case BoosterTypes.DamageBoost:
-                        if (boosterTypeRemainingTime.Value == 10 * 1000 && Game.Player.Damage == 10) //Link to existing boosters impact?
-                            Game.Player.GetDamageBoost(Game.Player.Damage);
+                        if (boosterTypeRemainingTime.Value == 10 * 1000 && Game.Player.BonusDamage == 0) //Link to existing boosters impact?
+                            Game.Player.GetDamageBoost(15); //boosters.cs impacts
                         break;
 
                     case BoosterTypes.SpeedBoost:
-                        if (boosterTypeRemainingTime.Value == 10 * 1000 && Game.Player.Speed == 5)
-                            Game.Player.GetSpeedBoost(Game.Player.Speed);
+                        if (boosterTypeRemainingTime.Value == 10 * 1000 && Game.Player.BonusSpeed == 0)
+                            Game.Player.GetSpeedBoost(5);
                         break;
                 }
 
@@ -58,10 +58,13 @@ namespace GameProject.Domain
                     switch (boosterTypeRemainingTime.Key)
                     {
                         case BoosterTypes.DamageBoost:
-                            Game.Player.Damage = 10;
+                            Game.Player.Damage -= Game.Player.BonusDamage;
+                            Game.Player.BonusDamage = 0;
                             break;
+
                         case BoosterTypes.SpeedBoost:
-                            Game.Player.Speed = 5;
+                            Game.Player.Speed -= Game.Player.BonusSpeed;
+                            Game.Player.BonusSpeed = 0;
                             break;
                     }
                 }
@@ -84,12 +87,12 @@ namespace GameProject.Domain
                             break;
 
                         case BoosterTypes.DamageBoost:
-                            if (boosterTypeRemainingTime.Value == 10 * 1000) //Link to existing boosters impact? +bonus damage field
-                                enemy.GetDamageBoost(10);
+                            if (boosterTypeRemainingTime.Value == 10 * 1000 && enemy.BonusDamage == 0) //Link to existing boosters impact? +bonus damage field
+                                enemy.GetDamageBoost(15); //boosters.cs impacts
                             break;
 
                         case BoosterTypes.SpeedBoost:
-                            if (boosterTypeRemainingTime.Value == 10 * 1000)
+                            if (boosterTypeRemainingTime.Value == 10 * 1000 && enemy.BonusSpeed == 0)
                                 enemy.GetSpeedBoost(5);
                             break;
                     }
@@ -101,10 +104,12 @@ namespace GameProject.Domain
                         switch (boosterTypeRemainingTime.Key)
                         {
                             case BoosterTypes.DamageBoost:
-                                enemy.Damage = 10;
+                                enemy.Damage -= enemy.BonusDamage;
+                                enemy.BonusDamage = 0;
                                 break;
                             case BoosterTypes.SpeedBoost:
-                                enemy.Speed = 5;
+                                enemy.Speed -= enemy.BonusSpeed;
+                                enemy.BonusSpeed = 0;
                                 break;
                         }
                     }
