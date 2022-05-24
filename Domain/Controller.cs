@@ -45,10 +45,10 @@ namespace GameProject.Domain
             switch (pressedButton)
             {
                 case MouseButtons.Left:
-                    Game.Player.GetSpeed(5);
+                    Game.Player.ActiveBoosters[BoosterTypes.SpeedBoost] = 10000;
                     break;
                 case MouseButtons.Right:
-                    Game.Player.GetHealth(50);
+                    Game.Player.GetHealthBoost(50 * 1000);
                     break;
             }
         }

@@ -8,9 +8,8 @@ namespace GameProject.Interfaces
         void DealDamage(Entity entity);
         void TakeDamage(int damage);
         void GetBoost(Booster booster);
-        void GetSpeed(int impact);
-        void GetDamage(int impact);
-        void GetHealth(int impact);
-        void GetSlowdown(int impact);
+        void GetSpeedBoost(int impact);
+        void GetDamageBoost(int impact);
+        void GetHealthBoost(double impact);
     }
 }

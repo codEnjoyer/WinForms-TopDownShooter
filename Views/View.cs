@@ -24,15 +24,14 @@ namespace GameProject
         internal static bool IsFullscreen { get; set; }
         internal static Label testLabel;
         internal static Label ScoresLabel { get; set; }
-        internal static Button fullscreenButton { get; set; }
+        internal static ProgressBar speedTimeBar { get; set; }
+        internal static ProgressBar damageTimeBar { get; set; }
+        internal static ProgressBar healthTimeBar { get; set; }
 
         internal static void UpdateTextures(Graphics graphics, Form form)
         {
             Form = form;
-
             Form.Cursor = Cursors.Cross;
-
-            
             if (!Initialized)
             {
                 GoFullscreen(true);
@@ -49,7 +48,7 @@ namespace GameProject
 
                     //graphics.DrawRectangle(new Pen(Color.Red), Game.GameZone); //GameZone hitbox
                     //graphics.DrawRectangle(new Pen(Color.Blue), Game.CameraZone); //CameraZone hitbox
-                    graphics.DrawRectangle(new Pen(Color.Yellow), ViewedZone); //Rectangle covering the observed area (and slightly larger)
+                    //graphics.DrawRectangle(new Pen(Color.Yellow), ViewedZone); //Rectangle covering the observed area (and slightly larger)
 
                     UpdateBoosters(graphics);
                     UpdateMovement(graphics);
@@ -130,19 +129,8 @@ namespace GameProject
         private static void UpdateBoosters(Graphics graphics)
         {
             UpdateSpawnedBoosters(graphics);
-            var playerSpeedBooster = new Point(
-                Game.Player.Hitbox.Location.X,
-                Game.Player.Hitbox.Location.Y + (int)(1.5 * Game.Player.Hitbox.Height));
-
-            graphics.DrawRectangle(Pens.Black,
-                playerSpeedBooster.X,
-                playerSpeedBooster.Y, 100, 20);
-
-            graphics.FillRectangle(Brushes.Green,
-                playerSpeedBooster.X,
-                playerSpeedBooster.Y,
-                5 * 10 + 100 * Game.Player.ActiveBoosters[BoosterTypes.SpeedBoost] / (10 * 1000),
-                20);
+            UpdateBoostersUserInterface();
+            UpdateEnemiesBoostersVisual(graphics);
         }
 
         private static void UpdateSpawnedBoosters(Graphics graphics)
@@ -159,6 +147,49 @@ namespace GameProject
                 graphics.DrawImage(image, booster.Hitbox.Location);
 
                 //graphics.DrawRectangle(new Pen(Color.MediumPurple), booster.Hitbox);
+            }
+        }
+
+        private static void UpdateBoostersUserInterface()
+        {
+            if (Game.Player.ActiveBoosters[BoosterTypes.HealthBoost] != 0)
+                healthTimeBar.Value = (int)(Game.Player.ActiveBoosters[BoosterTypes.HealthBoost] / (double)(10 * 1000) * 10 * 1000);
+
+            if (Game.Player.ActiveBoosters[BoosterTypes.DamageBoost] != 0)
+                damageTimeBar.Value = (int)(Game.Player.ActiveBoosters[BoosterTypes.DamageBoost] / (double)(10 * 1000) * 10 * 1000);
+
+            if (Game.Player.ActiveBoosters[BoosterTypes.SpeedBoost] != 0)
+                speedTimeBar.Value =(int)(Game.Player.ActiveBoosters[BoosterTypes.SpeedBoost] / (double)(10 * 1000) * 10 * 1000);
+        }
+
+        private static void UpdateEnemiesBoostersVisual(Graphics graphics)
+        {
+            if (Game.SpawnedEnemies.Count == 0) return;
+            foreach (var enemy in Game.SpawnedEnemies)
+            {
+                if (enemy.ActiveBoosters[BoosterTypes.HealthBoost] != 0)
+                {
+                    var enemyHealthTimeBarLocation = new Point(enemy.Hitbox.Left + (int)(0.25 * enemy.Hitbox.Width), enemy.Hitbox.Bottom + 5);
+                    graphics.DrawRectangle(Pens.Black, enemyHealthTimeBarLocation.X, enemyHealthTimeBarLocation.Y, (int)(0.5 * enemy.Hitbox.Width), 10);
+                    graphics.FillRectangle(Brushes.LightGreen, enemyHealthTimeBarLocation.X, enemyHealthTimeBarLocation.Y,
+                        (int)(enemy.ActiveBoosters[BoosterTypes.HealthBoost] / (double)(10 * 1000) * (int)(0.5 * enemy.Hitbox.Width)), 10);
+                }
+
+                if (enemy.ActiveBoosters[BoosterTypes.DamageBoost] != 0)
+                {
+                    var enemyDamageTimeBarLocation = new Point(enemy.Hitbox.Left + (int)(0.25 * enemy.Hitbox.Width), enemy.Hitbox.Bottom + 20);
+                    graphics.DrawRectangle(Pens.Black, enemyDamageTimeBarLocation.X, enemyDamageTimeBarLocation.Y, (int)(0.5 * enemy.Hitbox.Width), 10);
+                    graphics.FillRectangle(Brushes.DarkOrange, enemyDamageTimeBarLocation.X, enemyDamageTimeBarLocation.Y,
+                        (int)(enemy.ActiveBoosters[BoosterTypes.DamageBoost] / (double)(10 * 1000) * (int)(0.5 * enemy.Hitbox.Width)), 10);
+                }
+
+                if (enemy.ActiveBoosters[BoosterTypes.SpeedBoost] != 0)
+                {
+                    var enemySpeedTimeBarLocation = new Point(enemy.Hitbox.Left + (int)(0.25 * enemy.Hitbox.Width), enemy.Hitbox.Bottom + 35);
+                    graphics.DrawRectangle(Pens.Black, enemySpeedTimeBarLocation.X, enemySpeedTimeBarLocation.Y, (int)(0.5 * enemy.Hitbox.Width), 10);
+                    graphics.FillRectangle(Brushes.DodgerBlue, enemySpeedTimeBarLocation.X, enemySpeedTimeBarLocation.Y,
+                        (int)(enemy.ActiveBoosters[BoosterTypes.SpeedBoost] / (double)(10 * 1000) * (int)(0.5 * enemy.Hitbox.Width)), 10);
+                }
             }
         }
 
@@ -280,21 +311,38 @@ namespace GameProject
 
             ScoresLabel = new Label
             {
-                Location = new Point(Screen.PrimaryScreen.WorkingArea.Right - 200, 50),
+                Location = new Point(Form.Right - 200, 50),
                 Size = new Size(200, 20),
                 Font = new Font(FontFamily.GenericMonospace, 18, FontStyle.Bold)
             };
             Form.Controls.Add(ScoresLabel);
 
-            //fullscreenButton = new Button
-            //{
-            //    Location = new Point(testLabel.Right + 10, testLabel.Location.Y),
-            //    Size = new Size(80, 80),
-            //    Text = "Fullscreen"
-            //};
-            //fullscreenButton.TabStop = false;
-            //fullscreenButton.Click += (s, a) => GoFullscreen(!IsFullscreen);
-            //Form.Controls.Add(fullscreenButton); //TODO: Move to GameMenu
+            speedTimeBar = new ProgressBar
+            {
+                Location = new Point(Form.Left + 30, Form.Bottom - 70),
+                Size = new Size(150, 30),
+                Minimum = 0,
+                Maximum = 10 * 1000,
+            };
+            Form.Controls.Add(speedTimeBar);
+
+            damageTimeBar = new ProgressBar
+            {
+                Location = new Point(speedTimeBar.Left, speedTimeBar.Top - 40),
+                Size = new Size(150, 30),
+                Minimum = 0,
+                Maximum = 10 * 1000,
+            };
+            Form.Controls.Add(damageTimeBar);
+
+            healthTimeBar = new ProgressBar
+            {
+                Location = new Point(damageTimeBar.Left, damageTimeBar.Top - 40),
+                Size = new Size(150, 30),
+                Minimum = 0,
+                Maximum = 10 * 1000,
+            };
+            Form.Controls.Add(healthTimeBar);
         }
 
         private static void InitializeUserInterface()

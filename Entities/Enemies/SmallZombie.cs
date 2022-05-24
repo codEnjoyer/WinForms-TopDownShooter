@@ -13,7 +13,7 @@ namespace GameProject.Entities
             Damage = 10;
             //MaxDamage = 2 * Damage;
 
-            MaxHealth = 50;
+            MaxHealth = 50 * 1000;
             Health = MaxHealth;
 
             Value = 1;

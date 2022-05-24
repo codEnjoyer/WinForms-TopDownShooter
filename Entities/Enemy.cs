@@ -48,7 +48,7 @@ namespace GameProject.Entities
         {
             ActiveBoosters[booster.Type] = booster.Time;
         }
-        public void GetHealth(int impact)
+        public void GetHealthBoost(double impact)
         {
             if (Health == MaxHealth)
             {
@@ -65,32 +65,19 @@ namespace GameProject.Entities
             Health += impact;
         }
 
-        public void GetDamage(int impact)
+        public void GetDamageBoost(int impact)
         {
             Damage += impact;
         }
-        public void GetSpeed(int impact)
+        public void GetSpeedBoost(int impact)
         {
             Speed += impact;
-        }
-
-        public void GetSlowdown(int impact)
-        {
-            if (Speed == MinSpeed) return;
-
-            if (Speed - impact < MinSpeed)
-            {
-                Speed = MinSpeed;
-                return;
-            }
-
-            Speed -= impact;
         }
 
         public void DealDamage(Entity entity)
         {
             var player = (Player)entity;
-            player.TakeDamage(Damage);
+            player.TakeDamage(Damage * 1000);
         }
 
         public void TakeDamage(int damage)

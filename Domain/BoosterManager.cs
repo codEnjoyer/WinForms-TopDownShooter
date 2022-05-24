@@ -31,24 +31,23 @@ namespace GameProject.Domain
 
         private static void CheckPlayerBoostersRemainingTime(Dictionary<BoosterTypes, int> activeBoosters)
         {
-            foreach (var boosterTypeRemainingTime in activeBoosters)
+            foreach (var boosterTypeRemainingTime in activeBoosters
+                         .Where(boosterTypeRemainingTime => boosterTypeRemainingTime.Value > 0))
             {
-                if (boosterTypeRemainingTime.Value <= 0) continue;
-
                 switch (boosterTypeRemainingTime.Key)
                 {
                     case BoosterTypes.HealthBoost:
-                        Game.Player.GetHealth(10 * 1000 / boosterTimer.Interval);
+                        Game.Player.GetHealthBoost((double)(10 * 1000 * 2)/ boosterTimer.Interval);
                         break;
 
                     case BoosterTypes.DamageBoost:
                         if (boosterTypeRemainingTime.Value == 10 * 1000 && Game.Player.Damage == 10) //Link to existing boosters impact?
-                            Game.Player.GetDamage(Game.Player.Damage);
+                            Game.Player.GetDamageBoost(Game.Player.Damage);
                         break;
 
                     case BoosterTypes.SpeedBoost:
                         if (boosterTypeRemainingTime.Value == 10 * 1000 && Game.Player.Speed == 5)
-                            Game.Player.GetSpeed(Game.Player.Speed);
+                            Game.Player.GetSpeedBoost(Game.Player.Speed);
                         break;
                 }
 
@@ -81,17 +80,17 @@ namespace GameProject.Domain
                     switch (boosterTypeRemainingTime.Key)
                     {
                         case BoosterTypes.HealthBoost:
-                            enemy.GetHealth(10 * 1000 / boosterTimer.Interval);
+                            enemy.GetHealthBoost((double)(10 * 1000) / boosterTimer.Interval);
                             break;
 
                         case BoosterTypes.DamageBoost:
                             if (boosterTypeRemainingTime.Value == 10 * 1000) //Link to existing boosters impact? +bonus damage field
-                                enemy.GetDamage(10);
+                                enemy.GetDamageBoost(10);
                             break;
 
                         case BoosterTypes.SpeedBoost:
                             if (boosterTypeRemainingTime.Value == 10 * 1000)
-                                enemy.GetSpeed(5);
+                                enemy.GetSpeedBoost(5);
                             break;
                     }
 

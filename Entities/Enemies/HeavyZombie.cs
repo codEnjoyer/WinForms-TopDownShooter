@@ -10,10 +10,10 @@ namespace GameProject.Entities.Enemies
             Speed = 2;
             //MaxSpeed = 2 * Speed;
 
-            Damage = 25;
+            Damage = 15;
             //MaxDamage = 2 * Damage;
 
-            MaxHealth = 200;
+            MaxHealth = 200 * 1000;
             Health = MaxHealth;
 
             Value = 3;

@@ -27,7 +27,7 @@ namespace GameProject.Entities
 
             Damage = 10; //TODO: Make weapons
 
-            MaxHealth = 100;
+            MaxHealth = 100 * 1000;
             Health = MaxHealth;
 
             HealthBar = new Rectangle(Hitbox.Location.X + (int) (0.25 * Hitbox.Width), Hitbox.Location.Y - 10,
@@ -117,7 +117,7 @@ namespace GameProject.Entities
         {
             ActiveBoosters[booster.Type] = booster.Time;
         }
-        public void GetHealth(int impact)
+        public void GetHealthBoost(double impact)
         {
             if (Health == MaxHealth)
             {
@@ -134,31 +134,18 @@ namespace GameProject.Entities
             Health += impact;
         }
 
-        public void GetDamage(int impact)
+        public void GetDamageBoost(int impact)
         {
             Damage += impact;
         }
-        public void GetSpeed(int impact)
+        public void GetSpeedBoost(int impact)
         {
             Speed += impact;
         }
 
-        public void GetSlowdown(int impact)
-        {
-            if (Speed == MinSpeed) return;
-
-            if (Speed - impact < MinSpeed)
-            {
-                Speed = MinSpeed;
-                return;
-            }
-
-            Speed -= impact;
-        }
-
         public void DealDamage(Entity entity)
         {
-            ((Enemy)entity).TakeDamage(Damage);
+            ((Enemy)entity).TakeDamage(Damage * 1000);
         }
 
         public void TakeDamage(int damage)
@@ -169,7 +156,6 @@ namespace GameProject.Entities
                 return;
             }
             Health -= damage;
-            GetSlowdown(1);
         }
     }
 }
