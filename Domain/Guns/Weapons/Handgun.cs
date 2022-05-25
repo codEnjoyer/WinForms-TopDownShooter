@@ -1,6 +1,4 @@
-﻿using System.Data.Common;
-
-namespace GameProject.Domain.Weapons
+﻿namespace GameProject.Domain.Weapons
 {
     internal class Handgun : Weapon
     {

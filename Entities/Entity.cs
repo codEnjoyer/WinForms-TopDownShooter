@@ -5,17 +5,12 @@ using GameProject.Physics;
 
 namespace GameProject.Entities
 {
-    abstract class Entity
+    internal abstract class Entity
     {
         public Image Image { get; set; }
         public Rectangle Hitbox { get; set; }
         public PictureBox PictureBox { get; set; }
-        public int MinHealth { get; set; }
-        public double Health { get; set; }
-        public double MaxHealth { get; set; }
         public int MinSpeed { get; set; }
-        //public int MaxSpeed { get; set; }
-        //public int MaxDamage { get; set; }
         public Rectangle HealthBar { get; set; }
 
         protected Entity(Vector location, Image image)
@@ -31,11 +26,6 @@ namespace GameProject.Entities
             };
 
             MinSpeed = 1;
-        }
-
-        internal float GetHpPercent()
-        {
-            return (float)(Health / MaxHealth);
         }
     }
 }

@@ -50,15 +50,19 @@
     <Compile Include="Domain\Controller.cs" />
     <Compile Include="Domain\Game.cs" />
     <Compile Include="Domain\GameStage.cs" />
+    <Compile Include="Domain\Guns\Bullets\HandgunBullet.cs" />
+    <Compile Include="Domain\Guns\Bullets\RifleBullet.cs" />
+    <Compile Include="Domain\Guns\Bullets\ShotgunBullet.cs" />
     <Compile Include="Domain\KillManager.cs" />
     <Compile Include="Domain\Shop.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Domain\SpawnManager.cs" />
-    <Compile Include="Domain\Weapons\Handgun.cs" />
-    <Compile Include="Domain\Weapons\RifleGun.cs" />
-    <Compile Include="Domain\Weapons\Shotgun.cs" />
-    <Compile Include="Domain\Weapons\Weapon.cs" />
+    <Compile Include="Domain\Guns\Bullets\Bullet.cs" />
+    <Compile Include="Domain\Guns\Weapons\Handgun.cs" />
+    <Compile Include="Domain\Guns\Weapons\RifleGun.cs" />
+    <Compile Include="Domain\Guns\Weapons\Shotgun.cs" />
+    <Compile Include="Domain\Guns\Weapons\Weapon.cs" />
     <Compile Include="Entities\Boosters\BoosterTypes.cs" />
     <Compile Include="Entities\Boosters\DamageBooster.cs" />
     <Compile Include="Entities\Boosters\HealthBooster.cs" />

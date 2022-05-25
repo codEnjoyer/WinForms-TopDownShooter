@@ -8,7 +8,7 @@ using GameProject.Physics;
 
 namespace GameProject.Interfaces
 {
-    interface IMovable
+    internal interface IMovable
     {
         bool IsMovingUp { get; set; }
         bool IsMovingLeft { get; set; }

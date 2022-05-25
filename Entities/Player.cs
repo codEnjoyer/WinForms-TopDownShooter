@@ -11,6 +11,9 @@ namespace GameProject.Entities
     
     internal class Player : Entity, IMovable, IFightable
     {
+        public int MinHealth { get; set; }
+        public double Health { get; set; }
+        public double MaxHealth { get; set; }
         public int Speed{ get; set; }
         public int BonusSpeed { get; set; }
         public float RotationAngle { get; set; } //in radians
@@ -162,6 +165,10 @@ namespace GameProject.Entities
                 return;
             }
             Health -= damage;
+        }
+        internal float GetHpPercent()
+        {
+            return (float)(Health / MaxHealth);
         }
     }
 }

@@ -9,6 +9,9 @@ namespace GameProject.Entities
 {
     abstract class Enemy : Entity, IFightable
     {
+        public int MinHealth { get; set; }
+        public double Health { get; set; }
+        public double MaxHealth { get; set; }
         public float RotationAngle { get; set; }
         public int Speed { get; set; }
         public int BonusSpeed { get; set; }
@@ -92,6 +95,10 @@ namespace GameProject.Entities
                 return;
             }
             Health -= damage;
+        }
+        internal float GetHpPercent()
+        {
+            return (float)(Health / MaxHealth);
         }
     }
 }
