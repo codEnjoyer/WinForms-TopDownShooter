@@ -61,7 +61,7 @@ namespace GameProject.Domain
                     switch (boosterTypeRemainingTime.Key)
                     {
                         case BoosterTypes.DamageBoost:
-                            Game.Player.Damage -= Game.Player.BonusDamage;
+                            Game.Player.Weapon.Damage -= Game.Player.BonusDamage;
                             Game.Player.BonusDamage = 0;
                             break;
 

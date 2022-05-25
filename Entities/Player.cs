@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using GameProject.Domain;
+using GameProject.Domain.Weapons;
 using GameProject.Interfaces;
 using GameProject.Physics;
 using GameProject.Properties;
@@ -17,9 +18,9 @@ namespace GameProject.Entities
         public bool IsMovingLeft { get; set; }
         public bool IsMovingDown { get; set; }
         public bool IsMovingRight { get; set; }
-        public int Damage { get; set; }
         public int BonusDamage { get; set; }
         public Dictionary<BoosterTypes, int> ActiveBoosters { get; set; }
+        public Weapon Weapon { get; set; }
 
         internal Player(Vector location) : base(location, Resources.HeroNormal)
         {
@@ -27,7 +28,7 @@ namespace GameProject.Entities
             
             Speed = 5;
 
-            Damage = 10; //TODO: Make weapons
+            Weapon = new Handgun();
 
             MaxHealth = 100 * 1000;
             Health = MaxHealth;
@@ -42,6 +43,7 @@ namespace GameProject.Entities
                 [BoosterTypes.SpeedBoost] = 0
             };
 
+            
         }
 
         public void Move()
@@ -139,7 +141,7 @@ namespace GameProject.Entities
         public void GetDamageBoost(int impact)
         {
             BonusDamage = impact;
-            Damage += BonusDamage;
+            Weapon.Damage += BonusDamage;
         }
         public void GetSpeedBoost(int impact)
         {
@@ -149,7 +151,7 @@ namespace GameProject.Entities
 
         public void DealDamage(Entity entity)
         {
-            ((Enemy)entity).TakeDamage(Damage * 1000);
+            ((Enemy)entity).TakeDamage(Weapon.Damage * 1000);
         }
 
         public void TakeDamage(int damage)

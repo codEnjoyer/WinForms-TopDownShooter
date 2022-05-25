@@ -4,7 +4,6 @@ namespace GameProject.Interfaces
 {
     internal interface IFightable
     {
-        int Damage { get; set; }
         int BonusDamage { get; set; }
         int BonusSpeed { get; set; }
         void DealDamage(Entity entity);

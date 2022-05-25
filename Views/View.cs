@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.SymbolStore;
 using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using GameProject.Domain;
 using GameProject.Entities;
@@ -28,7 +21,7 @@ namespace GameProject
         internal static PictureBox CoinsIcon { get; set; }
         internal static ProgressBar healthTimeBar { get; set; }
         internal static PictureBox healthBarIcon { get; set; }
-        internal static ProgressBar damageTimeBar { get; set; }
+        internal static ProgressBar damageTimeBar { get; set; } //TODO: Move to new UIClass
         internal static PictureBox damageBarIcon { get; set; }
         internal static ProgressBar speedTimeBar { get; set; }
         internal static PictureBox speedBarIcon { get; set; }
