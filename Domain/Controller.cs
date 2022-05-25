@@ -22,7 +22,8 @@ namespace GameProject.Domain
                     Game.Player.IsMovingRight = isActive;
                     break;
                 case Keys.M:
-                    Game.ChangeStage(Game.Stage == GameStage.InShop ? GameStage.Battle : GameStage.InShop);
+                    if(Game.Stage == GameStage.Battle)
+                        Game.ChangeStage(GameStage.InShop);
                     break;
 
                 case Keys.Escape:

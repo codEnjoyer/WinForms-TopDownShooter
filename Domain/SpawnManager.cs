@@ -36,6 +36,16 @@ namespace GameProject.Domain
             boosterSpawner.Start();
         }
 
+        internal void StopTimers()
+        {
+            enemySpawner.Stop();
+            boosterSpawner.Stop();
+        }
+        internal void StartTimers()
+        {
+            enemySpawner.Start();
+            boosterSpawner.Start();
+        }
         private static void SpawnEnemy(EnemyTypes enemyType, Vector location)
         {
             if (!CanSpawnEnemy()) return;

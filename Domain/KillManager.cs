@@ -39,5 +39,8 @@ namespace GameProject.Domain
                     Game.ChangeStage(GameStage.Finished);
             }
         }
+
+        internal void StopTimer() => killTimer.Stop();
+        internal void StartTimer() => killTimer.Start();
     }
 }

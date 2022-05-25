@@ -32,6 +32,7 @@ namespace GameProject
         internal static PictureBox damageBarIcon { get; set; }
         internal static ProgressBar speedTimeBar { get; set; }
         internal static PictureBox speedBarIcon { get; set; }
+        internal static Shop Shop { get; set; }
 
 
         internal static void UpdateTextures(Graphics graphics, Form form)
@@ -43,6 +44,8 @@ namespace GameProject
                 GoFullscreen(true);
                 ShowUserInterface();
                 InitializeUserInterface();
+                Shop = new Shop(Form);
+                Form.Controls.Add(Shop);
             }
 
             var gameStage = Game.Stage;
@@ -50,6 +53,14 @@ namespace GameProject
             switch (gameStage)
             {
                 case GameStage.Battle:
+                    if (Form.Controls.Contains(Shop))
+                    {
+                        Shop.Close();
+                        Form.Controls.Remove(Shop);
+                        Game.Resume();
+                    }
+                        
+
                     UpdateCamera(graphics);
 
                     //graphics.DrawRectangle(new Pen(Color.Red), Game.GameZone); //GameZone hitbox
@@ -63,7 +74,9 @@ namespace GameProject
                     break;
 
                 case GameStage.InShop:
-                    ShowShop();
+                    Game.Pause();
+                    Form.Controls.Add(Shop);
+                    Shop.Open();
                     break;
 
                 case GameStage.Finished:
@@ -342,6 +355,7 @@ namespace GameProject
                 Size = new Size(150, 30),
                 Minimum = 0,
                 Maximum = 10 * 1000,
+                MarqueeAnimationSpeed = 5
             };
             Form.Controls.Add(speedTimeBar);
 
@@ -378,7 +392,7 @@ namespace GameProject
                 Location = new Point(damageTimeBar.Left, damageTimeBar.Top - 40),
                 Size = new Size(150, 30),
                 Minimum = 0,
-                Maximum = 5 * 1000,
+                Maximum = 5 * 1000
             };
             healthTimeBar.SetState(2);
             Form.Controls.Add(healthTimeBar);
@@ -405,11 +419,6 @@ namespace GameProject
                 testLabel.Text = "Camera offset: " + Offset + "\nPlayer location: " + Game.Player.Hitbox.Location;
             };
             Initialized = true;
-        }
-
-        private static void ShowShop()
-        {
-            Form.Controls.Add(new Shop(Form));
         }
     }
 }

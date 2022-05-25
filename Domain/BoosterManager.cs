@@ -19,6 +19,14 @@ namespace GameProject.Domain
             boosterTimer.Start();
         }
 
+        internal void StopTimer()
+        {
+            boosterTimer.Stop();
+        }
+        internal void StartTimer()
+        {
+            boosterTimer.Start();
+        }
         private static void CheckBoostersRemainingTime()
         {
             var activeBoosters = new Dictionary<BoosterTypes, int>(Game.Player.ActiveBoosters);

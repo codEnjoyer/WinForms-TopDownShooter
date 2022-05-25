@@ -55,6 +55,19 @@ namespace GameProject.Domain
             Stage = stage;
             StageChanged?.Invoke(stage);
         }
+
+        internal static void Pause()
+        {
+            SpawnManager.StopTimers();
+            KillManager.StopTimer();
+            BoosterManager.StopTimer();
+        }
+        internal static void Resume()
+        {
+            SpawnManager.StartTimers();
+            KillManager.StartTimer();
+            BoosterManager.StartTimer();
+        }
         internal static bool InBounds(Vector location)
         {
             return GameZone.Contains(location.ToPoint());
