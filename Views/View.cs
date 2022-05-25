@@ -176,13 +176,16 @@ namespace GameProject
         private static void UpdateBoostersUserInterface()
         {
             if (Game.Player.ActiveBoosters[BoosterTypes.HealthBoost] != 0)
-                healthTimeBar.Value = (int)(Game.Player.ActiveBoosters[BoosterTypes.HealthBoost] / (double)(10 * 1000) * 10 * 1000);
+                healthTimeBar.Value = (int)(Game.Player.ActiveBoosters[BoosterTypes.HealthBoost] /
+                    double.Parse(Resources.HealthBoosterTime) * healthTimeBar.Maximum);
 
             if (Game.Player.ActiveBoosters[BoosterTypes.DamageBoost] != 0)
-                damageTimeBar.Value = (int)(Game.Player.ActiveBoosters[BoosterTypes.DamageBoost] / (double)(10 * 1000) * 10 * 1000);
+                damageTimeBar.Value = (int)(Game.Player.ActiveBoosters[BoosterTypes.DamageBoost] /
+                    double.Parse(Resources.DamageBoosterTime) * damageTimeBar.Maximum);
 
             if (Game.Player.ActiveBoosters[BoosterTypes.SpeedBoost] != 0)
-                speedTimeBar.Value =(int)(Game.Player.ActiveBoosters[BoosterTypes.SpeedBoost] / (double)(10 * 1000) * 10 * 1000);
+                speedTimeBar.Value =(int)(Game.Player.ActiveBoosters[BoosterTypes.SpeedBoost] /
+                    double.Parse(Resources.SpeedBoosterTime) * speedTimeBar.Maximum);
         }
 
         private static void UpdateEnemiesBoostersVisual(Graphics graphics)
@@ -354,8 +357,7 @@ namespace GameProject
                 Location = new Point(Form.Left + 30, Form.Bottom - 70),
                 Size = new Size(150, 30),
                 Minimum = 0,
-                Maximum = 10 * 1000,
-                MarqueeAnimationSpeed = 5
+                Maximum = int.Parse(Resources.SpeedBoosterTime)
             };
             Form.Controls.Add(speedTimeBar);
 
@@ -373,7 +375,7 @@ namespace GameProject
                 Location = new Point(speedTimeBar.Left, speedTimeBar.Top - 40),
                 Size = new Size(150, 30),
                 Minimum = 0,
-                Maximum = 10 * 1000,
+                Maximum = int.Parse(Resources.DamageBoosterTime),
             };
             damageTimeBar.SetState(3);
             Form.Controls.Add(damageTimeBar);
@@ -392,7 +394,7 @@ namespace GameProject
                 Location = new Point(damageTimeBar.Left, damageTimeBar.Top - 40),
                 Size = new Size(150, 30),
                 Minimum = 0,
-                Maximum = 5 * 1000
+                Maximum = int.Parse(Resources.HealthBoosterTime)
             };
             healthTimeBar.SetState(2);
             Form.Controls.Add(healthTimeBar);

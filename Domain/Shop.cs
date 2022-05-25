@@ -30,6 +30,8 @@ namespace GameProject.Domain
                 Location = new Point(Location.X + Size.Width - 70, Location.Y + 20),
                 Size = new Size(50, 50),
                 Text = "Exit",
+                Font = new Font(FontFamily.GenericSansSerif,  14),
+                
             };
             exitButton.Click += (s,a) => Game.ChangeStage(GameStage.Battle);
             Form.Controls.Add(exitButton);

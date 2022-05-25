@@ -8,8 +8,8 @@ namespace GameProject.Entities
         internal HealthBooster(Vector location) : base(location, Resources.HealthBoost)
         {
             Type = BoosterTypes.HealthBoost;
-            Impact = 25;
-            Time = 5 * 1000;
+            Impact = int.Parse(Resources.HealthBoosterImpact);
+            Time = int.Parse(Resources.HealthBoosterTime);
         }
     }
 }

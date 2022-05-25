@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Windows.Forms;
 using GameProject.Entities;
+using GameProject.Properties;
 
 namespace GameProject.Domain
 {
@@ -19,14 +20,8 @@ namespace GameProject.Domain
             boosterTimer.Start();
         }
 
-        internal void StopTimer()
-        {
-            boosterTimer.Stop();
-        }
-        internal void StartTimer()
-        {
-            boosterTimer.Start();
-        }
+        internal void StopTimer() => boosterTimer.Stop();
+        internal void StartTimer() => boosterTimer.Start();
         private static void CheckBoostersRemainingTime()
         {
             var activeBoosters = new Dictionary<BoosterTypes, int>(Game.Player.ActiveBoosters);
@@ -45,17 +40,17 @@ namespace GameProject.Domain
                 switch (boosterTypeRemainingTime.Key)
                 {
                     case BoosterTypes.HealthBoost:
-                        Game.Player.GetHealthBoost((double)(10 * 1000 * 2)/ boosterTimer.Interval);
+                        Game.Player.GetHealthBoost(int.Parse(Resources.HealthBoosterImpact) * 2);
                         break;
 
                     case BoosterTypes.DamageBoost:
-                        if (boosterTypeRemainingTime.Value == 10 * 1000 && Game.Player.BonusDamage == 0) //Link to existing boosters impact?
-                            Game.Player.GetDamageBoost(15); //boosters.cs impacts
+                        if (Game.Player.BonusDamage == 0)
+                            Game.Player.GetDamageBoost(int.Parse(Resources.DamageBoosterImpact));
                         break;
 
                     case BoosterTypes.SpeedBoost:
-                        if (boosterTypeRemainingTime.Value == 10 * 1000 && Game.Player.BonusSpeed == 0)
-                            Game.Player.GetSpeedBoost(5);
+                        if (Game.Player.BonusSpeed == 0)
+                            Game.Player.GetSpeedBoost(int.Parse(Resources.SpeedBoosterImpact));
                         break;
                 }
 
@@ -91,17 +86,17 @@ namespace GameProject.Domain
                     switch (boosterTypeRemainingTime.Key)
                     {
                         case BoosterTypes.HealthBoost:
-                            enemy.GetHealthBoost((double)(10 * 1000) / boosterTimer.Interval);
+                            enemy.GetHealthBoost(int.Parse(Resources.HealthBoosterImpact));
                             break;
 
                         case BoosterTypes.DamageBoost:
-                            if (boosterTypeRemainingTime.Value == 10 * 1000 && enemy.BonusDamage == 0) //Link to existing boosters impact? +bonus damage field
-                                enemy.GetDamageBoost(15); //boosters.cs impacts
+                            if (enemy.BonusDamage == 0)
+                                enemy.GetDamageBoost(int.Parse(Resources.DamageBoosterImpact));
                             break;
 
                         case BoosterTypes.SpeedBoost:
-                            if (boosterTypeRemainingTime.Value == 10 * 1000 && enemy.BonusSpeed == 0)
-                                enemy.GetSpeedBoost(5);
+                            if (enemy.BonusSpeed == 0)
+                                enemy.GetSpeedBoost(int.Parse(Resources.SpeedBoosterImpact));
                             break;
                     }
 
@@ -141,11 +136,10 @@ namespace GameProject.Domain
         {
             foreach (var booster in spawnedBoosters)
             {
-                if (Game.Player.Hitbox.IntersectsWith(booster.Hitbox))
-                {
-                    Game.Player.GetBoost(booster);
-                    Game.SpawnedBoosters.Remove(booster);
-                }
+                if (!Game.Player.Hitbox.IntersectsWith(booster.Hitbox)) continue;
+
+                Game.Player.GetBoost(booster);
+                Game.SpawnedBoosters.Remove(booster);
             }
         }
 
@@ -155,11 +149,10 @@ namespace GameProject.Domain
             {
                 foreach (var enemy in spawnedEnemies)
                 {
-                    if (enemy.Hitbox.IntersectsWith(booster.Hitbox))
-                    {
-                        enemy.GetBoost(booster);
-                        Game.SpawnedBoosters.Remove(booster);
-                    }
+                    if (!enemy.Hitbox.IntersectsWith(booster.Hitbox)) continue;
+
+                    enemy.GetBoost(booster);
+                    Game.SpawnedBoosters.Remove(booster);
                 }
             }
         }

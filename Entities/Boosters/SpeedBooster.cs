@@ -8,8 +8,8 @@ namespace GameProject.Entities
         internal SpeedBooster(Vector location) : base(location, Resources.SpeedBoost)
         {
             Type = BoosterTypes.SpeedBoost;
-            Impact = 5;
-            Time = 10 * 1000;
+            Impact = int.Parse(Resources.SpeedBoosterImpact);
+            Time = int.Parse(Resources.SpeedBoosterTime);
         }
     }
 }

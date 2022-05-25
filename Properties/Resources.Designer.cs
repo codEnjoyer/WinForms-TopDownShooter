@@ -81,12 +81,48 @@ namespace GameProject.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на 15.
+        /// </summary>
+        internal static string DamageBoosterImpact {
+            get {
+                return ResourceManager.GetString("DamageBoosterImpact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на 10000.
+        /// </summary>
+        internal static string DamageBoosterTime {
+            get {
+                return ResourceManager.GetString("DamageBoosterTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap HealthBoost {
             get {
                 object obj = ResourceManager.GetObject("HealthBoost", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на 250.
+        /// </summary>
+        internal static string HealthBoosterImpact {
+            get {
+                return ResourceManager.GetString("HealthBoosterImpact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на 5000.
+        /// </summary>
+        internal static string HealthBoosterTime {
+            get {
+                return ResourceManager.GetString("HealthBoosterTime", resourceCulture);
             }
         }
         
@@ -157,6 +193,24 @@ namespace GameProject.Properties {
             get {
                 object obj = ResourceManager.GetObject("SpeedBoost", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на 5.
+        /// </summary>
+        internal static string SpeedBoosterImpact {
+            get {
+                return ResourceManager.GetString("SpeedBoosterImpact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на 10000.
+        /// </summary>
+        internal static string SpeedBoosterTime {
+            get {
+                return ResourceManager.GetString("SpeedBoosterTime", resourceCulture);
             }
         }
     }

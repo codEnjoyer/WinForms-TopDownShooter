@@ -55,6 +55,8 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Domain\SpawnManager.cs" />
+    <Compile Include="Domain\Weapons\AttackTypes.cs" />
+    <Compile Include="Domain\Weapons\Weapon.cs" />
     <Compile Include="Entities\Boosters\BoosterTypes.cs" />
     <Compile Include="Entities\Boosters\DamageBooster.cs" />
     <Compile Include="Entities\Boosters\HealthBooster.cs" />

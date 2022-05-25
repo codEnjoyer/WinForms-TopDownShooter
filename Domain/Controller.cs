@@ -1,5 +1,6 @@
 ﻿using System.Windows.Forms;
 using GameProject.Physics;
+using GameProject.Properties;
 
 namespace GameProject.Domain
 {
@@ -49,10 +50,10 @@ namespace GameProject.Domain
             switch (pressedButton)
             {
                 case MouseButtons.Left:
-                    Game.Player.ActiveBoosters[BoosterTypes.SpeedBoost] = 10000;
+                    Game.Player.ActiveBoosters[BoosterTypes.SpeedBoost] = int.Parse(Resources.SpeedBoosterTime);
                     break;
                 case MouseButtons.Right:
-                    Game.Player.GetHealthBoost(50 * 1000);
+                    Game.Player.ActiveBoosters[BoosterTypes.HealthBoost] = int.Parse(Resources.HealthBoosterTime);
                     break;
             }
         }

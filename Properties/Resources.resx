@@ -124,8 +124,20 @@
   <data name="DamageBoost" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\sprites\damageboost.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="DamageBoosterImpact" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="DamageBoosterTime" xml:space="preserve">
+    <value>10000</value>
+  </data>
   <data name="HealthBoost" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\sprites\healthboost.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="HealthBoosterImpact" xml:space="preserve">
+    <value>250</value>
+  </data>
+  <data name="HealthBoosterTime" xml:space="preserve">
+    <value>5000</value>
   </data>
   <data name="HeavyZombie" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\sprites\heavyzombie.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -147,5 +159,11 @@
   </data>
   <data name="SpeedBoost" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\sprites\speedboost.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SpeedBoosterImpact" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="SpeedBoosterTime" xml:space="preserve">
+    <value>10000</value>
   </data>
 </root>

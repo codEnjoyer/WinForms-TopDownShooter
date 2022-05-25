@@ -1,4 +1,5 @@
-﻿using GameProject.Physics;
+﻿using System;
+using GameProject.Physics;
 using GameProject.Properties;
 
 namespace GameProject.Entities
@@ -8,8 +9,8 @@ namespace GameProject.Entities
         internal DamageBooster(Vector location) : base(location, Resources.DamageBoost)
         {
             Type = BoosterTypes.DamageBoost;
-            Impact = 15;
-            Time = 10 * 1000;
+            Impact = int.Parse(Resources.DamageBoosterImpact);
+            Time = int.Parse(Resources.DamageBoosterTime);
         }
     }
 }
