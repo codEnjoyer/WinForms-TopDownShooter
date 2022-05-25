@@ -2,7 +2,7 @@
 {
     internal abstract class Weapon
     {
-        internal bool IsAttacking { get; set; }
+        internal bool IsShooting { get; set; }
         internal bool IsReloading { get; set; }
         internal int Recoil { get; set; }
         internal int Ammo { get; set; }
@@ -13,9 +13,13 @@
 
         }
 
-        internal void Shoot()
+        internal virtual void Shoot(float angle)
         {
-            Ammo--;
+
+        }
+
+        internal void Reload()
+        {
 
         }
     }

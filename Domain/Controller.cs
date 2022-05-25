@@ -26,6 +26,9 @@ namespace GameProject.Domain
                     if(Game.Stage == GameStage.Battle)
                         Game.ChangeStage(GameStage.InShop);
                     break;
+                case Keys.F:
+                    Game.Player.IsShooting = isActive;
+                    break;
 
                 case Keys.Escape:
                     Application.Exit();

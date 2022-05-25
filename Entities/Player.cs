@@ -21,6 +21,7 @@ namespace GameProject.Entities
         public bool IsMovingLeft { get; set; }
         public bool IsMovingDown { get; set; }
         public bool IsMovingRight { get; set; }
+        internal bool IsShooting { get; set; }
         public int BonusDamage { get; set; }
         public Dictionary<BoosterTypes, int> ActiveBoosters { get; set; }
         public Weapon Weapon { get; set; }
@@ -152,6 +153,21 @@ namespace GameProject.Entities
             Speed += BonusSpeed;
         }
 
+        internal void Shoot()
+        {
+            if (IsShooting && Weapon.Recoil == 0)
+            {
+                if (Weapon.Ammo != 0)
+                {
+                    Weapon.Shoot(RotationAngle);
+                }
+                else
+                {
+                    Weapon.Reload();
+                }
+            }
+            
+        }
         public void DealDamage(Entity entity)
         {
             ((Enemy)entity).TakeDamage(Weapon.Damage * 1000);
@@ -169,6 +185,13 @@ namespace GameProject.Entities
         internal float GetHpPercent()
         {
             return (float)(Health / MaxHealth);
+        }
+
+        internal Vector GetHitboxCenter()
+        {
+            var x = Hitbox.X + Hitbox.Width / 2;
+            var y = Hitbox.Y + Hitbox.Height / 2;
+            return new Vector(x, y);
         }
     }
 }

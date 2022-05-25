@@ -64,6 +64,8 @@ namespace GameProject
                     UpdateMovement(graphics);
                     UpdateHealth(graphics);
                     UpdateRotation(graphics);
+                    UpdateShooting(graphics);
+                    UpdateBullets(graphics);
                     break;
 
                 case GameStage.InShop:
@@ -77,6 +79,25 @@ namespace GameProject
                     MainForm.MainTimer.Stop();
                     return;
             }
+        }
+
+        private static void UpdateBullets(Graphics graphics)
+        {
+            if (Game.SpawnedBullets.Count == 0) return;
+            foreach (var bullet in Game.SpawnedBullets)
+            {
+                bullet.Move();
+                bullet.PictureBox.Image?.Dispose();
+                var bulletBitmap = new Bitmap(bullet.Image, bullet.PictureBox.Size);
+                RotateBitmap(bulletBitmap, bullet.Angle, graphics, bullet.Hitbox.Location);
+            }
+        }
+
+        private static void UpdateShooting(Graphics graphics)
+        {
+            if(Game.Player.Weapon.Recoil != 0)
+                Game.Player.Weapon.Recoil -= MainForm.MainTimer.Interval;
+            Game.Player.Shoot();
         }
         private static void UpdateCamera(Graphics graphics)
         {
