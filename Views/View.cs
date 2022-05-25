@@ -23,7 +23,8 @@ namespace GameProject
         internal static Form Form { get; set; }
         internal static bool IsFullscreen { get; set; }
         internal static Label testLabel;
-        internal static Label ScoresLabel { get; set; }
+        internal static Label CoinsLabel { get; set; }
+        internal static PictureBox CoinsIcon { get; set; }
         internal static ProgressBar healthTimeBar { get; set; }
         internal static PictureBox healthBarIcon { get; set; }
         internal static ProgressBar damageTimeBar { get; set; }
@@ -266,7 +267,7 @@ namespace GameProject
 
         private static void ShowFinishWindow()
         {
-            Form.Controls.Remove(ScoresLabel);
+            Form.Controls.Remove(CoinsLabel);
 
             var restart = new Button
             {
@@ -278,7 +279,7 @@ namespace GameProject
 
             var result = new Label()
             {
-                Text = "Your result: " + Game.Scores,
+                Text = "Your result: " + Game.Coins,
                 Location = new Point(restart.Left + restart.Width / 4 + 10, restart.Top - 30),
                 Size = new Size(restart.Width / 2, 20),
                 Font = new Font(FontFamily.GenericMonospace, 18, FontStyle.Bold)
@@ -316,13 +317,21 @@ namespace GameProject
             };
             Form.Controls.Add(testLabel);
 
-            ScoresLabel = new Label
+            CoinsIcon = new PictureBox
+            {
+                Location = new Point(Form.Right - Resources.Coin.Width - 50, 40),
+                Size = new Size(Resources.Coin.Width, Resources.Coin.Height),
+                Image = Resources.Coin
+            };
+            Form.Controls.Add(CoinsIcon);
+
+            CoinsLabel = new Label
             {
                 Location = new Point(Form.Right - 200, 50),
-                Size = new Size(200, 20),
-                Font = new Font(FontFamily.GenericMonospace, 18, FontStyle.Bold)
+                Size = new Size(40, 50),
+                Font = new Font(FontFamily.GenericMonospace, 24, FontStyle.Bold)
             };
-            Form.Controls.Add(ScoresLabel);
+            Form.Controls.Add(CoinsLabel);
 
             speedTimeBar = new ProgressBar
             {
@@ -384,7 +393,7 @@ namespace GameProject
             Form.MouseMove += (s, e) =>
             {
                 testLabel.Text = "Camera offset: " + Offset + "\nPlayer location: " + Game.Player.Hitbox.Location;
-                ScoresLabel.Text = "Score:" + Game.Scores;
+                CoinsLabel.Text = Game.Coins.ToString();
             };
             Form.KeyDown += (s, e) =>
             {

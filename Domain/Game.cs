@@ -21,7 +21,7 @@ namespace GameProject.Domain
         internal static BoosterManager BoosterManager;
         internal static List<Enemy> SpawnedEnemies { get; set; }
         internal static List<Booster> SpawnedBoosters { get; set; }
-        internal static int Scores { get; set; }
+        internal static int Coins { get; set; }
 
         internal Game(Player player, Rectangle gameZone, Form form)
         {
