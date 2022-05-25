@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using GameProject.Domain;
 using GameProject.Entities;
+using GameProject.Extensions;
 using GameProject.Physics;
 using GameProject.Properties;
 
@@ -60,6 +61,7 @@ namespace GameProject
                     UpdateHealth(graphics);
                     UpdateRotation(graphics);
                     break;
+
                 case GameStage.InShop:
                     ShowShop();
                     break;
@@ -327,9 +329,10 @@ namespace GameProject
 
             CoinsLabel = new Label
             {
-                Location = new Point(Form.Right - 200, 50),
-                Size = new Size(40, 50),
-                Font = new Font(FontFamily.GenericMonospace, 24, FontStyle.Bold)
+                Text = Game.Coins.ToString(),
+                Location = new Point(CoinsIcon.Left - 100, CoinsIcon.Top + CoinsIcon.Height / 10),
+                Size = new Size(80, CoinsIcon.Height),
+                Font = new Font(FontFamily.GenericMonospace, 26, FontStyle.Bold)
             };
             Form.Controls.Add(CoinsLabel);
 
@@ -358,6 +361,7 @@ namespace GameProject
                 Minimum = 0,
                 Maximum = 10 * 1000,
             };
+            damageTimeBar.SetState(3);
             Form.Controls.Add(damageTimeBar);
 
             damageBarIcon = new PictureBox
@@ -376,6 +380,7 @@ namespace GameProject
                 Minimum = 0,
                 Maximum = 5 * 1000,
             };
+            healthTimeBar.SetState(2);
             Form.Controls.Add(healthTimeBar);
 
             healthBarIcon = new PictureBox
@@ -386,6 +391,7 @@ namespace GameProject
                 SizeMode = PictureBoxSizeMode.StretchImage
             };
             Form.Controls.Add(healthBarIcon);
+
         }
 
         private static void InitializeUserInterface()
@@ -393,7 +399,6 @@ namespace GameProject
             Form.MouseMove += (s, e) =>
             {
                 testLabel.Text = "Camera offset: " + Offset + "\nPlayer location: " + Game.Player.Hitbox.Location;
-                CoinsLabel.Text = Game.Coins.ToString();
             };
             Form.KeyDown += (s, e) =>
             {

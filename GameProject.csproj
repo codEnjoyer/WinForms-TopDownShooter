@@ -67,6 +67,7 @@
     <Compile Include="Entities\Player.cs" />
     <Compile Include="Entities\Enemies\SmallZombie.cs" />
     <Compile Include="Entities\Boosters\SpeedBooster.cs" />
+    <Compile Include="Extensions\ProgressBar1.cs" />
     <Compile Include="Interfaces\IMovable.cs" />
     <Compile Include="Interfaces\IFightable.cs" />
     <Compile Include="MainForm.cs">
