@@ -10,6 +10,7 @@ namespace GameProject.Domain.Weapons
     {
         internal Handgun()
         {
+            Type = WeaponTypes.Handgun;
             MaxAmmo = int.Parse(Resources.HandgunAmmo);
             Ammo = MaxAmmo;
             Damage = 20;

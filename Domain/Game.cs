@@ -52,7 +52,6 @@ namespace GameProject.Domain
             BoosterManager = new BoosterManager();
 
             ChangeStage(GameStage.Battle);
-            StageChanged += CheckGameStage;
         }
 
         internal static void ChangeStage(GameStage stage)
@@ -92,13 +91,11 @@ namespace GameProject.Domain
             return hitbox.Location.Y > CameraZone.Top && hitbox.Location.Y < CameraZone.Bottom;
         }
 
-        private static void CheckGameStage(GameStage gameStage)
+        internal static void UpdateAvailableWeapons()
         {
-            switch (gameStage)
+            if (!AvailableWeapons.Contains(Player.Weapon))
             {
-                case GameStage.Finished:
-                    
-                    break;
+                AvailableWeapons.Add(Player.Weapon);
             }
         }
     }

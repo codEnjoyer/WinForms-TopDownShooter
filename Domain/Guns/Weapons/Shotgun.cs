@@ -9,6 +9,7 @@ namespace GameProject.Domain.Weapons
     {
         internal Shotgun()
         {
+            Type = WeaponTypes.Shotgun;
             MaxAmmo = int.Parse(Resources.ShotgunAmmo);
             Ammo = MaxAmmo;
             Damage = 30;
@@ -28,8 +29,10 @@ namespace GameProject.Domain.Weapons
 
                 var bullet = new ShotgunBullet(bulletLocation, angle);
                 Game.SpawnedBullets.Add(bullet);
-                Ammo--;
             }
+
+            Recoil = MainForm.MainTimer.Interval * 50;
+            Ammo--;
         }
 
         internal override void Reload()

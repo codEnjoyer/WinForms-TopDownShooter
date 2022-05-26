@@ -72,6 +72,7 @@ namespace GameProject
 
                 case GameStage.InShop:
                     Game.Pause();
+                    Game.UpdateAvailableWeapons();
                     Form.Controls.Add(Shop);
                     Shop.Open();
                     break;

@@ -53,6 +53,7 @@
     <Compile Include="Domain\Guns\Bullets\HandgunBullet.cs" />
     <Compile Include="Domain\Guns\Bullets\RifleBullet.cs" />
     <Compile Include="Domain\Guns\Bullets\ShotgunBullet.cs" />
+    <Compile Include="Domain\Guns\Weapons\WeaponTypes.cs" />
     <Compile Include="Domain\KillManager.cs" />
     <Compile Include="Domain\Shop.cs">
       <SubType>Component</SubType>
