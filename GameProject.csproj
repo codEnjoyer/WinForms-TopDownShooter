@@ -60,7 +60,7 @@
     <Compile Include="Domain\SpawnManager.cs" />
     <Compile Include="Domain\Guns\Bullets\Bullet.cs" />
     <Compile Include="Domain\Guns\Weapons\Handgun.cs" />
-    <Compile Include="Domain\Guns\Weapons\RifleGun.cs" />
+    <Compile Include="Domain\Guns\Weapons\Rifle.cs" />
     <Compile Include="Domain\Guns\Weapons\Shotgun.cs" />
     <Compile Include="Domain\Guns\Weapons\Weapon.cs" />
     <Compile Include="Entities\Boosters\BoosterTypes.cs" />

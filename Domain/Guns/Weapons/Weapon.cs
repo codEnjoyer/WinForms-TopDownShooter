@@ -6,6 +6,7 @@
         internal bool IsReloading { get; set; }
         internal int Recoil { get; set; }
         internal int Ammo { get; set; }
+        internal int MaxAmmo { get; set; }
         internal int Damage { get; set; }
 
         internal Weapon()

@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 using GameProject.Domain;
+using GameProject.Domain.Weapons;
 using GameProject.Entities;
 using GameProject.Extensions;
 using GameProject.Physics;
@@ -102,7 +103,7 @@ namespace GameProject
                 if (Game.Player.Weapon.IsReloading && Game.Player.Weapon.Recoil == 0)
                 {
                     Game.Player.Weapon.IsReloading = false;
-                    Game.Player.Weapon.Ammo = int.Parse(Resources.HandgunAmmo);
+                    Game.Player.Weapon.Ammo = Game.Player.Weapon.MaxAmmo;
                 }
             }
 

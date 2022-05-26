@@ -23,6 +23,7 @@ namespace GameProject.Domain
         internal static List<Enemy> SpawnedEnemies { get; set; }
         internal static List<Booster> SpawnedBoosters { get; set; }
         internal static List<Bullet> SpawnedBullets { get; set; }
+        internal static List<Weapon> AvailableWeapons { get; set; }
         internal static int Coins { get; set; }
 
         internal Game(Player player, Rectangle gameZone, Form form)
@@ -44,6 +45,7 @@ namespace GameProject.Domain
             SpawnedEnemies = new List<Enemy>();
             SpawnedBoosters = new List<Booster>();
             SpawnedBullets = new List<Bullet>();
+            AvailableWeapons = new List<Weapon>();
 
             SpawnManager = new SpawnManager();
             KillManager = new KillManager();

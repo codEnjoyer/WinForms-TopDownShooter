@@ -32,7 +32,8 @@ namespace GameProject.Entities
             
             Speed = 5;
 
-            Weapon = new Handgun();
+            Weapon = new Shotgun();
+            Game.AvailableWeapons.Add(Weapon);
 
             MaxHealth = 100 * 1000;
             Health = MaxHealth;
