@@ -26,8 +26,11 @@ namespace GameProject.Domain
                     if(Game.Stage == GameStage.Battle)
                         Game.ChangeStage(GameStage.InShop);
                     break;
-                case Keys.F:
+                case Keys.Space:
                     Game.Player.IsShooting = isActive;
+                    break;
+                case Keys.C:
+                    Game.Player.ActiveBoosters[BoosterTypes.DamageBoost] = int.Parse(Resources.DamageBoosterTime);
                     break;
 
                 case Keys.Escape:
@@ -39,17 +42,15 @@ namespace GameProject.Domain
             }
         }
 
-        internal static void ControlMouse(MouseEventArgs e)
+        internal static void ControlMouse(MouseEventArgs e, bool isActive)
         {
-
             var cursorLocationOnScreen = new Vector(e.Location.X, e.Location.Y);
-            var pressedButton = e.Button;
-
             var cursorLocationWithOffset = cursorLocationOnScreen + View.Offset;
-            var angleToCursor = Game.Player.AngleToTarget(cursorLocationWithOffset); //in radians
+            var angleToCursor = Game.Player.AngleToTarget(cursorLocationWithOffset);
 
             Game.Player.RotationAngle = angleToCursor;
 
+            var pressedButton = e.Button;
             switch (pressedButton)
             {
                 case MouseButtons.Left:

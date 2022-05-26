@@ -6,9 +6,9 @@ namespace GameProject.Domain.Guns.Bullets
 {
     internal class HandgunBullet : Bullet
     {
-        internal HandgunBullet(Vector location, float angle) : base(location, Resources.Coin, angle)
+        internal HandgunBullet(Vector location, float angle) : base(location, Resources.HandgunBullet, angle)
         {
-            Speed = 15;
+            Speed = 25;
         }
     }
 }

@@ -16,18 +16,18 @@ namespace GameProject
         public MainForm()
         {
             InitializeComponent();
-
-            InitGame();
-
             MainTimer = new Timer();
             MainTimer.Interval = 15;
             MainTimer.Tick += (sender, args) => Invalidate();
             MainTimer.Start();
+            InitGame();
 
             KeyDown += MainForm_KeyDown;
             KeyUp += MainForm_KeyUp;
             MouseMove += MainForm_MouseMove;
-            MouseClick += MainForm_MouseClick;
+            //MouseClick += MainForm_MouseClick;
+            MouseDown += MainForm_MouseDown;
+            MouseUp += MainForm_MouseUp;
         }
 
         private void InitGame()
@@ -57,13 +57,21 @@ namespace GameProject
 
         private static void MainForm_MouseMove(object sender, MouseEventArgs e)
         {
-            Controller.ControlMouse(e);
+            Controller.ControlMouse(e, false);
+        }
+        private static void MainForm_MouseDown(object sender, MouseEventArgs e)
+        {
+            Controller.ControlMouse(e, true);
+        }
+        private static void MainForm_MouseUp(object sender, MouseEventArgs e)
+        {
+            Controller.ControlMouse(e, false);
         }
 
-        private static void MainForm_MouseClick(object sender, MouseEventArgs e)
-        {
-            Controller.ControlMouse(e);
-        }
+        //private static void MainForm_MouseClick(object sender, MouseEventArgs e)
+        //{
+        //    Controller.ControlMouse(e);
+        //}
         protected override void OnPaint(PaintEventArgs e)
         {
             View.UpdateTextures(e.Graphics, this);

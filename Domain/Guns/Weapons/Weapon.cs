@@ -15,12 +15,10 @@
 
         internal virtual void Shoot(float angle)
         {
-
         }
 
-        internal void Reload()
+        internal virtual void Reload()
         {
-
         }
     }
 }

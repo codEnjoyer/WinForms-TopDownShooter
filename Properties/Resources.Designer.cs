@@ -63,6 +63,16 @@ namespace GameProject.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Ammo {
+            get {
+                object obj = ResourceManager.GetObject("Ammo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Coin {
             get {
                 object obj = ResourceManager.GetObject("Coin", resourceCulture);
@@ -95,6 +105,25 @@ namespace GameProject.Properties {
         internal static string DamageBoosterTime {
             get {
                 return ResourceManager.GetString("DamageBoosterTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на 7.
+        /// </summary>
+        internal static string HandgunAmmo {
+            get {
+                return ResourceManager.GetString("HandgunAmmo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap HandgunBullet {
+            get {
+                object obj = ResourceManager.GetObject("HandgunBullet", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -173,6 +202,24 @@ namespace GameProject.Properties {
             get {
                 object obj = ResourceManager.GetObject("MediumZombie", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на 30.
+        /// </summary>
+        internal static string RiflegunAmmo {
+            get {
+                return ResourceManager.GetString("RiflegunAmmo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на 5.
+        /// </summary>
+        internal static string ShotgunAmmo {
+            get {
+                return ResourceManager.GetString("ShotgunAmmo", resourceCulture);
             }
         }
         

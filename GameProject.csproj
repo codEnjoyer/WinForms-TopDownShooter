@@ -115,8 +115,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Sprites\Ammo.png" />
     <Content Include="Sprites\Coin.png" />
     <Content Include="Sprites\DamageBoost.png" />
+    <Content Include="Sprites\HandgunBullet.png" />
     <Content Include="Sprites\HealthBoost.png" />
     <Content Include="Sprites\HeavyZombie.png" />
     <Content Include="Sprites\HeroNormal.png" />

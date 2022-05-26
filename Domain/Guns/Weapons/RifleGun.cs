@@ -1,10 +1,12 @@
-﻿namespace GameProject.Domain.Weapons
+﻿using GameProject.Properties;
+
+namespace GameProject.Domain.Weapons
 {
     internal class RifleGun : Weapon
     {
         internal RifleGun()
         {
-            Ammo = 30;
+            Ammo = int.Parse(Resources.RiflegunAmmo);
             Damage = 15;
         }
     }

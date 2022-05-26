@@ -155,13 +155,14 @@ namespace GameProject.Entities
 
         internal void Shoot()
         {
-            if (IsShooting && Weapon.Recoil == 0)
+            if (IsShooting)
             {
-                if (Weapon.Ammo != 0)
+                if (Weapon.Ammo != 0 && Weapon.Recoil == 0)
                 {
                     Weapon.Shoot(RotationAngle);
                 }
-                else
+
+                else if(Weapon.Ammo == 0 && !Weapon.IsReloading)
                 {
                     Weapon.Reload();
                 }

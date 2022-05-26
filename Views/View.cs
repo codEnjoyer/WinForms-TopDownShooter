@@ -17,6 +17,7 @@ namespace GameProject
         internal static Form Form { get; set; }
         internal static bool IsFullscreen { get; set; }
         internal static Label testLabel;
+        internal static Label ammoLabel { get; set; }
         internal static Label CoinsLabel { get; set; }
         internal static PictureBox CoinsIcon { get; set; }
         internal static ProgressBar healthTimeBar { get; set; }
@@ -95,9 +96,19 @@ namespace GameProject
 
         private static void UpdateShooting(Graphics graphics)
         {
-            if(Game.Player.Weapon.Recoil != 0)
+            if (Game.Player.Weapon.Recoil != 0)
+            {
                 Game.Player.Weapon.Recoil -= MainForm.MainTimer.Interval;
+                if (Game.Player.Weapon.IsReloading && Game.Player.Weapon.Recoil == 0)
+                {
+                    Game.Player.Weapon.IsReloading = false;
+                    Game.Player.Weapon.Ammo = int.Parse(Resources.HandgunAmmo);
+                }
+            }
+
             Game.Player.Shoot();
+            ammoLabel.Text = Game.Player.Weapon.Ammo.ToString();
+
         }
         private static void UpdateCamera(Graphics graphics)
         {
@@ -422,6 +433,20 @@ namespace GameProject
             };
             Form.Controls.Add(healthBarIcon);
 
+            var ammoIcon = new PictureBox
+            {
+                Location = new Point(Form.Right - Resources.Ammo.Width - 50, Form.Bottom - Resources.Ammo.Height - 40),
+                Image = Resources.Ammo,
+            };
+            Form.Controls.Add(ammoIcon);
+
+            ammoLabel = new Label
+            {
+                Size = new Size(CoinsLabel.Width, ammoIcon.Height),
+                Location = new Point(ammoIcon.Left - CoinsIcon.Width - 10, ammoIcon.Top),
+                Text = Game.Player.Weapon.Ammo.ToString()
+            };
+            Form.Controls.Add(ammoLabel);
         }
 
         private static void InitializeUserInterface()

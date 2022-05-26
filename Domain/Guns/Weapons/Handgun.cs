@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using GameProject.Domain.Guns.Bullets;
 using GameProject.Physics;
+using GameProject.Properties;
 
 namespace GameProject.Domain.Weapons
 {
@@ -9,7 +10,7 @@ namespace GameProject.Domain.Weapons
     {
         internal Handgun()
         {
-            Ammo = 7;
+            Ammo = int.Parse(Resources.HandgunAmmo);
             Damage = 20;
         }
 
@@ -21,7 +22,14 @@ namespace GameProject.Domain.Weapons
                 playerCenter.Y + Game.Player.Hitbox.Height / 2 * Math.Sin(angle));
             var bullet = new HandgunBullet(bulletLocation, angle);
             Game.SpawnedBullets.Add(bullet);
+            Ammo--;
             Recoil = MainForm.MainTimer.Interval * 20;
+        }
+
+        internal override void Reload()
+        {
+            Recoil = MainForm.MainTimer.Interval * 200;
+            IsReloading = true;
         }
     }
 }
