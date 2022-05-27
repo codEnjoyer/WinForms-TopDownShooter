@@ -51,7 +51,7 @@ namespace GameProject.Domain
             KillManager = new KillManager();
             BoosterManager = new BoosterManager();
 
-            ChangeStage(GameStage.Battle);
+            Pause();
         }
 
         internal static void ChangeStage(GameStage stage)

@@ -199,6 +199,15 @@ namespace GameProject.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Выйти из игры.
+        /// </summary>
+        internal static string ExitGame {
+            get {
+                return ResourceManager.GetString("ExitGame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на 7.
         /// </summary>
         internal static string HandgunAmmo {
@@ -612,6 +621,24 @@ namespace GameProject.Properties {
         internal static string SpeedBoosterTime {
             get {
                 return ResourceManager.GetString("SpeedBoosterTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Начать игру.
+        /// </summary>
+        internal static string StartGame {
+            get {
+                return ResourceManager.GetString("StartGame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Управление.
+        /// </summary>
+        internal static string Tutorial {
+            get {
+                return ResourceManager.GetString("Tutorial", resourceCulture);
             }
         }
     }

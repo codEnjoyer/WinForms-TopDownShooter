@@ -41,7 +41,6 @@ namespace GameProject.Domain
             Initialized = false;
             exitButton = new Button
             {
-                
                 Location = new Point(Location.X + Size.Width - 150 - 20, Location.Y + 20),
                 Size = new Size(150, 50),
                 Text = Resources.Exit,

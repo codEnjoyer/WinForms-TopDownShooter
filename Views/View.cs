@@ -7,12 +7,14 @@ using GameProject.Entities;
 using GameProject.Extensions;
 using GameProject.Physics;
 using GameProject.Properties;
+using MainMenu = GameProject.Domain.MainMenu;
 
 namespace GameProject
 {
     internal class View
     {
-        private static bool Initialized;
+        private static bool GameInitialized;
+        private static bool MainMenuInitialized;
         internal static Vector Offset = Vector.Zero;
         internal static Rectangle ViewedZone { get; set; }
         internal static Form Form { get; set; }
@@ -28,32 +30,56 @@ namespace GameProject
         internal static ProgressBar speedTimeBar { get; set; }
         internal static PictureBox speedBarIcon { get; set; }
         internal static Shop Shop { get; set; }
+        internal static MainMenu MainMenu { get; set; }
 
 
         internal static void UpdateTextures(Graphics graphics, Form form)
         {
-            Form = form;
-            Form.Cursor = Cursors.Cross;
-            if (!Initialized)
-            {
-                GoFullscreen(true);
-                ShowUserInterface();
-                InitializeUserInterface();
-                Shop = new Shop(Form);
-            }
+            if(Form == null)
+                Form = form;
 
             var gameStage = Game.Stage;
 
             switch (gameStage)
             {
+                case GameStage.NotStarted:
+                    if (!MainMenuInitialized)
+                    {
+                        GoFullscreen(true);
+                        MainMenuInitialized = true;
+                        MainMenu = new MainMenu(Form);
+                    }
+
+                    if (!Form.Controls.Contains(MainMenu))
+                    {
+                        MainMenu.Open();
+                        Form.Controls.Add(MainMenu);
+                    }
+                    break;
+
                 case GameStage.Battle:
+                    if (!GameInitialized)
+                    {
+                        GameInitialized = true;
+                        Form.Cursor = Cursors.Cross;
+                        ShowUserInterface();
+                        InitializeUserInterface();
+                        Game.Resume();
+                        Shop = new Shop(Form);
+                    }
                     if (Form.Controls.Contains(Shop))
                     {
                         Shop.Close();
                         Form.Controls.Remove(Shop);
                         Game.Resume();
                     }
-                        
+
+                    if (Form.Controls.Contains(MainMenu))
+                    {
+                        MainMenu.Close();
+                        Form.Controls.Remove(MainMenu);
+                    }
+
 
                     UpdateCamera(graphics);
 
@@ -103,10 +129,18 @@ namespace GameProject
             if (Game.Player.Weapon.Recoil != 0)
             {
                 Game.Player.Weapon.Recoil -= MainForm.MainTimer.Interval;
-                if (Game.Player.Weapon.IsReloading && Game.Player.Weapon.Recoil == 0)
+
+                if (Game.Player.Weapon.IsReloading)
                 {
-                    Game.Player.Weapon.IsReloading = false;
-                    Game.Player.Weapon.Ammo = Game.Player.Weapon.MaxAmmo;
+                    if (Game.Player.Weapon.Recoil == 0)
+                    {
+                        Game.Player.Weapon.IsReloading = false;
+                        Game.Player.Weapon.Ammo = Game.Player.Weapon.MaxAmmo;
+                    }
+                    else
+                    {
+                        UpdateReloading(graphics);
+                    }
                 }
             }
 
@@ -119,6 +153,24 @@ namespace GameProject
             graphics.TranslateTransform(-(int)Offset.X, -(int)Offset.Y);
         }
 
+        private static void UpdateReloading(Graphics graphics)
+        {
+            var playerReloadingBarPosition = new Point(
+                Game.Player.Hitbox.Location.X + (int)(0.25 * Game.Player.Hitbox.Width),
+                Game.Player.Hitbox.Bottom);
+
+            graphics.DrawRectangle(Pens.Black,
+                playerReloadingBarPosition.X,
+                playerReloadingBarPosition.Y,
+                (int)(0.5 * Game.Player.Hitbox.Width),
+                Game.Player.HealthBar.Height);
+
+            graphics.FillRectangle(Brushes.CornflowerBlue,
+                playerReloadingBarPosition.X,
+                playerReloadingBarPosition.Y,
+                (int)(0.5 * Game.Player.Hitbox.Width) * Game.Player.GetReloadingPercent(),
+                Game.Player.HealthBar.Height);
+        }
         private static void UpdateMovement(Graphics graphics)
         {
             UpdateEnemiesMovement(graphics);
@@ -314,7 +366,7 @@ namespace GameProject
 
         private static void ShowFinishWindow()
         {
-            Form.Controls.Remove(CoinsLabel);
+            //Form.Controls.Remove(CoinsLabel);
 
             var restart = new Button
             {
@@ -324,7 +376,7 @@ namespace GameProject
                 Font = new Font(FontFamily.GenericMonospace, 40, FontStyle.Bold)
             };
 
-            var result = new Label()
+            var result = new Label
             {
                 Text = "Your result: " + Game.Coins,
                 Location = new Point(restart.Left + restart.Width / 4 + 10, restart.Top - 30),
@@ -463,7 +515,6 @@ namespace GameProject
             {
                 testLabel.Text = "Camera offset: " + Offset + "\nPlayer location: " + Game.Player.Hitbox.Location;
             };
-            Initialized = true;
         }
     }
 }

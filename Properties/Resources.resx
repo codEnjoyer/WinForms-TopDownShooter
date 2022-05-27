@@ -160,6 +160,9 @@
   <data name="Exit" xml:space="preserve">
     <value>Выход</value>
   </data>
+  <data name="ExitGame" xml:space="preserve">
+    <value>Выйти из игры</value>
+  </data>
   <data name="HandgunAmmo" xml:space="preserve">
     <value>7</value>
   </data>
@@ -294,6 +297,12 @@
   </data>
   <data name="SpeedBoosterTime" xml:space="preserve">
     <value>10000</value>
+  </data>
+  <data name="StartGame" xml:space="preserve">
+    <value>Начать игру</value>
+  </data>
+  <data name="Tutorial" xml:space="preserve">
+    <value>Управление</value>
   </data>
   <data name="_Coins" xml:space="preserve">
     <value> монет</value>

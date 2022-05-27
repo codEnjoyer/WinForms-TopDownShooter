@@ -187,7 +187,30 @@ namespace GameProject.Entities
         {
             return (float)(Health / MaxHealth);
         }
+        internal float GetReloadingPercent()
+        {
+            var reloadingTime = GetReloadingTime();
+            return Weapon.Recoil / (float)reloadingTime;
+        }
 
+        internal int GetReloadingTime()
+        {
+            var reloadingTime = 0;
+            switch (Weapon.Type)
+            {
+                case WeaponTypes.Handgun:
+                    reloadingTime = int.Parse(Resources.HandgunReload) * MainForm.MainTimer.Interval;
+                    break;
+                case WeaponTypes.Rifle:
+                    reloadingTime = int.Parse(Resources.RifleReload) * MainForm.MainTimer.Interval;
+                    break;
+                case WeaponTypes.Shotgun:
+                    reloadingTime = int.Parse(Resources.ShotgunReload) * MainForm.MainTimer.Interval;
+                    break;
+            }
+
+            return reloadingTime;
+        }
         internal Vector GetHitboxCenter()
         {
             var x = Hitbox.X + Hitbox.Width / 2;

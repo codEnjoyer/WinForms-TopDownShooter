@@ -20,28 +20,22 @@ namespace GameProject
             MainTimer.Interval = 15;
             MainTimer.Tick += (sender, args) => Invalidate();
             MainTimer.Start();
-            InitGame();
+
+            InitGame(new Size(3000, 3000));
 
             KeyDown += MainForm_KeyDown;
             KeyUp += MainForm_KeyUp;
             MouseMove += MainForm_MouseMove;
-            //MouseClick += MainForm_MouseClick;
             MouseDown += MainForm_MouseDown;
             MouseUp += MainForm_MouseUp;
         }
 
-        private void InitGame()
+        internal void InitGame(Size gameSize)
         {
-
             var center = new Vector(Screen.PrimaryScreen.WorkingArea.Width / 2,
                 Screen.PrimaryScreen.WorkingArea.Height / 2);
-
-            var gameSize = new Size(3000, 3000);
-
             var gameZone = new Rectangle(Point.Empty, gameSize);
-
             var playerSpawnPoint = new Vector(center.X, center.Y);
-
             new Game(new Player(playerSpawnPoint), gameZone, this);
         }
 
@@ -68,10 +62,6 @@ namespace GameProject
             Controller.ControlMouse(e, false);
         }
 
-        //private static void MainForm_MouseClick(object sender, MouseEventArgs e)
-        //{
-        //    Controller.ControlMouse(e);
-        //}
         protected override void OnPaint(PaintEventArgs e)
         {
             View.UpdateTextures(e.Graphics, this);
