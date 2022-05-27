@@ -40,7 +40,6 @@ namespace GameProject
                 ShowUserInterface();
                 InitializeUserInterface();
                 Shop = new Shop(Form);
-                Form.Controls.Add(Shop);
             }
 
             var gameStage = Game.Stage;
@@ -71,10 +70,13 @@ namespace GameProject
                     break;
 
                 case GameStage.InShop:
-                    Game.Pause();
-                    Game.UpdateAvailableWeapons();
-                    Form.Controls.Add(Shop);
-                    Shop.Open();
+                    if (!Form.Controls.Contains(Shop))
+                    {
+                        Game.Pause();
+                        Game.UpdateAvailableWeapons();
+                        Shop.Open();
+                        Form.Controls.Add(Shop);
+                    }
                     break;
 
                 case GameStage.Finished:

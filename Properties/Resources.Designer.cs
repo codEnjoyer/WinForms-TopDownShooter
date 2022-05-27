@@ -61,12 +61,48 @@ namespace GameProject.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на  монет.
+        /// </summary>
+        internal static string _Coins {
+            get {
+                return ResourceManager.GetString("_Coins", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap Ammo {
             get {
                 object obj = ResourceManager.GetObject("Ammo", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Купить пистолет за .
+        /// </summary>
+        internal static string BuyHandgunFor {
+            get {
+                return ResourceManager.GetString("BuyHandgunFor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Купить автомат за .
+        /// </summary>
+        internal static string BuyRifleFor {
+            get {
+                return ResourceManager.GetString("BuyRifleFor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Купить дробовик за .
+        /// </summary>
+        internal static string BuyShotgunFor {
+            get {
+                return ResourceManager.GetString("BuyShotgunFor", resourceCulture);
             }
         }
         
@@ -109,6 +145,33 @@ namespace GameProject.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Экипировать.
+        /// </summary>
+        internal static string Equip {
+            get {
+                return ResourceManager.GetString("Equip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Экипировано.
+        /// </summary>
+        internal static string Equipped {
+            get {
+                return ResourceManager.GetString("Equipped", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Выход.
+        /// </summary>
+        internal static string Exit {
+            get {
+                return ResourceManager.GetString("Exit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на 7.
         /// </summary>
         internal static string HandgunAmmo {
@@ -124,6 +187,15 @@ namespace GameProject.Properties {
             get {
                 object obj = ResourceManager.GetObject("HandgunBullet", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на 10.
+        /// </summary>
+        internal static string HandgunCost {
+            get {
+                return ResourceManager.GetString("HandgunCost", resourceCulture);
             }
         }
         
@@ -206,6 +278,15 @@ namespace GameProject.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на 150.
+        /// </summary>
+        internal static string RifleCost {
+            get {
+                return ResourceManager.GetString("RifleCost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на 30.
         /// </summary>
         internal static string RiflegunAmmo {
@@ -220,6 +301,15 @@ namespace GameProject.Properties {
         internal static string ShotgunAmmo {
             get {
                 return ResourceManager.GetString("ShotgunAmmo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на 100.
+        /// </summary>
+        internal static string ShotgunCost {
+            get {
+                return ResourceManager.GetString("ShotgunCost", resourceCulture);
             }
         }
         

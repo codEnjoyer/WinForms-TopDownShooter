@@ -13,7 +13,7 @@ namespace GameProject.Domain.Weapons
             Type = WeaponTypes.Handgun;
             MaxAmmo = int.Parse(Resources.HandgunAmmo);
             Ammo = MaxAmmo;
-            Damage = 20;
+            Damage = 40;
         }
 
         internal override void Shoot(float angle)

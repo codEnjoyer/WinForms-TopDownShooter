@@ -16,7 +16,7 @@ namespace GameProject.Entities
         public double MaxHealth { get; set; }
         public int Speed{ get; set; }
         public int BonusSpeed { get; set; }
-        public float RotationAngle { get; set; } //in radians
+        public float RotationAngle { get; set; }
         public bool IsMovingUp { get; set; }
         public bool IsMovingLeft { get; set; }
         public bool IsMovingDown { get; set; }

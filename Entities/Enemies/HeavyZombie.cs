@@ -9,7 +9,7 @@ namespace GameProject.Entities.Enemies
         {
             Speed = 2;
 
-            Damage = 15;
+            Damage = 1;
 
             MaxHealth = 200 * 1000;
             Health = MaxHealth;

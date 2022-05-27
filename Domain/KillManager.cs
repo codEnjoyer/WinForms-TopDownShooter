@@ -14,7 +14,7 @@ namespace GameProject.Domain
         internal KillManager()
         {
             killTimer = new Timer();
-            killTimer.Interval = MainForm.MainTimer.Interval * 5;
+            killTimer.Interval = MainForm.MainTimer.Interval * 2;
             killTimer.Tick += (sender, args) => CheckConfrontations();
             killTimer.Start();
         }
