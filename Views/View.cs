@@ -439,8 +439,8 @@ namespace GameProject
 
             var ammoIcon = new PictureBox
             {
-                Location = new Point(Form.Right - Resources.Ammo.Width - 50, Form.Bottom - Resources.Ammo.Height - 40),
-                Image = Resources.Ammo,
+                Location = new Point(Form.Right - Resources.AmmoPicture.Width - 50, Form.Bottom - Resources.AmmoPicture.Height - 40),
+                Image = Resources.AmmoPicture,
             };
             Form.Controls.Add(ammoIcon);
 

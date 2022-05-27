@@ -76,9 +76,6 @@
     <Compile Include="Entities\Player.cs" />
     <Compile Include="Entities\Enemies\SmallZombie.cs" />
     <Compile Include="Entities\Boosters\SpeedBooster.cs" />
-    <Compile Include="Extensions\WeaponButton.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Extensions\ProgressBar1.cs" />
     <Compile Include="Interfaces\IMovable.cs" />
     <Compile Include="Interfaces\IFightable.cs" />
@@ -123,11 +120,14 @@
     <Content Include="Sprites\Coin.png" />
     <Content Include="Sprites\DamageBoost.png" />
     <Content Include="Sprites\HandgunBullet.png" />
+    <Content Include="Sprites\HandgunPicture.png" />
     <Content Include="Sprites\HealthBoost.png" />
     <Content Include="Sprites\HeavyZombie.png" />
     <Content Include="Sprites\HeroNormal.png" />
     <Content Include="Sprites\HeroSmall.png" />
     <Content Include="Sprites\MediumZombie.png" />
+    <Content Include="Sprites\RiflePicture.png" />
+    <Content Include="Sprites\ShotgunPicture.png" />
     <Content Include="Sprites\SmallZombie.png" />
     <Content Include="Sprites\SpeedBoost.png" />
   </ItemGroup>

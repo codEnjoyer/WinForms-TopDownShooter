@@ -1,4 +1,5 @@
-﻿using GameProject.Domain.Weapons;
+﻿using System.Runtime.InteropServices;
+using GameProject.Domain.Weapons;
 using GameProject.Physics;
 using GameProject.Properties;
 
@@ -8,7 +9,7 @@ namespace GameProject.Domain.Guns.Bullets
     {
         internal RifleBullet(Vector location, float angle) : base(location, Resources.Coin, angle)
         {
-            Speed = 40;
+            Speed = int.Parse(Resources.RifleBulletSpeed);
         }
     }
 }

@@ -22,15 +22,17 @@ namespace GameProject.Domain
                 case Keys.D:
                     Game.Player.IsMovingRight = isActive;
                     break;
-                case Keys.M:
-                    if(Game.Stage == GameStage.Battle)
-                        Game.ChangeStage(GameStage.InShop);
-                    break;
                 case Keys.Space:
                     Game.Player.IsShooting = isActive;
                     break;
+                case Keys.Q:
+                    Game.Player.ActiveBoosters[BoosterTypes.SpeedBoost] = int.Parse(Resources.SpeedBoosterTime);
+                    break;
                 case Keys.C:
                     Game.Player.ActiveBoosters[BoosterTypes.DamageBoost] = int.Parse(Resources.DamageBoosterTime);
+                    break;
+                case Keys.E:
+                    Game.Player.ActiveBoosters[BoosterTypes.HealthBoost] = int.Parse(Resources.HealthBoosterTime);
                     break;
 
                 case Keys.Escape:
@@ -54,10 +56,11 @@ namespace GameProject.Domain
             switch (pressedButton)
             {
                 case MouseButtons.Left:
-                    Game.Player.ActiveBoosters[BoosterTypes.SpeedBoost] = int.Parse(Resources.SpeedBoosterTime);
                     break;
+
                 case MouseButtons.Right:
-                    Game.Player.ActiveBoosters[BoosterTypes.HealthBoost] = int.Parse(Resources.HealthBoosterTime);
+                    if (Game.Stage == GameStage.Battle)
+                        Game.ChangeStage(GameStage.InShop);
                     break;
             }
         }

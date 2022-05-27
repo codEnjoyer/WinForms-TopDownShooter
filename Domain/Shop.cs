@@ -7,13 +7,23 @@ using GameProject.Properties;
 
 namespace GameProject.Domain
 {
-    internal class Shop : Control
+    internal sealed class Shop : Control
     {
         private Form Form;
+        private bool Initialized;
         private List<Control> controls;
-        private Button handgunButton { get; set; }
-        private Button rifleButton { get; set; }
-        private Button shotgunButton { get; set; }
+        private Font buttonFont;
+        private Button exitButton;
+        private Button handgunButton;
+        private Button rifleButton;
+        private Button shotgunButton;
+        private PictureBox handgunPicture;
+        private PictureBox riflePicture;
+        private PictureBox shotgunPicture;
+        private Font characteristicsFont;
+        private Label handgunCharacteristics;
+        private Label rifleCharacteristics;
+        private Label shotgunCharacteristics;
 
         internal Shop(Form form)
         {
@@ -22,17 +32,21 @@ namespace GameProject.Domain
             Location = new Point(Form.Left + Form.Width / 5, Form.Top + 30);
             Size = new Size(Form.Width * 3 / 5, Form.Height - 2 * 30);
             BackColor = Color.Wheat;
+            buttonFont = new Font(FontFamily.GenericSansSerif, 16);
+            characteristicsFont = new Font(FontFamily.GenericMonospace, 12, FontStyle.Bold);
         }
 
-        internal void InitButtons()
+        internal void UpdateButtons()
         {
-            var exitButton = new Button
+            Initialized = false;
+            exitButton = new Button
             {
-                Location = new Point(Location.X + Size.Width - 70, Location.Y + 20),
-                Size = new Size(50, 50),
-                Text = Resources.Exit,
-                Font = new Font(FontFamily.GenericSansSerif,  14),
                 
+                Location = new Point(Location.X + Size.Width - 150 - 20, Location.Y + 20),
+                Size = new Size(150, 50),
+                Text = Resources.Exit,
+                TabStop = false,
+                Font = buttonFont
             };
             exitButton.Click += (s,a) => Game.ChangeStage(GameStage.Battle);
             Form.Controls.Add(exitButton);
@@ -40,34 +54,18 @@ namespace GameProject.Domain
 
 
 
-
-
-
-
-
             handgunButton = new Button
             {
-                Location = new Point(Location.X + 70, Location.Y + 20),
-                Size = new Size(150, 200),
-                Font = new Font(FontFamily.GenericSansSerif, 14),
+                Location = new Point(Location.X + 35, Bottom - 100 - 20),
+                Size = new Size(250, 100),
+                Font = buttonFont,
                 TabStop = false
             };
 
             if (!Game.AvailableWeapons.Contains(WeaponTypes.Handgun))
-            {
                 handgunButton.Text = Resources.BuyHandgunFor + Resources.HandgunCost + Resources._Coins;
-            }
             else
-            {
-                if (Game.Player.Weapon.Type != WeaponTypes.Handgun)
-                {
-                    handgunButton.Text = Resources.Equip;
-                    handgunButton.Click += (s,a) => ChangeWeapon(handgunButton);
-                }
-                else MakeButtonEquipped(handgunButton);
-
-            }
-
+                MakeButtonEquipable(handgunButton, WeaponTypes.Handgun);
             DefineButtonClickEvent(handgunButton, int.Parse(Resources.HandgunCost), WeaponTypes.Handgun);
             Form.Controls.Add(handgunButton);
             controls.Add(handgunButton);
@@ -76,26 +74,16 @@ namespace GameProject.Domain
 
             rifleButton = new Button
             {
-                Location = new Point(handgunButton.Right + 70, handgunButton.Top),
+                Location = new Point(handgunButton.Right + 50, handgunButton.Top),
                 Size = handgunButton.Size,
-                Font = new Font(FontFamily.GenericSansSerif, 14),
+                Font = buttonFont,
                 TabStop = false
             };
 
             if (!Game.AvailableWeapons.Contains(WeaponTypes.Rifle))
-            {
                 rifleButton.Text = Resources.BuyRifleFor + Resources.RifleCost + Resources._Coins;
-            }
             else
-            {
-                if (Game.Player.Weapon.Type != WeaponTypes.Rifle)
-                {
-                    rifleButton.Text = Resources.Equip;
-                    rifleButton.Click += (s, a) => ChangeWeapon(rifleButton);
-                }
-                else MakeButtonEquipped(rifleButton);
-
-            }
+                MakeButtonEquipable(rifleButton, WeaponTypes.Rifle);
             DefineButtonClickEvent(rifleButton, int.Parse(Resources.RifleCost), WeaponTypes.Rifle);
             Form.Controls.Add(rifleButton);
             controls.Add(rifleButton);
@@ -104,26 +92,16 @@ namespace GameProject.Domain
 
             shotgunButton = new Button
             {
-                Location = new Point(rifleButton.Right + 70, rifleButton.Top),
+                Location = new Point(rifleButton.Right + 50, rifleButton.Top),
                 Size = rifleButton.Size,
-                Font = new Font(FontFamily.GenericSansSerif, 14),
+                Font = buttonFont,
                 TabStop = false
             };
 
             if (!Game.AvailableWeapons.Contains(WeaponTypes.Shotgun))
-            {
                 shotgunButton.Text = Resources.BuyShotgunFor + Resources.ShotgunCost + Resources._Coins;
-            }
             else
-            {
-                if (Game.Player.Weapon.Type != WeaponTypes.Shotgun)
-                {
-                    shotgunButton.Text = Resources.Equip;
-                    shotgunButton.Click += (s, a) => ChangeWeapon(shotgunButton);
-                }
-                else MakeButtonEquipped(shotgunButton);
-            }
-
+                MakeButtonEquipable(shotgunButton, WeaponTypes.Shotgun);
             DefineButtonClickEvent(shotgunButton, int.Parse(Resources.ShotgunCost), WeaponTypes.Shotgun);
             Form.Controls.Add(shotgunButton);
             controls.Add(shotgunButton);
@@ -145,12 +123,11 @@ namespace GameProject.Domain
 
             MakeButtonEquipped(button);
         }
-
         private void DefineButtonClickEvent(Button button, int cost, WeaponTypes weaponType)
         {
             button.Click += (s, a) =>
             {
-                if (Game.Coins > cost && !Game.AvailableWeapons.Contains(weaponType))
+                if (Game.Coins >= cost && !Game.AvailableWeapons.Contains(weaponType))
                 {
                     Game.Coins -= cost;
                     BuyWeapon(button, weaponType);
@@ -178,17 +155,114 @@ namespace GameProject.Domain
             }
             Game.UpdateAvailableWeapons();
         }
-
-        
         private void MakeButtonEquipped(Button button)
         {
             button.Text = "Экипировано";
             button.Enabled = false;
         }
+        private void MakeButtonEquipable(Button button, WeaponTypes weaponType)
+        {
+            if (Game.Player.Weapon.Type != weaponType)
+            {
+                button.Text = Resources.Equip;
+                button.Click += (s, a) => ChangeWeapon(button);
+            }
+            else MakeButtonEquipped(button);
+        }
 
+        private void InitPictures()
+        {
+            
+
+            handgunPicture = new PictureBox
+            {
+                Image = Resources.HandgunPicture,
+                Size = new Size(handgunButton.Width, Resources.HandgunPicture.Height * handgunButton.Width / Resources.HandgunPicture.Width),
+                SizeMode = PictureBoxSizeMode.Zoom,
+                Location = new Point(handgunButton.Left, exitButton.Bottom + 60),
+                BackColor = Color.Wheat
+            };
+            Form.Controls.Add(handgunPicture);
+            controls.Add(handgunPicture);
+
+            riflePicture = new PictureBox
+            {
+                Image = Resources.RiflePicture,
+                Size = new Size(rifleButton.Width, Resources.RiflePicture.Height * rifleButton.Width / Resources.RiflePicture.Width),
+                SizeMode = PictureBoxSizeMode.Zoom,
+                Location = new Point(rifleButton.Left, handgunPicture.Top),
+                BackColor = Color.Wheat
+            };
+            Form.Controls.Add(riflePicture);
+            controls.Add(riflePicture);
+
+            shotgunPicture = new PictureBox
+            {
+                Image = Resources.ShotgunPicture,
+                Size = new Size(shotgunButton.Width, Resources.ShotgunPicture.Height * shotgunButton.Width / Resources.ShotgunPicture.Width),
+                SizeMode = PictureBoxSizeMode.Zoom,
+                Location = new Point(shotgunButton.Left, riflePicture.Top),
+                BackColor = Color.Wheat
+            };
+            Form.Controls.Add(shotgunPicture);
+            controls.Add(shotgunPicture);
+        }
+
+        private void InitWeaponCharacteristics()
+        {
+            handgunCharacteristics = new Label
+            {
+                Location = new Point(handgunPicture.Left, handgunPicture.Bottom + 60),
+                Size = new Size(handgunPicture.Width, handgunButton.Top - handgunPicture.Bottom - 60),
+                Text = Resources.Damage__ + Resources.HandgunDamage + "\n\n" +
+                       Resources.Ammo__ + Resources.HandgunAmmo + "\n\n" +
+                       Resources.Recoil__ + Resources.HandgunRecoil + "\n\n" +
+                       Resources.Reload__ + Resources.HandgunReload + "\n\n" +
+                       Resources.BulletSpeed__ + Resources.HandgunBulletSpeed,
+                BackColor = Color.Wheat,
+                Font = characteristicsFont
+            };
+            Form.Controls.Add(handgunCharacteristics);
+            controls.Add(handgunCharacteristics);
+
+            rifleCharacteristics = new Label
+            {
+                Location = new Point(riflePicture.Left, handgunCharacteristics.Top),
+                Size = new Size(riflePicture.Width, rifleButton.Top - riflePicture.Bottom - 60),
+                Text = Resources.Damage__ + Resources.RifleDamage + "\n\n" +
+                       Resources.Ammo__ + Resources.RifleAmmo + "\n\n" +
+                       Resources.Recoil__ + Resources.RifleRecoil + "\n\n" +
+                       Resources.Reload__ + Resources.RifleReload + "\n\n" +
+                       Resources.BulletSpeed__ + Resources.RifleBulletSpeed,
+                BackColor = Color.Wheat,
+                Font = characteristicsFont
+            };
+            Form.Controls.Add(rifleCharacteristics);
+            controls.Add(rifleCharacteristics);
+
+            shotgunCharacteristics = new Label
+            {
+                Location = new Point(shotgunPicture.Left, rifleCharacteristics.Top),
+                Size = new Size(shotgunPicture.Width, shotgunButton.Top - shotgunPicture.Bottom - 60),
+                Text = Resources.Damage__ + Resources.ShotgunDamage + "\n\n" +
+                       Resources.Ammo__ + Resources.ShotgunAmmo + "\n\n" +
+                       Resources.Recoil__ + Resources.ShotgunRecoil + "\n\n" +
+                       Resources.Reload__ + Resources.ShotgunReload + "\n\n" +
+                       Resources.BulletSpeed__ + Resources.ShotgunBulletSpeed,
+                BackColor = Color.Wheat,
+                Font = characteristicsFont
+            };
+            Form.Controls.Add(shotgunCharacteristics);
+            controls.Add(shotgunCharacteristics);
+        }
         internal void Open()
         {
-            InitButtons();
+            UpdateButtons();
+            if (Initialized) return;
+
+            InitPictures();
+            InitWeaponCharacteristics();
+            Initialized = true;
         }
 
         internal void Close()

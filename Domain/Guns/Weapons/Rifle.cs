@@ -10,7 +10,7 @@ namespace GameProject.Domain.Weapons
         internal Rifle()
         {
             Type = WeaponTypes.Rifle;
-            MaxAmmo = int.Parse(Resources.RiflegunAmmo);
+            MaxAmmo = int.Parse(Resources.RifleAmmo);
             Ammo = MaxAmmo;
             Damage = int.Parse(Resources.RifleDamage);
         }

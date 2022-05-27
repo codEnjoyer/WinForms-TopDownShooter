@@ -70,12 +70,30 @@ namespace GameProject.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Количество патронов: .
+        /// </summary>
+        internal static string Ammo__ {
+            get {
+                return ResourceManager.GetString("Ammo:_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Ammo {
+        internal static System.Drawing.Bitmap AmmoPicture {
             get {
-                object obj = ResourceManager.GetObject("Ammo", resourceCulture);
+                object obj = ResourceManager.GetObject("AmmoPicture", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Скорость полёта пули: .
+        /// </summary>
+        internal static string BulletSpeed__ {
+            get {
+                return ResourceManager.GetString("BulletSpeed:_", resourceCulture);
             }
         }
         
@@ -113,6 +131,15 @@ namespace GameProject.Properties {
             get {
                 object obj = ResourceManager.GetObject("Coin", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Урон: .
+        /// </summary>
+        internal static string Damage__ {
+            get {
+                return ResourceManager.GetString("Damage:_", resourceCulture);
             }
         }
         
@@ -191,7 +218,16 @@ namespace GameProject.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на 10.
+        ///   Ищет локализованную строку, похожую на 35.
+        /// </summary>
+        internal static string HandgunBulletSpeed {
+            get {
+                return ResourceManager.GetString("HandgunBulletSpeed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на 0.
         /// </summary>
         internal static string HandgunCost {
             get {
@@ -205,6 +241,16 @@ namespace GameProject.Properties {
         internal static string HandgunDamage {
             get {
                 return ResourceManager.GetString("HandgunDamage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap HandgunPicture {
+            get {
+                object obj = ResourceManager.GetObject("HandgunPicture", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -359,7 +405,43 @@ namespace GameProject.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на 35.
+        ///   Ищет локализованную строку, похожую на Задержка между выстрелами: .
+        /// </summary>
+        internal static string Recoil__ {
+            get {
+                return ResourceManager.GetString("Recoil:_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Время перезарядки: .
+        /// </summary>
+        internal static string Reload__ {
+            get {
+                return ResourceManager.GetString("Reload:_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на 25.
+        /// </summary>
+        internal static string RifleAmmo {
+            get {
+                return ResourceManager.GetString("RifleAmmo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на 40.
+        /// </summary>
+        internal static string RifleBulletSpeed {
+            get {
+                return ResourceManager.GetString("RifleBulletSpeed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на 0.
         /// </summary>
         internal static string RifleCost {
             get {
@@ -377,11 +459,12 @@ namespace GameProject.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на 25.
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static string RiflegunAmmo {
+        internal static System.Drawing.Bitmap RiflePicture {
             get {
-                return ResourceManager.GetString("RiflegunAmmo", resourceCulture);
+                object obj = ResourceManager.GetObject("RiflePicture", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -413,7 +496,16 @@ namespace GameProject.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на 120.
+        ///   Ищет локализованную строку, похожую на 30.
+        /// </summary>
+        internal static string ShotgunBulletSpeed {
+            get {
+                return ResourceManager.GetString("ShotgunBulletSpeed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на 0.
         /// </summary>
         internal static string ShotgunCost {
             get {
@@ -427,6 +519,16 @@ namespace GameProject.Properties {
         internal static string ShotgunDamage {
             get {
                 return ResourceManager.GetString("ShotgunDamage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ShotgunPicture {
+            get {
+                object obj = ResourceManager.GetObject("ShotgunPicture", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

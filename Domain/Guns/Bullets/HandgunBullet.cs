@@ -8,7 +8,7 @@ namespace GameProject.Domain.Guns.Bullets
     {
         internal HandgunBullet(Vector location, float angle) : base(location, Resources.HandgunBullet, angle)
         {
-            Speed = 35;
+            Speed = int.Parse(Resources.HandgunBulletSpeed);
         }
     }
 }
