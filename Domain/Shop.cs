@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using GameProject.Domain.Weapons;
 
@@ -9,6 +10,10 @@ namespace GameProject.Domain
     {
         private Form Form;
         private List<Control> controls;
+        private Button handgunButton { get; set; }
+        private Button rifleButton { get; set; }
+        private Button shotgunButton { get; set; }
+
         internal Shop(Form form)
         {
             Form = form;
@@ -32,79 +37,108 @@ namespace GameProject.Domain
             Form.Controls.Add(exitButton);
             controls.Add(exitButton);
 
-            var handgunButton = new Button
+
+
+
+
+
+
+
+            handgunButton = new Button
             {
                 Location = new Point(Location.X + 70, Location.Y + 20),
                 Size = new Size(100, 70),
-                Text = "Купить пистолет",
                 Font = new Font(FontFamily.GenericSansSerif, 14),
-
             };
 
-            if (Game.Player.Weapon.Type == WeaponTypes.Handgun)
+            if (!Game.AvailableWeapons.Contains(WeaponTypes.Handgun))
             {
-                handgunButton.Text = "Экипировано";
-                handgunButton.Enabled = false;
+                handgunButton.Text = "Купить пистолет";
+                handgunButton.Click += (s, a) =>
+                {
+                    BuyWeapon(WeaponTypes.Handgun);
+                    MakeButtonBought(handgunButton);
+                };
             }
-            handgunButton.Click += (s, a) =>
+            else
             {
-                BuyWeapon(WeaponTypes.Handgun);
-                handgunButton.Text = "Куплено";
-                handgunButton.Enabled = false;
-            };
+                handgunButton.Text = "Экипировать";
+            }
+            handgunButton.Click += (s, a) => UpdateButtons();
             Form.Controls.Add(handgunButton);
             controls.Add(handgunButton);
 
-            var rifleButton = new Button
+
+
+            rifleButton = new Button
             {
                 Location = new Point(handgunButton.Right + 70, handgunButton.Top),
                 Size = handgunButton.Size,
-                Text = "Купить автомат",
                 Font = new Font(FontFamily.GenericSansSerif, 14),
 
             };
 
-            rifleButton.Click += (s, a) =>
+            if (!Game.AvailableWeapons.Contains(WeaponTypes.Rifle))
             {
-                BuyWeapon(WeaponTypes.Rifle);
-                rifleButton.Text = "Куплено";
-                rifleButton.Enabled = false;
-            };
+                rifleButton.Text = "Купить автомат";
+                rifleButton.Click += (s, a) =>
+                {
+                    BuyWeapon(WeaponTypes.Rifle);
+                    MakeButtonBought(rifleButton);
+                };
+            }
+            else
+            {
+                rifleButton.Text = "Экипировать";
+            }
+            rifleButton.Click += (s, a) => UpdateButtons();
             Form.Controls.Add(rifleButton);
             controls.Add(rifleButton);
 
-            var shotgunButton = new Button
+
+
+            shotgunButton = new Button
             {
                 Location = new Point(rifleButton.Right + 70, rifleButton.Top),
                 Size = rifleButton.Size,
-                Text = "Купить дробовик",
                 Font = new Font(FontFamily.GenericSansSerif, 14),
-
             };
 
-            shotgunButton.Click += (s, a) =>
+            if (!Game.AvailableWeapons.Contains(WeaponTypes.Shotgun))
             {
-                BuyWeapon(WeaponTypes.Shotgun);
-                shotgunButton.Text = "Куплено";
-                shotgunButton.Enabled = false;
-            };
+                shotgunButton.Text = "Купить дробовик";
+                shotgunButton.Click += (s, a) =>
+                {
+                    BuyWeapon(WeaponTypes.Shotgun);
+                    MakeButtonBought(shotgunButton);
+                };
+            }
+            else
+            {
+                shotgunButton.Text = "Экипировать";
+            }
+            shotgunButton.Click += (s, a) => UpdateButtons();
             Form.Controls.Add(shotgunButton);
             controls.Add(shotgunButton);
 
+            UpdateButtons();
+        }
+
+        private void UpdateButtons()
+        {
             switch (Game.Player.Weapon.Type)
             {
                 case WeaponTypes.Handgun:
-                    Equip(handgunButton);
+                    MakeButtonEquipped(handgunButton);
                     break;
                 case WeaponTypes.Rifle:
-                    Equip(rifleButton);
+                    MakeButtonEquipped(rifleButton);
                     break;
                 case WeaponTypes.Shotgun:
-                    Equip(shotgunButton);
+                    MakeButtonEquipped(shotgunButton);
                     break;
             }
         }
-
         private void BuyWeapon(WeaponTypes weaponType)
         {
             switch (weaponType)
@@ -122,9 +156,15 @@ namespace GameProject.Domain
             Game.UpdateAvailableWeapons();
         }
 
-        private void Equip(Button button)
+        
+        private void MakeButtonEquipped(Button button)
         {
             button.Text = "Экипировано";
+            button.Enabled = false;
+        }
+        private void MakeButtonBought(Button button)
+        {
+            button.Text = "Куплено";
             button.Enabled = false;
         }
         internal void Open()
