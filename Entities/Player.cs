@@ -30,9 +30,9 @@ namespace GameProject.Entities
         {
             Hitbox = new Rectangle(new Vector(location.X - Hitbox.Size.Width / 2, location.Y - Hitbox.Size.Height / 2).ToPoint(), Hitbox.Size);
             
-            Speed = 5;
+            Speed = 7;
 
-            Weapon = new Rifle();
+            Weapon = new Handgun();
 
             MaxHealth = 100 * 1000;
             Health = MaxHealth;

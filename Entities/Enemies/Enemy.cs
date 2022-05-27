@@ -17,7 +17,7 @@ namespace GameProject.Entities
         public int BonusSpeed { get; set; }
         public int Damage { get; set; }
         public int BonusDamage { get; set; }
-        internal int Score { get; set; }
+        internal int Coins { get; set; }
         public Dictionary<BoosterTypes, int> ActiveBoosters { get; set; }
 
         protected Enemy(Vector location, Image image) : base(location, image)

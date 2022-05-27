@@ -12,7 +12,7 @@ namespace GameProject.Domain.Weapons
             Type = WeaponTypes.Rifle;
             MaxAmmo = int.Parse(Resources.RiflegunAmmo);
             Ammo = MaxAmmo;
-            Damage = 15;
+            Damage = int.Parse(Resources.RifleDamage);
         }
         internal override void Shoot(float angle)
         {
@@ -23,12 +23,12 @@ namespace GameProject.Domain.Weapons
             var bullet = new RifleBullet(bulletLocation, angle);
             Game.SpawnedBullets.Add(bullet);
             Ammo--;
-            Recoil = MainForm.MainTimer.Interval * 5;
+            Recoil = MainForm.MainTimer.Interval * int.Parse(Resources.RifleRecoil);
         }
 
         internal override void Reload()
         {
-            Recoil = MainForm.MainTimer.Interval * 300;
+            Recoil = MainForm.MainTimer.Interval * int.Parse(Resources.RifleReload);
             IsReloading = true;
         }
     }

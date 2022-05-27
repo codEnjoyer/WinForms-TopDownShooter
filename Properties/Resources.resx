@@ -137,10 +137,10 @@
     <value>..\sprites\damageboost.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="DamageBoosterImpact" xml:space="preserve">
-    <value>15</value>
+    <value>10</value>
   </data>
   <data name="DamageBoosterTime" xml:space="preserve">
-    <value>10000</value>
+    <value>5000</value>
   </data>
   <data name="Equip" xml:space="preserve">
     <value>Экипировать</value>
@@ -160,17 +160,35 @@
   <data name="HandgunCost" xml:space="preserve">
     <value>10</value>
   </data>
+  <data name="HandgunDamage" xml:space="preserve">
+    <value>20</value>
+  </data>
+  <data name="HandgunRecoil" xml:space="preserve">
+    <value>20</value>
+  </data>
+  <data name="HandgunReload" xml:space="preserve">
+    <value>150</value>
+  </data>
   <data name="HealthBoost" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\sprites\healthboost.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="HealthBoosterImpact" xml:space="preserve">
-    <value>250</value>
+    <value>500</value>
   </data>
   <data name="HealthBoosterTime" xml:space="preserve">
     <value>5000</value>
   </data>
   <data name="HeavyZombie" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\sprites\heavyzombie.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="HeavyZombieCoins" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="HeavyZombieDamage" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="HeavyZombieSpeed" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="HeroBig" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\survivor-idle_knife_0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -184,20 +202,56 @@
   <data name="MediumZombie" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\sprites\mediumzombie.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="MediumZombieCoins" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="MediumZombieDamage" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="MediumZombieSpeed" xml:space="preserve">
+    <value>4</value>
+  </data>
   <data name="RifleCost" xml:space="preserve">
-    <value>150</value>
+    <value>35</value>
+  </data>
+  <data name="RifleDamage" xml:space="preserve">
+    <value>20</value>
   </data>
   <data name="RiflegunAmmo" xml:space="preserve">
-    <value>30</value>
+    <value>25</value>
+  </data>
+  <data name="RifleRecoil" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="RifleReload" xml:space="preserve">
+    <value>250</value>
   </data>
   <data name="ShotgunAmmo" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="ShotgunCost" xml:space="preserve">
-    <value>100</value>
+    <value>120</value>
+  </data>
+  <data name="ShotgunDamage" xml:space="preserve">
+    <value>20</value>
+  </data>
+  <data name="ShotgunRecoil" xml:space="preserve">
+    <value>75</value>
+  </data>
+  <data name="ShotgunReload" xml:space="preserve">
+    <value>300</value>
   </data>
   <data name="SmallZombie" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\sprites\smallzombie.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SmallZombieCoins" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="SmallZombieDamage" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="SmallZombieSpeed" xml:space="preserve">
+    <value>5</value>
   </data>
   <data name="SpeedBoost" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\sprites\speedboost.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

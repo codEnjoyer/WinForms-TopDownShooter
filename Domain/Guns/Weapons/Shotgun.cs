@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using GameProject.Domain.Guns.Bullets;
 using GameProject.Physics;
 using GameProject.Properties;
@@ -12,7 +13,7 @@ namespace GameProject.Domain.Weapons
             Type = WeaponTypes.Shotgun;
             MaxAmmo = int.Parse(Resources.ShotgunAmmo);
             Ammo = MaxAmmo;
-            Damage = 30;
+            Damage = int.Parse(Resources.ShotgunDamage);
         }
         internal override void Shoot(float angle)
         {
@@ -21,23 +22,23 @@ namespace GameProject.Domain.Weapons
 
             for (var i = 0; i < 5; i++)
             {
-                var spreadCoefficient = r.NextDouble() * (Math.PI / 2) - Math.PI / 4;
+                var spreadCoefficient = r.NextDouble() * (Math.PI / 5) - Math.PI / 10;
 
                 var bulletLocation = new Vector(
                     playerCenter.X + Game.Player.Hitbox.Width / 2 * Math.Cos(angle + spreadCoefficient),
                     playerCenter.Y + Game.Player.Hitbox.Height / 2 * Math.Sin(angle + spreadCoefficient));
 
-                var bullet = new ShotgunBullet(bulletLocation, angle);
+                var bullet = new ShotgunBullet(bulletLocation, angle + (float)spreadCoefficient);
                 Game.SpawnedBullets.Add(bullet);
             }
 
-            Recoil = MainForm.MainTimer.Interval * 50;
+            Recoil = MainForm.MainTimer.Interval * int.Parse(Resources.ShotgunRecoil);
             Ammo--;
         }
 
         internal override void Reload()
         {
-            Recoil = MainForm.MainTimer.Interval * 150;
+            Recoil = MainForm.MainTimer.Interval * int.Parse(Resources.ShotgunReload);
             IsReloading = true;
         }
     }

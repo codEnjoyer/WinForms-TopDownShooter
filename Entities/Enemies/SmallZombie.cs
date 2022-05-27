@@ -1,4 +1,5 @@
-﻿using GameProject.Physics;
+﻿using System.Resources;
+using GameProject.Physics;
 using GameProject.Properties;
 
 namespace GameProject.Entities
@@ -7,14 +8,14 @@ namespace GameProject.Entities
     {
         internal SmallZombie(Vector location) : base(location, Resources.SmallZombie)
         {
-            Speed = 4;
+            Speed = int.Parse(Resources.SmallZombieSpeed);
 
-            Damage = 1;
+            Damage = int.Parse(Resources.SmallZombieDamage);
 
             MaxHealth = 50 * 1000;
             Health = MaxHealth;
 
-            Score = 1;
+            Coins = int.Parse(Resources.SmallZombieCoins);
         }
     }
 }

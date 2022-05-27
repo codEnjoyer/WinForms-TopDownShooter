@@ -127,7 +127,7 @@ namespace GameProject.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на 15.
+        ///   Ищет локализованную строку, похожую на 10.
         /// </summary>
         internal static string DamageBoosterImpact {
             get {
@@ -136,7 +136,7 @@ namespace GameProject.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на 10000.
+        ///   Ищет локализованную строку, похожую на 5000.
         /// </summary>
         internal static string DamageBoosterTime {
             get {
@@ -200,6 +200,33 @@ namespace GameProject.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на 20.
+        /// </summary>
+        internal static string HandgunDamage {
+            get {
+                return ResourceManager.GetString("HandgunDamage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на 20.
+        /// </summary>
+        internal static string HandgunRecoil {
+            get {
+                return ResourceManager.GetString("HandgunRecoil", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на 150.
+        /// </summary>
+        internal static string HandgunReload {
+            get {
+                return ResourceManager.GetString("HandgunReload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap HealthBoost {
@@ -210,7 +237,7 @@ namespace GameProject.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на 250.
+        ///   Ищет локализованную строку, похожую на 500.
         /// </summary>
         internal static string HealthBoosterImpact {
             get {
@@ -234,6 +261,33 @@ namespace GameProject.Properties {
             get {
                 object obj = ResourceManager.GetObject("HeavyZombie", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на 5.
+        /// </summary>
+        internal static string HeavyZombieCoins {
+            get {
+                return ResourceManager.GetString("HeavyZombieCoins", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на 5.
+        /// </summary>
+        internal static string HeavyZombieDamage {
+            get {
+                return ResourceManager.GetString("HeavyZombieDamage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на 3.
+        /// </summary>
+        internal static string HeavyZombieSpeed {
+            get {
+                return ResourceManager.GetString("HeavyZombieSpeed", resourceCulture);
             }
         }
         
@@ -278,7 +332,34 @@ namespace GameProject.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на 150.
+        ///   Ищет локализованную строку, похожую на 3.
+        /// </summary>
+        internal static string MediumZombieCoins {
+            get {
+                return ResourceManager.GetString("MediumZombieCoins", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на 3.
+        /// </summary>
+        internal static string MediumZombieDamage {
+            get {
+                return ResourceManager.GetString("MediumZombieDamage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на 4.
+        /// </summary>
+        internal static string MediumZombieSpeed {
+            get {
+                return ResourceManager.GetString("MediumZombieSpeed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на 35.
         /// </summary>
         internal static string RifleCost {
             get {
@@ -287,11 +368,38 @@ namespace GameProject.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на 30.
+        ///   Ищет локализованную строку, похожую на 20.
+        /// </summary>
+        internal static string RifleDamage {
+            get {
+                return ResourceManager.GetString("RifleDamage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на 25.
         /// </summary>
         internal static string RiflegunAmmo {
             get {
                 return ResourceManager.GetString("RiflegunAmmo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на 10.
+        /// </summary>
+        internal static string RifleRecoil {
+            get {
+                return ResourceManager.GetString("RifleRecoil", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на 250.
+        /// </summary>
+        internal static string RifleReload {
+            get {
+                return ResourceManager.GetString("RifleReload", resourceCulture);
             }
         }
         
@@ -305,11 +413,38 @@ namespace GameProject.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на 100.
+        ///   Ищет локализованную строку, похожую на 120.
         /// </summary>
         internal static string ShotgunCost {
             get {
                 return ResourceManager.GetString("ShotgunCost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на 20.
+        /// </summary>
+        internal static string ShotgunDamage {
+            get {
+                return ResourceManager.GetString("ShotgunDamage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на 75.
+        /// </summary>
+        internal static string ShotgunRecoil {
+            get {
+                return ResourceManager.GetString("ShotgunRecoil", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на 300.
+        /// </summary>
+        internal static string ShotgunReload {
+            get {
+                return ResourceManager.GetString("ShotgunReload", resourceCulture);
             }
         }
         
@@ -320,6 +455,33 @@ namespace GameProject.Properties {
             get {
                 object obj = ResourceManager.GetObject("SmallZombie", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на 1.
+        /// </summary>
+        internal static string SmallZombieCoins {
+            get {
+                return ResourceManager.GetString("SmallZombieCoins", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на 2.
+        /// </summary>
+        internal static string SmallZombieDamage {
+            get {
+                return ResourceManager.GetString("SmallZombieDamage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на 5.
+        /// </summary>
+        internal static string SmallZombieSpeed {
+            get {
+                return ResourceManager.GetString("SmallZombieSpeed", resourceCulture);
             }
         }
         

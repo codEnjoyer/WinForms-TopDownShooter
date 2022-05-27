@@ -52,7 +52,8 @@ namespace GameProject.Domain
 
                     if (Math.Abs(enemy.Health - enemy.MinHealth) < 10)
                     {
-                        Game.Coins += enemy.Score;
+                        Game.Coins += enemy.Coins;
+                        enemy.Coins = 0;
                         View.CoinsLabel.Text = Game.Coins.ToString();
                         Game.SpawnedEnemies.Remove(enemy);
                     }

@@ -40,12 +40,12 @@ namespace GameProject.Domain
                 switch (boosterTypeRemainingTime.Key)
                 {
                     case BoosterTypes.HealthBoost:
-                        Game.Player.GetHealthBoost(int.Parse(Resources.HealthBoosterImpact) * 2);
+                        Game.Player.GetHealthBoost(int.Parse(Resources.HealthBoosterImpact));
                         break;
 
                     case BoosterTypes.DamageBoost:
                         if (Game.Player.BonusDamage == 0)
-                            Game.Player.GetDamageBoost(int.Parse(Resources.DamageBoosterImpact));
+                            Game.Player.GetDamageBoost((int)(int.Parse(Resources.DamageBoosterImpact) * 2));
                         break;
 
                     case BoosterTypes.SpeedBoost:
@@ -86,7 +86,7 @@ namespace GameProject.Domain
                     switch (boosterTypeRemainingTime.Key)
                     {
                         case BoosterTypes.HealthBoost:
-                            enemy.GetHealthBoost(int.Parse(Resources.HealthBoosterImpact));
+                            enemy.GetHealthBoost(int.Parse(Resources.HealthBoosterImpact) * 3);
                             break;
 
                         case BoosterTypes.DamageBoost:

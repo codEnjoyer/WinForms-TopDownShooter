@@ -7,14 +7,14 @@ namespace GameProject.Entities.Enemies
     {
         internal MediumZombie(Vector location) : base(location, Resources.MediumZombie)
         {
-            Speed = 3;
+            Speed = int.Parse(Resources.MediumZombieSpeed);
 
-            Damage = 1;
+            Damage = int.Parse(Resources.MediumZombieDamage);
 
             MaxHealth = 100 * 1000;
             Health = MaxHealth;
 
-            Score = 2;
+            Coins = int.Parse(Resources.MediumZombieCoins);
         }
     }
 }
