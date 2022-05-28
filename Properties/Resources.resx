@@ -173,7 +173,7 @@
     <value>35</value>
   </data>
   <data name="HandgunCost" xml:space="preserve">
-    <value>0</value>
+    <value>10</value>
   </data>
   <data name="HandgunDamage" xml:space="preserve">
     <value>20</value>
@@ -182,7 +182,7 @@
     <value>..\sprites\handgunpicture.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="HandgunRecoil" xml:space="preserve">
-    <value>20</value>
+    <value>30</value>
   </data>
   <data name="HandgunReload" xml:space="preserve">
     <value>150</value>
@@ -203,7 +203,7 @@
     <value>5</value>
   </data>
   <data name="HeavyZombieDamage" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="HeavyZombieSpeed" xml:space="preserve">
     <value>3</value>
@@ -211,11 +211,29 @@
   <data name="HeroBig" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\survivor-idle_knife_0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="HeroHandgun" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\sprites\herohandgun1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="HeroHandgun1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\sprites\herohandgun.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="HeroNormal" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\sprites\heronormal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="HeroRifle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\sprites\herorifle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="HeroShotgun" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\sprites\heroshotgun.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="HeroSmall" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\sprites\herosmall.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MainMenuBackground" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\sprites\mainmenubackground.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MainMenuLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\sprites\mainmenulogo.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="MediumZombie" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\sprites\mediumzombie.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -224,7 +242,7 @@
     <value>3</value>
   </data>
   <data name="MediumZombieDamage" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="MediumZombieSpeed" xml:space="preserve">
     <value>4</value>
@@ -237,6 +255,9 @@
   </data>
   <data name="RifleAmmo" xml:space="preserve">
     <value>25</value>
+  </data>
+  <data name="RifleBullet" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\sprites\riflebullet.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="RifleBulletSpeed" xml:space="preserve">
     <value>40</value>
@@ -259,11 +280,14 @@
   <data name="ShotgunAmmo" xml:space="preserve">
     <value>5</value>
   </data>
+  <data name="ShotgunBullet" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\sprites\shotgunbullet.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="ShotgunBulletSpeed" xml:space="preserve">
     <value>30</value>
   </data>
   <data name="ShotgunCost" xml:space="preserve">
-    <value>0</value>
+    <value>120</value>
   </data>
   <data name="ShotgunDamage" xml:space="preserve">
     <value>20</value>
@@ -284,7 +308,7 @@
     <value>1</value>
   </data>
   <data name="SmallZombieDamage" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="SmallZombieSpeed" xml:space="preserve">
     <value>5</value>

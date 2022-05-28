@@ -2,8 +2,6 @@
 using System.Drawing;
 using System.Windows.Forms;
 using GameProject.Domain;
-using GameProject.Domain.Weapons;
-using GameProject.Entities;
 using GameProject.Extensions;
 using GameProject.Physics;
 using GameProject.Properties;
@@ -63,7 +61,7 @@ namespace GameProject
                         GameInitialized = true;
                         Form.Cursor = Cursors.Cross;
                         ShowUserInterface();
-                        InitializeUserInterface();
+                        //InitializeUserInterface();
                         Game.Resume();
                         Shop = new Shop(Form);
                     }
@@ -366,11 +364,9 @@ namespace GameProject
 
         private static void ShowFinishWindow()
         {
-            //Form.Controls.Remove(CoinsLabel);
-
             var restart = new Button
             {
-                Text = "Restart",
+                Text = "Заново",
                 Location = new Point(500, 400),
                 Size = new Size(500, 100),
                 Font = new Font(FontFamily.GenericMonospace, 40, FontStyle.Bold)
@@ -378,9 +374,10 @@ namespace GameProject
 
             var result = new Label
             {
-                Text = "Your result: " + Game.Coins,
-                Location = new Point(restart.Left + restart.Width / 4 + 10, restart.Top - 30),
-                Size = new Size(restart.Width / 2, 20),
+                TextAlign = ContentAlignment.MiddleCenter,
+                Text = "У тебя получилось собрать " + Game.Coins + Resources._Coins,
+                Location = new Point(restart.Left - 100, restart.Top - 40),
+                Size = new Size(restart.Width + 200, 30),
                 Font = new Font(FontFamily.GenericMonospace, 18, FontStyle.Bold)
             };
             restart.Click += (s, e) => Application.Restart();
@@ -409,30 +406,19 @@ namespace GameProject
 
         private static void ShowUserInterface()
         {
-            testLabel = new Label
-            {
-                Location = new Point(50, 50),
-                Size = new Size(90, 70),
-            };
-            Form.Controls.Add(testLabel);
+            //testLabel = new Label
+            //{
+            //    Location = new Point(50, 50),
+            //    Size = new Size(90, 70),
+            //};
+            //Form.Controls.Add(testLabel);
+            ShowCoins();
+            ShowBoosters();
+            ShowAmmo();
+        }
 
-            CoinsIcon = new PictureBox
-            {
-                Location = new Point(Form.Right - Resources.Coin.Width - 50, 40),
-                Size = new Size(Resources.Coin.Width, Resources.Coin.Height),
-                Image = Resources.Coin
-            };
-            Form.Controls.Add(CoinsIcon);
-
-            CoinsLabel = new Label
-            {
-                Text = Game.Coins.ToString(),
-                Location = new Point(CoinsIcon.Left - 100, CoinsIcon.Top + CoinsIcon.Height / 10),
-                Size = new Size(80, CoinsIcon.Height),
-                Font = new Font(FontFamily.GenericMonospace, 26, FontStyle.Bold)
-            };
-            Form.Controls.Add(CoinsLabel);
-
+        private static void ShowBoosters()
+        {
             speedTimeBar = new ProgressBar
             {
                 Location = new Point(Form.Left + 30, Form.Bottom - 70),
@@ -488,7 +474,31 @@ namespace GameProject
                 SizeMode = PictureBoxSizeMode.StretchImage
             };
             Form.Controls.Add(healthBarIcon);
+        }
 
+        private static void ShowCoins()
+        {
+            CoinsIcon = new PictureBox
+            {
+                Location = new Point(Form.Right - Resources.Coin.Width - 50, 40),
+                Size = new Size(Resources.Coin.Width, Resources.Coin.Height),
+                Image = Resources.Coin
+            };
+            Form.Controls.Add(CoinsIcon);
+
+            CoinsLabel = new Label
+            {
+                TextAlign = ContentAlignment.MiddleLeft,
+                Text = Game.Coins.ToString(),
+                Location = new Point(CoinsIcon.Left - 100, CoinsIcon.Top),
+                Size = new Size(80, CoinsIcon.Height),
+                Font = new Font(FontFamily.GenericMonospace, 24, FontStyle.Bold)
+            };
+            Form.Controls.Add(CoinsLabel);
+        }
+
+        private static void ShowAmmo()
+        {
             var ammoIcon = new PictureBox
             {
                 Location = new Point(Form.Right - Resources.AmmoPicture.Width - 50, Form.Bottom - Resources.AmmoPicture.Height - 40),
@@ -498,23 +508,24 @@ namespace GameProject
 
             ammoLabel = new Label
             {
+                TextAlign = ContentAlignment.MiddleLeft,
+                Font = new Font(FontFamily.GenericMonospace, 24, FontStyle.Bold),
                 Size = new Size(CoinsLabel.Width, ammoIcon.Height),
-                Location = new Point(ammoIcon.Left - CoinsIcon.Width - 10, ammoIcon.Top),
+                Location = new Point(CoinsLabel.Left, ammoIcon.Top),
                 Text = Game.Player.Weapon.Ammo.ToString()
             };
             Form.Controls.Add(ammoLabel);
         }
-
-        private static void InitializeUserInterface()
-        {
-            Form.MouseMove += (s, e) =>
-            {
-                testLabel.Text = "Camera offset: " + Offset + "\nPlayer location: " + Game.Player.Hitbox.Location;
-            };
-            Form.KeyDown += (s, e) =>
-            {
-                testLabel.Text = "Camera offset: " + Offset + "\nPlayer location: " + Game.Player.Hitbox.Location;
-            };
-        }
+        //private static void InitializeUserInterface()
+        //{
+        //    Form.MouseMove += (s, e) =>
+        //    {
+        //        testLabel.Text = "Camera offset: " + Offset + "\nPlayer location: " + Game.Player.Hitbox.Location;
+        //    };
+        //    Form.KeyDown += (s, e) =>
+        //    {
+        //        testLabel.Text = "Camera offset: " + Offset + "\nPlayer location: " + Game.Player.Hitbox.Location;
+        //    };
+        //}
     }
 }

@@ -1,5 +1,4 @@
-﻿using System.Resources;
-using GameProject.Physics;
+﻿using GameProject.Physics;
 using GameProject.Properties;
 
 namespace GameProject.Entities

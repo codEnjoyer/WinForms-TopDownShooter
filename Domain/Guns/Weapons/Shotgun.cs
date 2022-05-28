@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
 using GameProject.Domain.Guns.Bullets;
 using GameProject.Physics;
 using GameProject.Properties;

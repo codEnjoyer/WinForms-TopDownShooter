@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using GameProject.Properties;
 
@@ -12,15 +8,18 @@ namespace GameProject.Domain
     internal class MainMenu : Control
     {
         private Form Form;
-        private bool Initialized;
+
+        private PictureBox Logo;
+        //private bool Initialized;
         private List<Control> controls;
         private Font buttonFont;
-        private PictureBox background;
+        //private PictureBox background;
         private Button startGame;
         private Button tutorial;
         private Button tutorialExitButton;
         private Button exitGame;
         private Control tutorialWindow;
+        private Label tutorialControls;
         internal MainMenu(Form form)
         {
             Form = form;
@@ -51,6 +50,8 @@ namespace GameProject.Domain
             Form.Controls.Add(tutorial);
             controls.Add(tutorial);
 
+            
+
             startGame = new Button
             {
                 Size = tutorial.Size,
@@ -67,6 +68,16 @@ namespace GameProject.Domain
             Form.Controls.Add(startGame);
             controls.Add(startGame);
 
+            Logo = new PictureBox
+            {
+                Location = new Point(startGame.Left - 15, Form.ClientSize.Height / 16),
+                Size = Resources.MainMenuLogo.Size,
+                Image = Resources.MainMenuLogo,
+
+            };
+            Form.Controls.Add(Logo);
+            controls.Add(Logo);
+
             exitGame = new Button
             {
                 Size = tutorial.Size,
@@ -78,53 +89,91 @@ namespace GameProject.Domain
             exitGame.Click += (s, a) => Application.Exit();
             Form.Controls.Add(exitGame);
             controls.Add(exitGame);
-        }
 
-        private void ShowTutorialWindow()
-        {
             tutorialWindow = new Control
             {
-                Location = new Point(100, 100),
-                Size = new Size(200, 200),
+                Location = new Point(Form.Width / 5, 30),
+                Size = new Size(Form.Width * 3 / 5, Form.Height - 2 * 30),
+                BackColor = Color.Wheat
             };
             Form.Controls.Add(tutorialWindow);
+            tutorialWindow.Hide();
             controls.Add(tutorialWindow);
 
             tutorialExitButton = new Button
             {
-                Location = new Point(tutorialWindow.Location.X + tutorialWindow.Size.Width - 150 - 20, tutorialWindow.Location.Y + 20),
+                BackColor = Color.WhiteSmoke,
+                Location = new Point(centerX - 20, centerY - tutorialWindow.Height / 2),
                 Size = new Size(150, 50),
                 Text = Resources.Exit,
                 TabStop = false,
                 Font = buttonFont
             };
             tutorialExitButton.Click += (s, a) => CloseTutorialWindow();
-            Form.Controls.Add(tutorialExitButton);
+            tutorialWindow.Controls.Add(tutorialExitButton);
             controls.Add(tutorialExitButton);
+
+            tutorialControls = new Label
+            {
+                Location = new Point(tutorialWindow.Width / 2 - 200, 200),
+                Size = tutorialWindow.Size,
+                BackColor = tutorialWindow.BackColor,
+                Font = new Font(FontFamily.GenericMonospace, 26, FontStyle.Italic),
+                Text = "W - движение вверх" + "\n\n" +
+                       "A - движение влево" + "\n\n" +
+                       "S - движение вниз" + "\n\n" +
+                       "D - движение вправо" + "\n\n" +
+                       "Space - выстрел" + "\n\n" +
+                       "RMB - магазин",
+
+            };
+            tutorialWindow.Controls.Add(tutorialControls);
+            controls.Add(tutorialControls);
+        }
+
+        private void ShowTutorialWindow()
+        {
+            tutorialWindow.BringToFront();
+            tutorialWindow.Show();
+            tutorialExitButton.BringToFront();
+            tutorialExitButton.Show();
+            tutorialControls.BringToFront();
+            tutorialControls.Show();
         }
 
         private void CloseTutorialWindow()
         {
-            tutorial.Enabled = false;
-            Form.Controls.Remove(tutorialWindow);
-            controls.Remove(tutorialWindow);
-            Form.Controls.Remove(tutorialExitButton);
-            controls.Remove(tutorialExitButton);
+            tutorial.Enabled = true;
+            tutorialExitButton.Hide();
+            tutorialWindow.Hide();
+            tutorialControls.Hide();
         }
         internal void Open()
         {
+            //if (!Initialized)
+            //{
+            //    Initialized = true;
+            //    background = new PictureBox
+            //    {
+            //        Location = Point.Empty,
+            //        Size = Form.ClientSize,
+            //        Image = Resources.MainMenuBackground,
+            //        SizeMode = PictureBoxSizeMode.StretchImage
+            //    };
+            //    Form.Controls.Add(background);
+            //    controls.Add(background);
+            //}
             UpdateButtons();
-
-            if (Initialized) return;
-            //background
-            Initialized = true;
         }
 
         internal void Close()
         {
             foreach (var control in controls)
             {
-                Form.Controls.Remove(control);
+                if (Form.Controls.Contains(control))
+                {
+                    Form.Controls.Remove(control);
+                }
             }
         }
     }

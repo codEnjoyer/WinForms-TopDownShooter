@@ -26,7 +26,7 @@ namespace GameProject.Entities
         public Dictionary<BoosterTypes, int> ActiveBoosters { get; set; }
         public Weapon Weapon { get; set; }
 
-        internal Player(Vector location) : base(location, Resources.HeroNormal)
+        internal Player(Vector location) : base(location, Resources.HeroHandgun)
         {
             Hitbox = new Rectangle(new Vector(location.X - Hitbox.Size.Width / 2, location.Y - Hitbox.Size.Height / 2).ToPoint(), Hitbox.Size);
             

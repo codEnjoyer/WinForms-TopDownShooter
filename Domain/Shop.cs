@@ -144,12 +144,15 @@ namespace GameProject.Domain
             {
                 case WeaponTypes.Handgun:
                     Game.Player.Weapon = new Handgun();
+                    Game.Player.Image = Resources.HeroHandgun;
                     break;
                 case WeaponTypes.Rifle:
                     Game.Player.Weapon = new Rifle();
+                    Game.Player.Image = Resources.HeroRifle;
                     break;
                 case WeaponTypes.Shotgun:
                     Game.Player.Weapon = new Shotgun();
+                    Game.Player.Image = Resources.HeroShotgun;
                     break;
             }
             Game.UpdateAvailableWeapons();
@@ -171,8 +174,6 @@ namespace GameProject.Domain
 
         private void InitPictures()
         {
-            
-
             handgunPicture = new PictureBox
             {
                 Image = Resources.HandgunPicture,

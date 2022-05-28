@@ -236,7 +236,7 @@ namespace GameProject.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на 0.
+        ///   Ищет локализованную строку, похожую на 10.
         /// </summary>
         internal static string HandgunCost {
             get {
@@ -264,7 +264,7 @@ namespace GameProject.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на 20.
+        ///   Ищет локализованную строку, похожую на 30.
         /// </summary>
         internal static string HandgunRecoil {
             get {
@@ -329,7 +329,7 @@ namespace GameProject.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на 5.
+        ///   Ищет локализованную строку, похожую на 4.
         /// </summary>
         internal static string HeavyZombieDamage {
             get {
@@ -359,6 +359,26 @@ namespace GameProject.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap HeroHandgun {
+            get {
+                object obj = ResourceManager.GetObject("HeroHandgun", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap HeroHandgun1 {
+            get {
+                object obj = ResourceManager.GetObject("HeroHandgun1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap HeroNormal {
             get {
                 object obj = ResourceManager.GetObject("HeroNormal", resourceCulture);
@@ -369,9 +389,49 @@ namespace GameProject.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap HeroRifle {
+            get {
+                object obj = ResourceManager.GetObject("HeroRifle", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap HeroShotgun {
+            get {
+                object obj = ResourceManager.GetObject("HeroShotgun", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap HeroSmall {
             get {
                 object obj = ResourceManager.GetObject("HeroSmall", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap MainMenuBackground {
+            get {
+                object obj = ResourceManager.GetObject("MainMenuBackground", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap MainMenuLogo {
+            get {
+                object obj = ResourceManager.GetObject("MainMenuLogo", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -396,7 +456,7 @@ namespace GameProject.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на 3.
+        ///   Ищет локализованную строку, похожую на 2.
         /// </summary>
         internal static string MediumZombieDamage {
             get {
@@ -437,6 +497,16 @@ namespace GameProject.Properties {
         internal static string RifleAmmo {
             get {
                 return ResourceManager.GetString("RifleAmmo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap RifleBullet {
+            get {
+                object obj = ResourceManager.GetObject("RifleBullet", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -505,6 +575,16 @@ namespace GameProject.Properties {
         }
         
         /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ShotgunBullet {
+            get {
+                object obj = ResourceManager.GetObject("ShotgunBullet", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на 30.
         /// </summary>
         internal static string ShotgunBulletSpeed {
@@ -514,7 +594,7 @@ namespace GameProject.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на 0.
+        ///   Ищет локализованную строку, похожую на 120.
         /// </summary>
         internal static string ShotgunCost {
             get {
@@ -579,7 +659,7 @@ namespace GameProject.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на 2.
+        ///   Ищет локализованную строку, похожую на 1.
         /// </summary>
         internal static string SmallZombieDamage {
             get {
