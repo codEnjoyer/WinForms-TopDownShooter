@@ -520,7 +520,7 @@ namespace GameProject.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на 0.
+        ///   Ищет локализованную строку, похожую на 35.
         /// </summary>
         internal static string RifleCost {
             get {

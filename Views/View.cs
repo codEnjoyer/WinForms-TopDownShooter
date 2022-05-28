@@ -17,7 +17,7 @@ namespace GameProject
         internal static Rectangle ViewedZone { get; set; }
         internal static Form Form { get; set; }
         internal static bool IsFullscreen { get; set; }
-        internal static Label testLabel;
+        //internal static Label testLabel;
         internal static Label ammoLabel { get; set; }
         internal static Label CoinsLabel { get; set; }
         internal static PictureBox CoinsIcon { get; set; }
