@@ -163,6 +163,9 @@
   <data name="ExitGame" xml:space="preserve">
     <value>Выйти из игры</value>
   </data>
+  <data name="GameTitle" xml:space="preserve">
+    <value>Danger Zombies</value>
+  </data>
   <data name="HandgunAmmo" xml:space="preserve">
     <value>7</value>
   </data>
@@ -176,16 +179,16 @@
     <value>10</value>
   </data>
   <data name="HandgunDamage" xml:space="preserve">
-    <value>20</value>
+    <value>25</value>
   </data>
   <data name="HandgunPicture" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\sprites\handgunpicture.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="HandgunRecoil" xml:space="preserve">
-    <value>30</value>
+    <value>25</value>
   </data>
   <data name="HandgunReload" xml:space="preserve">
-    <value>150</value>
+    <value>100</value>
   </data>
   <data name="HealthBoost" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\sprites\healthboost.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -203,7 +206,7 @@
     <value>5</value>
   </data>
   <data name="HeavyZombieDamage" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="HeavyZombieSpeed" xml:space="preserve">
     <value>3</value>
@@ -263,7 +266,7 @@
     <value>40</value>
   </data>
   <data name="RifleCost" xml:space="preserve">
-    <value>35</value>
+    <value>50</value>
   </data>
   <data name="RifleDamage" xml:space="preserve">
     <value>20</value>
@@ -275,7 +278,7 @@
     <value>10</value>
   </data>
   <data name="RifleReload" xml:space="preserve">
-    <value>250</value>
+    <value>175</value>
   </data>
   <data name="ShotgunAmmo" xml:space="preserve">
     <value>5</value>
@@ -287,7 +290,7 @@
     <value>30</value>
   </data>
   <data name="ShotgunCost" xml:space="preserve">
-    <value>120</value>
+    <value>100</value>
   </data>
   <data name="ShotgunDamage" xml:space="preserve">
     <value>20</value>
@@ -296,16 +299,16 @@
     <value>..\sprites\shotgunpicture.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ShotgunRecoil" xml:space="preserve">
-    <value>75</value>
+    <value>50</value>
   </data>
   <data name="ShotgunReload" xml:space="preserve">
-    <value>300</value>
+    <value>175</value>
   </data>
   <data name="SmallZombie" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\sprites\smallzombie.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SmallZombieCoins" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="SmallZombieDamage" xml:space="preserve">
     <value>1</value>
@@ -317,7 +320,7 @@
     <value>..\sprites\speedboost.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SpeedBoosterImpact" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="SpeedBoosterTime" xml:space="preserve">
     <value>10000</value>

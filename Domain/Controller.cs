@@ -35,12 +35,12 @@ namespace GameProject.Domain
                 //    Game.Player.ActiveBoosters[BoosterTypes.HealthBoost] = int.Parse(Resources.HealthBoosterTime);
                 //    break;
 
-                //case Keys.Escape:
-                //    Application.Exit();
-                //    break;
-                //case Keys.R:
-                //    Application.Restart();
-                //    break;
+                case Keys.Escape:
+                    Application.Exit();
+                    break;
+                case Keys.R:
+                    Application.Restart();
+                    break;
             }
         }
 

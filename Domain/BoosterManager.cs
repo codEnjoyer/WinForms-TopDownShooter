@@ -45,7 +45,7 @@ namespace GameProject.Domain
 
                     case BoosterTypes.DamageBoost:
                         if (Game.Player.BonusDamage == 0)
-                            Game.Player.GetDamageBoost((int)(int.Parse(Resources.DamageBoosterImpact) * 2));
+                            Game.Player.GetDamageBoost((int)(int.Parse(Resources.DamageBoosterImpact) * 2.5));
                         break;
 
                     case BoosterTypes.SpeedBoost:
@@ -91,7 +91,7 @@ namespace GameProject.Domain
 
                         case BoosterTypes.DamageBoost:
                             if (enemy.BonusDamage == 0)
-                                enemy.GetDamageBoost(int.Parse(Resources.DamageBoosterImpact));
+                                enemy.GetDamageBoost((int)(int.Parse(Resources.DamageBoosterImpact) * 0.5));
                             break;
 
                         case BoosterTypes.SpeedBoost:

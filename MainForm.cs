@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using GameProject.Domain;
 using GameProject.Entities;
 using GameProject.Physics;
+using GameProject.Properties;
 using Timer = System.Windows.Forms.Timer;
 
 namespace GameProject
@@ -15,6 +16,7 @@ namespace GameProject
         public MainForm()
         {
             InitializeComponent();
+            Text = Resources.GameTitle;
             MainTimer = new Timer();
             MainTimer.Interval = 15;
             MainTimer.Tick += (sender, args) => Invalidate();

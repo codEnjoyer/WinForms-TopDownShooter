@@ -208,6 +208,15 @@ namespace GameProject.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Danger Zombies.
+        /// </summary>
+        internal static string GameTitle {
+            get {
+                return ResourceManager.GetString("GameTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на 7.
         /// </summary>
         internal static string HandgunAmmo {
@@ -245,7 +254,7 @@ namespace GameProject.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на 20.
+        ///   Ищет локализованную строку, похожую на 25.
         /// </summary>
         internal static string HandgunDamage {
             get {
@@ -264,7 +273,7 @@ namespace GameProject.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на 30.
+        ///   Ищет локализованную строку, похожую на 25.
         /// </summary>
         internal static string HandgunRecoil {
             get {
@@ -273,7 +282,7 @@ namespace GameProject.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на 150.
+        ///   Ищет локализованную строку, похожую на 100.
         /// </summary>
         internal static string HandgunReload {
             get {
@@ -329,7 +338,7 @@ namespace GameProject.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на 4.
+        ///   Ищет локализованную строку, похожую на 3.
         /// </summary>
         internal static string HeavyZombieDamage {
             get {
@@ -520,7 +529,7 @@ namespace GameProject.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на 35.
+        ///   Ищет локализованную строку, похожую на 50.
         /// </summary>
         internal static string RifleCost {
             get {
@@ -557,7 +566,7 @@ namespace GameProject.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на 250.
+        ///   Ищет локализованную строку, похожую на 175.
         /// </summary>
         internal static string RifleReload {
             get {
@@ -594,7 +603,7 @@ namespace GameProject.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на 120.
+        ///   Ищет локализованную строку, похожую на 100.
         /// </summary>
         internal static string ShotgunCost {
             get {
@@ -622,7 +631,7 @@ namespace GameProject.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на 75.
+        ///   Ищет локализованную строку, похожую на 50.
         /// </summary>
         internal static string ShotgunRecoil {
             get {
@@ -631,7 +640,7 @@ namespace GameProject.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на 300.
+        ///   Ищет локализованную строку, похожую на 175.
         /// </summary>
         internal static string ShotgunReload {
             get {
@@ -650,7 +659,7 @@ namespace GameProject.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на 1.
+        ///   Ищет локализованную строку, похожую на 2.
         /// </summary>
         internal static string SmallZombieCoins {
             get {
@@ -687,7 +696,7 @@ namespace GameProject.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на 5.
+        ///   Ищет локализованную строку, похожую на 4.
         /// </summary>
         internal static string SpeedBoosterImpact {
             get {
